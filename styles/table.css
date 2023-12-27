@@ -1,0 +1,27 @@
+.table {
+    width: 100%;
+    background: var(--bg);
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.thead {
+    font-weight: 600;
+    padding-bottom: 1rem;
+}
+
+.thead td {
+    border-bottom: 1.5px solid #eee;
+}
+
+.tr td {
+    border-bottom: 1.5px solid #eee;
+    padding: 4px;
+}
+
+.tr:hover {
+    background: #eef5;
+}

@@ -1,0 +1,59 @@
+
+
+.border {
+    border: 1px solid var(--sb);
+}
+
+.shadow {
+    box-shadow:0 0 20px #0001;
+}
+
+.shadow-sm {
+    box-shadow: 0 0 10px #0003;
+}
+
+.undeline {
+    text-decoration: underline;
+}
+
+.tac {
+    text-align: center;
+}
+
+.tae {
+    text-align: end;
+}
+
+.color-bg {
+    color: var(--bg);
+}
+
+.error-text {
+    color: var(--error);
+}
+
+.ci {
+    color: inherit;
+}
+
+.cp {
+    color: var(--pc);
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.nowrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fs1 {
+    font-size: 1rem;
+}
+
+.caption {
+    font-size: 12px;
+  }

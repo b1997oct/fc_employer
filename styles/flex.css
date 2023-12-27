@@ -1,0 +1,59 @@
+.df {
+    display: flex;
+}
+
+.f-1 {
+    flex: 1;
+}
+
+.gap {
+    gap: 1rem;
+}
+
+.gap-1 {
+    gap: 4px;
+}
+
+.gap-2 {
+    gap: 8px;
+}
+
+.aic {
+    align-items: center;
+}
+
+.jcs {
+    justify-content: start;
+}
+
+.jce {
+    justify-content: end;
+}
+
+.jcc {
+    justify-content: center;
+}
+
+.jcsb {
+    justify-content: space-between;
+}
+
+.jcsa {
+    justify-content: space-around;
+}
+
+.jcse {
+    justify-content: space-evenly;
+}
+
+.fdc {
+    flex-direction: column;
+}
+
+.fww {
+    flex-wrap: wrap;
+}
+
+.f-1 {
+    flex: 1;
+}

@@ -1,0 +1,30 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  position: fixed;
+}
+
+.drawer {
+  position: fixed;
+  background: var(--bg);
+}
+
+.hide {
+  animation: hide 200ms forwards;
+}
+
+.df {
+  visibility: visible;
+}
+
+@keyframes hide {
+  100% {
+    visibility: hidden;
+  }
+}
