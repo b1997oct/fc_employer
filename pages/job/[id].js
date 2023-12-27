@@ -5,6 +5,8 @@ import { useTheme } from '@/Layout/Theme'
 import { useState } from 'react'
 import { StaticSelect } from '@/Components/Select'
 import Radio from '@/Components/Radio'
+import FormElement from '@/Components/FormElement'
+import Validator from '@/Components/Utils/Validator'
 
 const fields = [
     {
@@ -61,8 +63,10 @@ export default function Page() {
         total_openings: '01',
         job_type: 'Full Time',
         work_mode: 'Work from office',
-        requirement:'person',
+        requirement: 'person',
     })
+    let [errors, setErrors] = useState({})
+    let [active, setActive] = useState(false)
 
     function onChange(e) {
         let { name, value } = e.target
@@ -74,7 +78,18 @@ export default function Page() {
 
     }
 
-    const ValueGetter = (name) => data[name] || ''
+    const ValueGetter = ({ name, min, max, type }) => {
+        const value = data[name] || ''
+        const err = Validator({ value, min, max, type })
+        const present = errors[name]
+        if (err && err !== present) {
+            setErrors({ ...errors, [name]: err })
+        } else if (!err && present) {
+            delete errors[name]
+            setErrors({ ...errors })
+        }
+        return value
+    }
 
     return (
         <Layout>
@@ -82,26 +97,21 @@ export default function Page() {
                 <div style={{ padding: '4% 4% 3rem 4%', maxWidth: 600 }} className='bg df  w-full fdc gap rounded-sm shadow-sm'>
                     <h2 className='bold'>Job Details</h2>
                     {fields.map((dat, i) => {
-                        if (dat.type === 'select') {
-                            return (
-                                <StaticSelect
-                                    name={dat.name}
-                                    className='input mt-2'
-                                    value={ValueGetter(dat.name)}
-                                    onChange={onChange}
-                                >
-                                    {dat.options.map((d, ind) => <option key={ind} value={d}>{d}</option>)}
-                                </StaticSelect>
-                            )
-                        }
+                        const { label, name, pl, options, type, error } = dat
+                        const err = errors[name]
                         return (
-                            <Input
+                            <FormElement
                                 key={i}
-                                label={dat.label}
-                                name={dat.name}
-                                placeholder={dat.pl}
+                                label={label}
+                                name={name}
+                                placeholder={pl}
                                 onChange={onChange}
-                                value={ValueGetter(dat.name)}
+                                value={ValueGetter({ name, ...error })}
+                                options={options}
+                                type={type}
+                                active={active}
+                                error={err}
+                                errorText={err}
                             />)
                     })}
                     {
@@ -111,7 +121,7 @@ export default function Page() {
                             name='location'
                             placeholder='Banglore, Peenya'
                             onChange={onChange}
-                            value={ValueGetter('location')}
+                            value={ValueGetter({ name: 'location' })}
                         />
                     }
                     <div className='mb'>
@@ -131,14 +141,14 @@ export default function Page() {
                             name='requirement'
                             onChange={onChange}
                             value='person'
-                            checked={ValueGetter('requirement')}
+                            checked={ValueGetter({ name: 'requirement' })}
                         />
                         <Radio
                             label='Last Date'
                             name='requirement'
                             onChange={onChange}
                             value='last_date'
-                            checked={ValueGetter('requirement')}
+                            checked={ValueGetter({ name: 'requirement' })}
                         />
                     </div>
                     {data.requirement === 'last_date' &&

@@ -15,6 +15,10 @@ const menus = [
         title: 'Your Company Page',
         href: '/profile'
     },
+    {
+        title: 'Login',
+        href: '/login'
+    },
 ]
 export default function Sidebar() {
     const [open, setOpen] = useState(false)

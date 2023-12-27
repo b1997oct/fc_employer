@@ -73,7 +73,7 @@ export default function AccountForm() {
         setLoading(true)
         POST('/api/enroll', data)
             .then(res => {
-                r.push('/success')
+                r.push('/ok')
             })
             .catch(err => {
                 alert(err.message)

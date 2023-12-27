@@ -80,5 +80,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-    matcher: ['/','/profile', '/users', '/api/:path*'],
+    matcher: ['/ok','/profilex', '/api/:path*'],
 } 
