@@ -1,4 +1,5 @@
 import Input from '@/Components/Input';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react'
 
@@ -55,13 +56,13 @@ export default function Page() {
                     <button onClick={submit} className='btn w-full pbg'>
                         Login
                     </button>
-                    <a href='/account'>
+                    <Link href='/account' target='_blank'>
                         <button
                             className='btn w-full mt'
                         >
                             Create New Account
                         </button>
-                    </a>
+                    </Link>
                     <div className='df jce my'>
                         <a href='mailto:info@firstcareer.co'
                             // href={"https://wa.me/+918904472228?text=" + encodeURIComponent(`Hello, I am having problem while signup/login. And i need to know its my end or not`)}
