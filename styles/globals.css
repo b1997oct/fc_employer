@@ -5,6 +5,9 @@
     --pc: #5091f4;
     --sb: #8988;
     --error: red;
+    --success: #06ba15;
+    --text: #000;
+    --disabled: #9e9696cf;
   }
 
   * {
@@ -22,6 +25,16 @@
   .pbg {
     background-color: var(--pc);
     color: #fff;
+  }
+
+  .text-bg {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .success-bg {
+    background: var(--success);
+    color: var(--bg);
   }
 
   a {
@@ -43,6 +56,9 @@
     margin: 0;
   }
 
+  select {
+    background: transparent;
+  }
 
   option {
     padding: 8px;

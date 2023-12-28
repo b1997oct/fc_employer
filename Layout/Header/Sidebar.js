@@ -1,4 +1,5 @@
 import Drawer from '@/Components/Drawer'
+import { Menu } from '@/Components/Icons'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -15,6 +16,10 @@ const menus = [
         title: 'Your Company Page',
         href: '/profile'
     },
+       {
+        title: 'Employers',
+        href: '/employer/new'
+    },
     {
         title: 'Login',
         href: '/login'
@@ -24,7 +29,7 @@ export default function Sidebar() {
     const [open, setOpen] = useState(false)
     return (
         <div>
-            <button onClick={() => setOpen(!open)} style={{ borderRadius: 4 }} className='icon-btn'>Sidebar</button>
+            <button onClick={() => setOpen(!open)} style={{ borderRadius: 4 }} className='icon-btn'><Menu/></button>
             <Drawer open={open} onClose={() => setOpen(!open)}>
                 <div className='m'>
                     <div>

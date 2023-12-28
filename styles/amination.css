@@ -1,0 +1,15 @@
+.zoomIn {
+    z-index: 500;
+    animation: zoom 300ms forwards;
+    transform: scale(.8);
+}
+
+.zoomOut {
+    animation: zoom 300ms reverse;
+}
+
+@keyframes zoom {
+    100% {
+        transform: scale(1);
+    }
+}

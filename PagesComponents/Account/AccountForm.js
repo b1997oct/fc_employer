@@ -42,22 +42,20 @@ const fields = [
         pl: "Enter Company Location",
         error: { min: 3, max: 50 }
     },
-    {
-        label: "Quering for",
-        name: "reason",
-        pl: "Select any one",
-        options: ['Job Posting', 'None'],
-        type: 'select',
-        error: { min: 1 }
-    },
+    // {
+    //     label: "Quering for",
+    //     name: "reason",
+    //     pl: "Select any one",
+    //     options: ['Job Posting', 'None'],
+    //     type: 'select',
+    //     error: { min: 1 }
+    // },
 ]
 
 
 export default function AccountForm() {
 
-    const [data, setData] = useState({
-        reason: "Job Posting",
-    })
+    const [data, setData] = useState({})
     let [errors, setErrors] = useState({})
     const [loading, setLoading] = useState(false);
     const [active, setActive] = useState(false);
@@ -119,6 +117,7 @@ export default function AccountForm() {
                     />)
             })}
             <button
+                disabled={loading}
                 className='btn w-full my'
                 onClick={submit}>
                 SUBMIT

@@ -15,12 +15,12 @@ const fields = [
         pl: "Eg: Accountant, Cad Designer"
     },
     {
-        label: "Min Experience",
+        label: "Minimum Experience",
         name: "experience",
         pl: 'Fresher, 1 to 3 years'
     },
     {
-        label: "Min Education Level",
+        label: "Minimum Education Level",
         name: "education",
         pl: 'Any UG, Diploma'
     },

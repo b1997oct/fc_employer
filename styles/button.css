@@ -60,3 +60,40 @@
 .text-btn:not(:disabled):active {
     color: inherit;
 }
+
+.filled-btn {
+    padding: .5rem 1.5rem;
+    font-size: medium;
+    font-weight: 600;
+    border-radius: 100px;
+    border: none;
+  }
+  
+  .filled-btn:not(:disabled):hover {
+    outline: 2px solid var(--success);
+    outline-offset: 2px;
+  }
+  
+  .filled-btn:disabled {
+    background: var(--disabled-bg);
+    color: var(--text);
+    cursor: auto;
+  }
+  
+  .click:not(:disabled):active {
+    animation: click 300ms forwards;
+  }
+  
+  @keyframes click {
+    0% {
+      transform: scale(1);
+    }
+  
+    50% {
+      transform: scale(0.97);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }

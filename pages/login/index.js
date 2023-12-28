@@ -31,8 +31,8 @@ export default function Page() {
                         <Input
                             name="payload"
                             value={data.payload || ''}
-                            placeholder='Enter Email or Mobile Number'
-                            label="Registered Email or Mobile Number"
+                            placeholder='Enter Your Employer Id'
+                            label="Employer Id"
                             onChange={onChange}
                         />
                         <Input
@@ -55,11 +55,13 @@ export default function Page() {
                     <button onClick={submit} className='btn w-full pbg'>
                         Login
                     </button>
-                    <button
-                        className='btn w-full mt'
-                        onClick={() => r.push("/account")}>
-                        Create New Account
-                    </button>
+                    <a href='/account'>
+                        <button
+                            className='btn w-full mt'
+                        >
+                            Create New Account
+                        </button>
+                    </a>
                     <div className='df jce my'>
                         <a href='mailto:info@firstcareer.co'
                             // href={"https://wa.me/+918904472228?text=" + encodeURIComponent(`Hello, I am having problem while signup/login. And i need to know its my end or not`)}

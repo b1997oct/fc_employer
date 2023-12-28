@@ -1,4 +1,4 @@
-import { useEffect, useId } from "react"
+import useBody from '../Hooks/useBody'
 import styles from './styles.module.css'
 
 
@@ -40,15 +40,9 @@ const getDirectionStyle = (dir, open) => {
 }
 
 
-export default function Drawer({ open, onClose, duration = 200, direction, children, }) {
+export default function Drawer({ open, onClose, duration = 300, direction, children, }) {
 
-    useEffect(() => {
-        if (open) {
-            document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = 'auto'
-        }
-    }, [open])
+    useBody(open)
 
     const drawer = {
         zIndex: 500,
@@ -69,7 +63,7 @@ export default function Drawer({ open, onClose, duration = 200, direction, child
                 className={styles.backdrop}
                 style={{
                     zIndex: 400,
-                    backgroundColor: '#0004',
+                    backgroundColor: '#0008',
                 }}
                 onClick={onClose}
             />
