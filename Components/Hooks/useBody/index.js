@@ -1,15 +1,13 @@
+import { useTheme } from '@/Layout/Theme'
 import { useEffect } from 'react'
 
-let width
 export default function useBody(open) {
+    const { width } = useTheme()
     useEffect(() => {
-        if (typeof width !== 'boolean') {
-            width = window.innerWidth > 768
-        }
         if (open) {
-            document.body.style = `overflow:hidden; ${width ? 'padding-right:16px;' : ''}`;
+            document.body.style = `overflow:hidden; ${width ? 'padding-right:16px;' : ''}`
         } else {
-            document.body.style = '';
+            document.body.style = ''
         }
     }, [open])
 }

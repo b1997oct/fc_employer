@@ -33,6 +33,10 @@
     overflow: auto;
 }
 
+.hidden {
+    overflow: hidden;
+}
+
 .rounded {
     border-radius: 200px;
 }

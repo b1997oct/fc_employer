@@ -2,9 +2,7 @@ import { NextResponse } from "next/server"
 import { createToken, refreshToken, verifyToken } from "./lib/token";
 
 const authed = {
-
     // path
-
     '/': true,
     '/profile': true,
     '/job/all': true,
@@ -70,6 +68,7 @@ export async function middleware(request) {
         return response
 
     } catch (error) {
+        console.log('error: ', error.message);
         if (api) {
             return NextResponse.json({ message: 'it seems like your token expired please login' }, { status: 400 })
         } else {
@@ -80,5 +79,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-    matcher: ['/ok','/profilex', '/api/:path*'],
+    matcher: ['/', '/profile', '/job/:path*', '/api/:path*'],
 } 

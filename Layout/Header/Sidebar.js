@@ -9,12 +9,12 @@ const menus = [
         href: '/'
     },
     {
-        title: 'All Jobs',
-        href: '/job/all'
+        title: 'Jobs',
+        href: '/job/s'
     },
     {
-        title: 'Your Company Page',
-        href: '/profile'
+        title: 'Organization',
+        href: '/org/profile'
     },
        {
         title: 'Employers',

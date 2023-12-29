@@ -2,11 +2,8 @@ import { useTheme } from "@/Layout/Theme"
 import useBody from "../Hooks/useBody"
 
 export default function Modal({ open, onClose, className, children }) {
-
     open = Boolean(open)
-
     useBody(open)
-
     const { width } = useTheme()
 
     return (

@@ -13,3 +13,21 @@
         transform: scale(1);
     }
 }
+
+.click:not(:disabled):active {
+    animation: click 300ms forwards;
+  }
+  
+  @keyframes click {
+    0% {
+      transform: scale(1);
+    }
+  
+    50% {
+      transform: scale(0.97);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }

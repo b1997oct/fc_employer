@@ -1,20 +1,30 @@
+import Checkbox from '@/Components/Checkbox';
 import Input from '@/Components/Input';
+import { POST } from '@upgradableweb/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react'
 
 export default function Page() {
 
-    const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
-        payload: "",
+        uid: "",
         password: ""
     })
+    const [loading, setLoading] = useState(false);
 
     const r = useRouter()
 
     const submit = () => {
-        console.log(data);
+        setLoading(true)
+        POST('/api/login', data)
+            .then(res => {
+                r.replace('/')
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+            .finally(() => setLoading(false))
     }
 
     function onChange(e) {
@@ -30,8 +40,8 @@ export default function Page() {
                     <p className='tac fs1 '>Employer Login</p>
                     <div className='df fdc gap-2'>
                         <Input
-                            name="payload"
-                            value={data.payload || ''}
+                            name="uid"
+                            value={data.uid || ''}
                             placeholder='Enter Your Employer Id'
                             label="Employer Id"
                             onChange={onChange}
@@ -41,7 +51,6 @@ export default function Page() {
                             value={data.password || ''}
                             label="Password"
                             placeholder='Enter password'
-                            type='password'
                             // InputProps={{
                             //     endAdornment: <IconButton onClick={handleShow} sx={{ color: blue[400] }}>
                             //         {show ? <VisibilityOff /> : <Visibility />}
@@ -51,15 +60,17 @@ export default function Page() {
                         />
                     </div>
                     <div className='my tae'>
-                        <button onClick={() => r.push('/')} className='text-btn'>Forgot Password</button>
+                        <button
+                            onClick={() => r.push('/account/reset')}
+                            className='text-btn'>
+                            Forgot Password
+                        </button>
                     </div>
                     <button onClick={submit} className='btn w-full pbg'>
                         Login
                     </button>
                     <Link href='/account' target='_blank'>
-                        <button
-                            className='btn w-full mt'
-                        >
+                        <button className='btn w-full mt'>
                             Create New Account
                         </button>
                     </Link>

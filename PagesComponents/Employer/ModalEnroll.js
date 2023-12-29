@@ -69,7 +69,7 @@ export default function ModalEnroll({ props, onSuccess, onDelete }) {
                 value={data.uid}
                 onChange={onChange}
             />
-            <div className="df gap my fww">
+            <div className="df gap my fww mt">
                 <input
                     name="password"
                     onChange={onChange}
@@ -130,7 +130,7 @@ function UniqueId({ value, onChange, name }) {
                 .catch(err => {
                     alert(err.message)
                 })
-        }, 500)
+        }, 1000)
     }, [uid])
 
     useEffect(() => {
@@ -145,7 +145,7 @@ function UniqueId({ value, onChange, name }) {
                     count = '0' + count;
                 }
                 setUid(null)
-                onChange({ target: { value: `FCEMPYR${count}`, name } })
+                onChange({ target: { value: `FCEMYR${count}`, name } })
             })
             .catch(err => {
                 alert(err.message)
@@ -161,16 +161,15 @@ function UniqueId({ value, onChange, name }) {
                     name="uid"
                     onChange={(e) => setUid(e.target.value)}
                     style={{ fontFamily: 'sans-serif', background: '#9993' }}
-                    className="px py-1 fs1 border"
+                    className="px py-1 fs1 border h-full"
                     value={val}
                     autoComplete="off"
                 />
-                <div className="error-text">
+                <div className="ce absolute caption">
                     {typeof uid === 'string' && !uid ? 'uid is required'
                         : loading === 1 ? 'Loading...' : loading === 2 ? 'User id already exist' : null}
                 </div>
             </div>
-
             <button className="p-1 df aic gap-2" onClick={getUid}><Cached />Generate Unique Id</button>
         </div>)
 }

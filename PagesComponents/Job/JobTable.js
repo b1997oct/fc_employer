@@ -1,6 +1,5 @@
 import EditButton from "@/Components/EditButton"
 import useTableFetch from "@/Components/Hooks/useTableFetch"
-import Modal from "@/Components/Modal"
 import Table from "@/Components/Table"
 import SlNo from "@/Components/Table/SlNo"
 import THead from "@/Components/Table/THead"
@@ -8,21 +7,18 @@ import TRow from "@/Components/Table/TRow"
 import TableFooter from "@/Components/TableFooter"
 import moment from "moment"
 import { useState } from "react"
-import ApprovedModal from "./ApprovedModal"
 
 
 
 const h = [
     { label: 'No.', minWidth: 60, textAlign: 'center' },
-    { label: 'Name', minWidth: 100 },
-    { label: 'Uid', minWidth: 100 },
-    { label: 'Mobile', minWidth: 200 },
-    { label: 'Email', minWidth: 140, },
-    { label: 'Approved', minWidth: 140, },
-    { label: 'Posted Jobs', minWidth: 200 },
-    {},
+    { label: 'Job Title', minWidth: 100 },
+    { label: 'Posted on', minWidth: 100 },
+    { label: 'Posted By', minWidth: 200 },
+    { label: 'Status', minWidth: 140, },
+    { label: 'Applicants', minWidth: 100 },
 ]
-export default function ApprovedTable() {
+export default function JobTable() {
 
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
@@ -34,7 +30,7 @@ export default function ApprovedTable() {
     })
     const [open, setOpen] = useState(false)
 
-    useTableFetch({ url: '/api/employer/all', setData, setLoading }, [paination])
+    // useTableFetch({ url: '/api/employer/all', setData, setLoading }, [paination])
 
     return (
         <div>
@@ -44,7 +40,7 @@ export default function ApprovedTable() {
                 nodata={!loading && !data.length}
             >
                 <THead fields={h} />
-                <tbody>
+                {/* <tbody>
                     {data.map((dat, i) => {
                         return (
                             <TableRow
@@ -55,14 +51,11 @@ export default function ApprovedTable() {
                                 onEdit={() => setOpen(dat)}
                             />)
                     })}
-                </tbody>
+                </tbody> */}
 
             </Table>
             <TableFooter />
-            <ApprovedModal
-                open={open}
-                onClose={() => setOpen(null)}
-            />
+           
         </div>
     )
 }

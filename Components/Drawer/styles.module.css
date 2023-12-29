@@ -12,7 +12,7 @@
 
 .drawer {
   position: fixed;
-  background: var(--bg);
+  background:  var(--bg);
 }
 
 .hide {

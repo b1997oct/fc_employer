@@ -33,6 +33,10 @@ const schema = new Schema({
     temp_password: {
         type: String
     },
+    status: {
+        type: String,
+        enum: ['Blocked']
+    },
 
 }, { timestamps: true, versionKey: false })
 

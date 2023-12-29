@@ -3,9 +3,9 @@ import Editor, { htmlToJSON } from '@/Components/Editor'
 import Layout from '@/Layout'
 import { useTheme } from '@/Layout/Theme'
 import { useState } from 'react'
-import File, { FileButton } from '@/PagesComponents/Profile/File'
-import Image from 'next/image'
+import { Logo, UploadButton } from '@/PagesComponents/Profile/ProfileFiles'
 import { ReactSortable } from 'react-sortablejs'
+import ProfileHeader from '@/PagesComponents/Profile/ProfileHeader'
 
 const fields = [
     {
@@ -26,7 +26,7 @@ const fields = [
         pl: "Select Functional Area"
     },
     {
-        label: "Company Head Quater Address",
+        label: "Main office address",
         name: "address",
         pl: "Eg: Banglore , peenya 560001"
     },
@@ -51,8 +51,8 @@ const fields = [
 export default function Page() {
 
     const [data, setData] = useState({})
-    const [image, setImage] = useState(null)
     const [banner, setBanner] = useState([])
+    const [logo, setLogo] = useState(null)
 
     const { width } = useTheme()
 
@@ -68,16 +68,17 @@ export default function Page() {
 
     return (
         <Layout>
-            <h2 className='tac bold mt'>Manage Your Company Page</h2>
-            <div style={{ flexDirection: width ? 'row' : 'column', margin: '4% 0' }} className='df jcsa gap'>
-                <div style={{ padding: '5%' }} className='bg df fdc gap rounded-sm shadow-sm'>
-                    <label>Company Logo</label>
-                    <File
-                        image={image}
-                        onChange={setImage}
-                        label='Upload Logo'
-                    />
 
+            {/* <ProfileHeader /> */}
+
+            <div style={{ flexDirection: width ? 'row' : 'column', margin: '4% 0' }} className='df jcsa gap'>
+
+                <div style={{ padding: '5%' }} className='bg df fdc gap rounded-sm shadow-sm'>
+                <Logo
+                    open={true}
+                    image={logo}
+                    onChange={setLogo}
+                />
                     {fields.map((dat, i) => (
                         <Input
                             key={i}
@@ -100,26 +101,28 @@ export default function Page() {
                             list={banner}
                             setList={setBanner}
                             className='df fww gap jcc aic'
-                            >
+                        >
                             {banner.length && banner.map((value, i) => (
                                 <img
                                     key={i}
                                     src={URL.createObjectURL(value)}
-                                    style={{ objectFit: 'cover', maxWidth: 180, maxHeight: 100 }}
+                                    style={{ objectFit: 'cover', maxWidth: 160, maxHeight: 80 }}
                                     alt='company banners'
                                     className='rounded-sm w-full'
                                 />
                             ))}
                         </ReactSortable>
                         <div className='mt w-full'>
-                            <FileButton
-                                label='Upload'
+                            <UploadButton
                                 onChange={(file) => {
                                     if (file) {
                                         setBanner([...banner, file])
                                     }
                                 }}
-                            />
+                                className='w-full'
+                            >
+                                Upload
+                            </UploadButton>
                         </div>
 
                     </div>

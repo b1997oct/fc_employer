@@ -1,99 +1,97 @@
 .icon-btn {
-    display: flex;
-    border: none;
-    padding: .5rem;
-    border-radius: 50%;
-    background: #eee3;
+  display: flex;
+  border: none;
+  padding: .5rem;
+  border-radius: 50%;
+  background: #eee3;
 }
 
 .icon-btn:not(:disabled):hover {
-    background: #eee;
+  background: #eee;
 }
 
 .icon-btn:not(:disabled):active {
-    background: #eee6;
+  background: #eee6;
 }
 
 .btn {
-    border: none;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: medium;
-    outline-offset: 2px;
-    padding: 12px 1rem;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: medium;
+  outline-offset: 2px;
+  padding: 12px 1rem;
 }
 
 .btn:not(:disabled):hover {
-    opacity: .9;
+  opacity: .9;
 }
 
 .btn:disabled {
-    background: #9994;
-    cursor: auto;
-    color: #9998;
-    box-shadow: none;
+  background: #9994;
+  cursor: auto;
+  color: #9998;
+  box-shadow: none;
 }
 
 .btn:not(:disabled):active {
-    outline: 2px solid #333;
-    outline-offset: 2px;
+  outline: 2px solid #333;
+  outline-offset: 2px;
 }
 
 .p-btn {
-    box-shadow: 0 0 10px var(--pc);
-    background: var(--pc);
-    color: var(--bg);
+  box-shadow: 0 0 10px var(--pc);
+  background: var(--pc);
+  color: var(--bg);
 }
 
 .text-btn {
-    border: none;
-    background: transparent;
+  border: none;
+  background: transparent;
 }
 
 .text-btn:not(:disabled):hover {
-    color: var(--pc);
+  color: var(--pc);
 }
 
 .text-btn:not(:disabled):active {
-    color: inherit;
+  color: inherit;
 }
 
 .filled-btn {
-    padding: .5rem 1.5rem;
-    font-size: medium;
-    font-weight: 600;
-    border-radius: 100px;
-    border: none;
-  }
-  
-  .filled-btn:not(:disabled):hover {
-    outline: 2px solid var(--success);
-    outline-offset: 2px;
-  }
-  
-  .filled-btn:disabled {
-    background: var(--disabled-bg);
-    color: var(--text);
-    cursor: auto;
-  }
-  
-  .click:not(:disabled):active {
-    animation: click 300ms forwards;
-  }
-  
-  @keyframes click {
-    0% {
-      transform: scale(1);
-    }
-  
-    50% {
-      transform: scale(0.97);
-    }
-  
-    100% {
-      transform: scale(1);
-    }
-  }
+  padding: .5rem 1.5rem;
+  font-size: medium;
+  font-weight: 600;
+  border-radius: 100px;
+  border: none;
+}
+
+.filled-btn:not(:disabled):hover {
+  outline: 2px solid var(--success);
+  outline-offset: 2px;
+}
+
+.filled-btn:disabled {
+  background: var(--disabled-bg);
+  color: var(--text);
+  cursor: auto;
+}
+
+.upload-btn {
+  background: #0009;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid #7776;
+}
+
+.upload-btn:hover {
+  background: #9999;
+}

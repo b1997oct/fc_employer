@@ -1,11 +1,9 @@
-
-
 .border {
     border: 1px solid var(--sb);
 }
 
 .shadow {
-    box-shadow:0 0 20px #0001;
+    box-shadow: 0 0 20px #0001;
 }
 
 .shadow-sm {
@@ -24,11 +22,11 @@
     text-align: end;
 }
 
-.color-bg {
+.cbg {
     color: var(--bg);
 }
 
-.error-text {
+.ce {
     color: var(--error);
 }
 
@@ -56,4 +54,4 @@
 
 .caption {
     font-size: 12px;
-  }
+}
