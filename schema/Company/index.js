@@ -5,7 +5,11 @@ const image = {
     secure_url: String
 }
 
-const comapnySchema = new Schema({
+const schema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+        required: [true, '/user is required/'],
+    },
     company_name: {
         type: String,
         required: true,
@@ -40,7 +44,8 @@ const comapnySchema = new Schema({
     },
     about_us: {
         type: String,
-        required: true,
+        required: [true, '/about required'],
+        minlength: [30, '/about min 30 chars required']
     },
     banner: image,
     banner_2: image,
@@ -48,11 +53,6 @@ const comapnySchema = new Schema({
     banner_4: image,
     banner_5: image,
     company_logo: image,
-},
-    {
-        timestamps: true
-    })
+}, { timestamps: true, versionKey: false })
 
-
-
-export default models.Company || model('Company', comapnySchema);
+export default models.Company || model('Company', schema);

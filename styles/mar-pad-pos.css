@@ -25,24 +25,12 @@
     position: absolute;
 }
 
-.border {
-    border: 1.5px solid #7664;
-}
-
 .scroll {
     overflow: auto;
 }
 
 .hidden {
     overflow: hidden;
-}
-
-.rounded {
-    border-radius: 200px;
-}
-
-.rounded-sm {
-    border-radius: 8px;
 }
 
 .m {

@@ -37,12 +37,12 @@ const schema = new Schema({
         maxlength: 100,
         required: true
     },
-    reason: {
-        type: String,
-        minlength: 3,
-        maxlength: 50,
-        required: true
-    }
+    // reason: {
+    //     type: String,
+    //     minlength: 3,
+    //     maxlength: 50,
+    //     required: true
+    // }
 }, { timestamps: true, versionKey: false })
 
 

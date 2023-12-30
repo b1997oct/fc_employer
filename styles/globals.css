@@ -8,6 +8,7 @@
     --success: #06ba15;
     --text: #000;
     --disabled: #9e9696cf;
+    --radius: 8px;
   }
 
   * {
@@ -22,9 +23,9 @@
     padding: 0;
   }
 
-  .pbg {
+  .p-bg {
     background-color: var(--pc);
-    color: #fff;
+    color: var(--bg);
   }
 
   .text-bg {
@@ -34,6 +35,11 @@
 
   .success-bg {
     background: var(--success);
+    color: var(--bg);
+  }
+
+  .error-bg {
+    background-color: var(--error);
     color: var(--bg);
   }
 

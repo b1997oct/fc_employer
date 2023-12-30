@@ -3,7 +3,7 @@ import React from 'react'
 
 /**
  * @typedef {Object} Tab
- * @property {boolean} active - Indicates whether the tab is active.
+ * @property {boolean} className - className for tab.
  * @property {string} link - The URL the tab should navigate to.
  * @property {string} title - The text to be displayed on the tab.
  */
@@ -16,17 +16,18 @@ import React from 'react'
 /**
  * Tabs component.
  * @param {TabsProps} props - The props object for the Tabs component.
+ * @param {string} className - The props object for the Tabs component.
  */
 
 export default function Tabs({ props, className }) {
 
     return (
-        <div className={`mb p bg df gap scroll ${className}`}>
+        <div className={`p df bg scroll ${className}`}>
             {props.map((d, i) => {
-                const { active, link, title } = d
+                const { className: cn, link, title } = d
                 return (
                     <Link key={i} href={link}>
-                        <button className={`filled-btn ${active ? 'success-bg' : 'ci'}`}>
+                        <button className={`tab nowrap ${!i ? 'tab-start' : i === props.length - 1 ? 'tob-end' : ''} ${cn}`}>
                             <h2>{title}</h2>
                         </button>
                     </Link>

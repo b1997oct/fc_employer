@@ -6,19 +6,20 @@ import THead from "@/Components/Table/THead"
 import TRow from "@/Components/Table/TRow"
 import TableFooter from "@/Components/TableFooter"
 import moment from "moment"
+import Router from "next/router"
 import { useState } from "react"
 
 
 
 const h = [
     { label: 'No.', minWidth: 60, textAlign: 'center' },
-    { label: 'Job Title', minWidth: 100 },
+    { label: 'Job', minWidth: 100 },
     { label: 'Posted on', minWidth: 100 },
     { label: 'Posted By', minWidth: 200 },
     { label: 'Status', minWidth: 140, },
     { label: 'Applicants', minWidth: 100 },
 ]
-export default function JobTable() {
+export default function JobTable({ url }) {
 
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
@@ -28,9 +29,8 @@ export default function JobTable() {
         sort_field: 'createdAt',
         sort: 1
     })
-    const [open, setOpen] = useState(false)
 
-    // useTableFetch({ url: '/api/employer/all', setData, setLoading }, [paination])
+    useTableFetch({ url, setData, setLoading }, [paination])
 
     return (
         <div>
@@ -40,7 +40,7 @@ export default function JobTable() {
                 nodata={!loading && !data.length}
             >
                 <THead fields={h} />
-                {/* <tbody>
+                <tbody>
                     {data.map((dat, i) => {
                         return (
                             <TableRow
@@ -48,47 +48,45 @@ export default function JobTable() {
                                 {...dat}
                                 index={i}
                                 id={dat._id}
-                                onEdit={() => setOpen(dat)}
+                                status='Active'
                             />)
                     })}
-                </tbody> */}
+                </tbody>
 
             </Table>
             <TableFooter />
-           
+
         </div>
     )
 }
 
 
-function TableRow({ index, name, uid, mobile, email, jobs, createdAt, id, onEdit }) {
+function TableRow({ index, job_role, updatedAt, posted_by, status, applicants, id, onEdit }) {
     return (
         <TRow>
             <td>
                 <SlNo>{index + 1}</SlNo>
             </td>
             <td>
-                {name}
+                {job_role}
             </td>
             <td>
-                {uid}
+                {moment(updatedAt).fromNow()}
             </td>
             <td>
-                {mobile}
+                {posted_by}
             </td>
             <td>
-                {email}
+                {status}
             </td>
             <td>
-                {moment(createdAt).fromNow()}
-            </td>
-            <td>
-                {jobs}
+                {applicants || 0}
             </td>
             <td>
                 <EditButton
-                    value={id}
-                    onClick={onEdit}
+                    onClick={() => {
+                        Router.push('/job/' + id)
+                    }}
                 />
             </td>
         </TRow>

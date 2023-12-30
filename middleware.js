@@ -2,10 +2,16 @@ import { NextResponse } from "next/server"
 import { createToken, refreshToken, verifyToken } from "./lib/token";
 
 const authed = {
+    '/api/job/all': true,
+    '/api/job/closed': true,
+    '/api/job/count': true,
+    '/api/org': true,
+    '/api/job': true,
     // path
     '/': true,
     '/profile': true,
-    '/job/all': true,
+    '/job/s': true,
+    '/job/closed': true,
 }
 
 
@@ -29,12 +35,18 @@ export async function middleware(request) {
             const ref = request.cookies.get('_ref')?.value
             try {
                 const { uid } = await verifyToken(ref);
+                if (!uid) {
+                    throw Error('uid not valid')
+                }
                 rh.set('uid', uid)
             } catch (err) {
                 const tok = request.cookies.get('_tok')?.value
                 const payload = await verifyToken(tok);
                 exted = await createToken({ payload: payload })
                 refresh = await refreshToken({ payload: { uid: payload.uid } })
+                if (!payload.uid) {
+                    throw Error('uid not valid')
+                }
                 rh.set('uid', payload.uid)
             }
         }

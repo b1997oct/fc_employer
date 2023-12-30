@@ -2,10 +2,13 @@ import Input from '@/Components/Input'
 import Editor, { htmlToJSON } from '@/Components/Editor'
 import Layout from '@/Layout'
 import { useTheme } from '@/Layout/Theme'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Logo, UploadButton } from '@/PagesComponents/Profile/ProfileFiles'
 import { ReactSortable } from 'react-sortablejs'
 import ProfileHeader from '@/PagesComponents/Profile/ProfileHeader'
+import Gallery from '@/PagesComponents/Profile/Gallery'
+import { POST, PUT } from '@upgradableweb/client'
+import useTableFetch from '@/Components/Hooks/useTableFetch'
 
 const fields = [
     {
@@ -51,34 +54,62 @@ const fields = [
 export default function Page() {
 
     const [data, setData] = useState({})
+    const [py, setPy] = useState({})
     const [banner, setBanner] = useState([])
     const [logo, setLogo] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const { width } = useTheme()
+
+    function onResponse(res) {
+        if (!res.data) {
+            setPy({ id: 'new' })
+        } else {
+            setPy(res.data)
+        }
+    }
+
+    useTableFetch({ url: '/api/org', onResponse })
 
     function onChange(e) {
         let { name, value } = e.target
         setData({ ...data, [name]: value })
     }
 
-    function submit() {
-        console.log(data);
 
+    function submit() {
+        // if (logo) {
+        // }
+        let newData = { ...data, id: py.id }
+        setLoading(true)
+        PUT('/api/org', newData)
+            .then(res => {
+                setPy(res.data)
+                setData({})
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+            .finally(() => setLoading(false))
     }
+
+    const ValueGetter = (name) => typeof data[name] === 'string' ? data[name] : py[name] || ''
+
+    const disabled = loading || !Object.keys(data).length && !logo && !banner.length
 
     return (
         <Layout>
 
-            {/* <ProfileHeader /> */}
-
-            <div style={{ flexDirection: width ? 'row' : 'column', margin: '4% 0' }} className='df jcsa gap'>
+            <div style={{ margin: '4% 0' }} className={`df jcsa gap ${width ? '' : 'fdc'}`}>
 
                 <div style={{ padding: '5%' }} className='bg df fdc gap rounded-sm shadow-sm'>
-                <Logo
-                    open={true}
-                    image={logo}
-                    onChange={setLogo}
-                />
+                    {!disabled && data.id === 'new' && <p className='ce'>Please save the details</p>}
+                    <Logo
+                        open={true}
+                        image={logo}
+                        onChange={setLogo}
+                        url={py.company_logo?.secure_url}
+                    />
                     {fields.map((dat, i) => (
                         <Input
                             key={i}
@@ -86,7 +117,7 @@ export default function Page() {
                             name={dat.name}
                             placeholder={dat.pl}
                             onChange={onChange}
-                            value={data[dat.name]}
+                            value={ValueGetter(dat.name)}
                         />
                     ))}
 
@@ -94,44 +125,16 @@ export default function Page() {
 
                 <div className='bg p rounded-sm shadow-sm w-full' style={{ maxWidth: 478 }}>
 
-                    <div className='df jcc fdc aic gap'>
-
-                        <label>Company Image Gallery</label>
-                        <ReactSortable
-                            list={banner}
-                            setList={setBanner}
-                            className='df fww gap jcc aic'
-                        >
-                            {banner.length && banner.map((value, i) => (
-                                <img
-                                    key={i}
-                                    src={URL.createObjectURL(value)}
-                                    style={{ objectFit: 'cover', maxWidth: 160, maxHeight: 80 }}
-                                    alt='company banners'
-                                    className='rounded-sm w-full'
-                                />
-                            ))}
-                        </ReactSortable>
-                        <div className='mt w-full'>
-                            <UploadButton
-                                onChange={(file) => {
-                                    if (file) {
-                                        setBanner([...banner, file])
-                                    }
-                                }}
-                                className='w-full'
-                            >
-                                Upload
-                            </UploadButton>
-                        </div>
-
-                    </div>
-                    <div className='mt'>
-                        <h4 className='bold'>About Company</h4>
+                    <Gallery
+                        images={banner}
+                        setImages={setBanner}
+                    />
+                    <div>
+                        <h3 className='bold my'>About Company</h3>
                         <Editor
-                            value={data.about}
+                            value={ValueGetter('about_us')}
                             onChange={(val) => {
-                                setData({ ...data, ['about']: val })
+                                setData({ ...data, ['about_us']: val })
                             }}
                             placeholder='About company'
                         />
@@ -139,8 +142,9 @@ export default function Page() {
                 </div>
             </div>
             <div style={{ marginBottom: '6%' }} className='p df jce'>
-                <button onClick={submit}
-                    disabled={!Object.keys(data).length}
+                <button
+                    onClick={submit}
+                    disabled={disabled}
                     style={{ maxWidth: 400 }}
                     className='btn p-btn w-full p'>UPDATE</button>
             </div>

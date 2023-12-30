@@ -2,11 +2,15 @@ import Input from '@/Components/Input'
 import Editor from '@/Components/Editor'
 import Layout from '@/Layout'
 import { useTheme } from '@/Layout/Theme'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StaticSelect } from '@/Components/Select'
 import Radio from '@/Components/Radio'
 import FormElement from '@/Components/FormElement'
 import Validator from '@/Components/Utils/Validator'
+import useTableFetch from '@/Components/Hooks/useTableFetch'
+import CompanyModal from '@/PagesComponents/Job/CompanyModal'
+import { POST, PUT } from '@upgradableweb/client'
+import { useRouter } from 'next/router'
 
 const fields = [
     {
@@ -42,6 +46,11 @@ const fields = [
         pl: "Eg: 25,000/Month or 2 to 3 LPA or 18k to 20k"
     },
     {
+        label: "Required Skills",
+        name: "skills",
+        pl: "Eg: (,) seperated"
+    },
+    {
         label: "Select Job Type",
         name: "job_type",
         type: "select",
@@ -56,6 +65,16 @@ const fields = [
 
 ]
 
+const radio = [
+    {
+        label: 'Person requirement',
+        value: 'person'
+    },
+    {
+        label: 'Last Date',
+        value: 'last_date'
+    }
+]
 
 export default function Page() {
 
@@ -66,15 +85,48 @@ export default function Page() {
         requirement: 'person',
     })
     let [errors, setErrors] = useState({})
-    let [active, setActive] = useState(false)
+    const [active, setActive] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const r = useRouter()
+    const { id } = r.query
 
     function onChange(e) {
         let { name, value } = e.target
         setData({ ...data, [name]: value })
     }
 
+    useEffect(() => {
+        if (!id || id === 'new') return
+        POST('/api/job', { id })
+            .then(res => {
+                const d = res.data
+                d.requirement = d.lost_date ? 'last_date' : 'person'
+                d.last_date = d.lost_date
+                d.skills = d.skills.join(',')
+                const ed = d.education.split(',')
+                d.education = ed[0]
+                d.stream = ed[1]
+                setData(d)
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+    }, [id])
+
     function submit() {
-        console.log('j: ', data);
+
+        let newData = { ...data, id, lost_date: data.last_date }
+        newData.skills = newData.skills?.split(',') || undefined
+        newData.education = newData.education + ',' + newData.stream
+        setLoading(true)
+        PUT('/api/job', newData)
+            .then(res => {
+                r.back()
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+            .finally(() => setLoading(false))
 
     }
 
@@ -93,8 +145,11 @@ export default function Page() {
 
     return (
         <Layout>
+            <CompanyModal
+                setData={setData}
+            />
             <div className='df jcc my'>
-                <div style={{ padding: '4% 4% 3rem 4%', maxWidth: 600 }} className='bg df  w-full fdc gap rounded-sm shadow-sm'>
+                <div style={{ padding: '4% 4% 3rem 4%', maxWidth: 600 }} className='bg df  w-full fdc gap rounded-sm shadow'>
                     <h2 className='bold'>Job Details</h2>
                     {fields.map((dat, i) => {
                         const { label, name, pl, options, type, error } = dat
@@ -136,20 +191,15 @@ export default function Page() {
                         <p className='caption'>{`Note : "Please don't leave any extra gaps or spaces"`}</p>
                     </div>
                     <div className='df gap mb'>
-                        <Radio
-                            label='Person requirement'
-                            name='requirement'
-                            onChange={onChange}
-                            value='person'
-                            checked={ValueGetter({ name: 'requirement' })}
-                        />
-                        <Radio
-                            label='Last Date'
-                            name='requirement'
-                            onChange={onChange}
-                            value='last_date'
-                            checked={ValueGetter({ name: 'requirement' })}
-                        />
+                        {radio.map((dat, i) => (
+                            <Radio
+                                key={i}
+                                label={dat.label}
+                                name='requirement'
+                                onChange={onChange}
+                                value={dat.value}
+                                checked={ValueGetter({ name: 'requirement' })}
+                            />))}
                     </div>
                     {data.requirement === 'last_date' &&
                         <Input
@@ -157,11 +207,11 @@ export default function Page() {
                             type='date'
                             name='last_date'
                             onChange={onChange}
-                            value={ValueGetter('last_date')}
+                            value={ValueGetter({ name: 'last_date' })}
                         />}
                     <button
                         onClick={submit}
-                        disabled={!Object.keys(data).length}
+                        disabled={loading || !Object.keys(data).length}
                         className='btn p-btn w-full p mt'>
                         Submit
                     </button>

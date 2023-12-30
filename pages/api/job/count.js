@@ -1,4 +1,5 @@
 import dbConnect from "@/lib/db"
+import Job from "@/schema/Job"
 
 /**
  * @param {import("next").NextApiRequest} req 
@@ -8,12 +9,15 @@ import dbConnect from "@/lib/db"
 export default async function route(req, res) {
     try {
         await dbConnect()
-        let data
-        const { id, ...body } = req.body
-        if (req.method === 'PUT') {
-            // await
+        const { uid } = req.headers
+        const { q } = req.body
+        let find = {}
+        if (q === 'active') {
+            find = { publish: true }
+        } else if (q === 'inactive') {
+            find = { publish: false }
         }
-
+        let data = await Job.countDocuments({ user: uid, ...find })
         return res.status(200).json({ data })
     } catch (error) {
         res.status(500).json({ message: error.message })

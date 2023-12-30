@@ -1,16 +1,16 @@
 import { Camera } from "@/Components/Icons"
 import { useId } from "react"
 
-export function Logo({ image, onChange, open }) {
+export function Logo({ image, onChange, open, url }) {
 
-    const url = image && typeof image === 'object' ? URL.createObjectURL(image) : typeof image === 'string' ? image : ''
+    const imgUrl = image ? URL.createObjectURL(image) : url || ''
 
     return (
         <div style={{ width: 75, height: 75 }} className="relative skt rounded-sm">
-            {url && <img
+            {imgUrl && <img
                 style={{ width: 75, height: 75 }}
                 className="hidden rounded-sm image"
-                src={URL.createObjectURL(image)}
+                src={imgUrl}
                 alt="logo"
             />}
             {open &&

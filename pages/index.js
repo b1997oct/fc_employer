@@ -11,11 +11,11 @@ export default function Page() {
       <div className="df fww jcc">
       <DashboardCard
         title='Active Jobs'
-        value={20}
+        url='/api/job/count?q=active'
       />
        <DashboardCard
         title='Inactive Jobs'
-        value={2}
+        url='/api/job/count?q=inactive'
       />
       </div>
      

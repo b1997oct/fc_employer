@@ -6,7 +6,7 @@ export default function Input({ label, value, name, active, error, className = '
     const err = b && Boolean(error) || active && Boolean(error)
     return (
         <div style={style} className={`${err ? 'error' : ''} ${className}`} >
-            <label htmlFor={`hc-${id}`} className='bold'>{label}</label>
+            <label htmlFor={id} className='bold'>{label}</label>
             <input
                 id={id}
                 value={value}

@@ -14,6 +14,21 @@
   background: #eee6;
 }
 
+.tab {
+  padding: 8px 1rem;
+  border: none;
+}
+
+.tab-start {
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+}
+
+.tob-end {
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
 .btn {
   border: none;
   border-radius: 4px;
