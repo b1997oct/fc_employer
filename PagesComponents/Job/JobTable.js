@@ -6,7 +6,8 @@ import THead from "@/Components/Table/THead"
 import TRow from "@/Components/Table/TRow"
 import TableFooter from "@/Components/TableFooter"
 import moment from "moment"
-import Router from "next/router"
+import Link from "next/link"
+import Router, { useRouter } from "next/router"
 import { useState } from "react"
 
 
@@ -15,10 +16,12 @@ const h = [
     { label: 'No.', minWidth: 60, textAlign: 'center' },
     { label: 'Job', minWidth: 100 },
     { label: 'Posted on', minWidth: 100 },
-    { label: 'Posted By', minWidth: 200 },
-    { label: 'Status', minWidth: 140, },
+    { label: 'Posted By', minWidth: 100 },
+    { label: 'Status', minWidth: 140 },
     { label: 'Applicants', minWidth: 100 },
 ]
+const statusText = ['', 'Reviewing', 'Rejected']
+
 export default function JobTable({ url }) {
 
     const [data, setData] = useState([])
@@ -48,7 +51,6 @@ export default function JobTable({ url }) {
                                 {...dat}
                                 index={i}
                                 id={dat._id}
-                                status='Active'
                             />)
                     })}
                 </tbody>
@@ -61,7 +63,19 @@ export default function JobTable({ url }) {
 }
 
 
-function TableRow({ index, job_role, updatedAt, posted_by, status, applicants, id, onEdit }) {
+function TableRow({ index, job_role, updatedAt, posted_by, status, publish, applicants, id }) {
+
+    const r = useRouter()
+    const closed = r.pathname.split('/')[2] === 'closed'
+
+    if (status) {
+        status = statusText[status]
+    } else if (publish) {
+        status = 'Live'
+    } else {
+        status = 'Closed'
+    }
+
     return (
         <TRow>
             <td>
@@ -77,7 +91,11 @@ function TableRow({ index, job_role, updatedAt, posted_by, status, applicants, i
                 {posted_by}
             </td>
             <td>
-                {status}
+                <div className="df aic gap">
+                    <p className={`${publish === false ? 'ce' : 'cs'}`}>{status}</p>
+                    {closed && <Link href={`/job/${id}?repost=yes`}><button>Repost ?</button></Link>}
+                </div>
+
             </td>
             <td>
                 {applicants || 0}
@@ -85,7 +103,7 @@ function TableRow({ index, job_role, updatedAt, posted_by, status, applicants, i
             <td>
                 <EditButton
                     onClick={() => {
-                        Router.push('/job/' + id)
+                        r.push('/job/' + id)
                     }}
                 />
             </td>

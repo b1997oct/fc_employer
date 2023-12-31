@@ -7,7 +7,7 @@ export default function Page() {
         <Layout>
             <JobHeader />
             <JobTable
-                url='/api/job/all'
+                url='/api/job/live'
             />
         </Layout>
     )

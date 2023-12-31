@@ -16,7 +16,7 @@ export const config = {
  */
 
 export default async function route(req, res) {
-    
+
     try {
         await dbConnect()
         let data
@@ -33,10 +33,10 @@ export default async function route(req, res) {
             if (!img.mimetype.startsWith('image')) {
                 return res.status(400).json({ message: "please upload only image files" })
             }
-            let { secure_url } = await Cloud.upload(img.filepath, { folder: FOLDER })
-            data = { id: secure_url }
+            data = await Cloud.upload(img.filepath, { folder: FOLDER })
+            console.log('data: ', data);
+            id && await Cloud.destroy(id)
         }
-
         return res.status(200).json({ data })
     } catch (error) {
         res.status(500).json({ message: error.message })

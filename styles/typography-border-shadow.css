@@ -10,6 +10,10 @@
     border-radius: var(--radius);
 }
 
+.rounded-md {
+    border-radius: 200px
+}
+
 .shadow {
     box-shadow: 0 0 20px #0001;
 }

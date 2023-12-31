@@ -12,9 +12,14 @@ export default function JobHeader() {
 
     const tabs = [
         {
-            className: getActive('s'),
-            link: '/job/s',
-            title: 'Newly Posted'
+            className: getActive('live'),
+            link: '/job/live',
+            title: 'Live'
+        },
+        {
+            className: getActive('processing'),
+            link: '/job/processing',
+            title: 'Processing'
         },
         {
             className: getActive('closed'),

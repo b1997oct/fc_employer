@@ -1,9 +1,8 @@
 import Input from '@/Components/Input'
 import Editor from '@/Components/Editor'
 import Layout from '@/Layout'
-import { useTheme } from '@/Layout/Theme'
 import { useEffect, useState } from 'react'
-import { StaticSelect } from '@/Components/Select'
+import Select from '@/Components/Select'
 import Radio from '@/Components/Radio'
 import FormElement from '@/Components/FormElement'
 import Validator from '@/Components/Utils/Validator'
@@ -11,6 +10,7 @@ import useTableFetch from '@/Components/Hooks/useTableFetch'
 import CompanyModal from '@/PagesComponents/Job/CompanyModal'
 import { POST, PUT } from '@upgradableweb/client'
 import { useRouter } from 'next/router'
+import { MultiChips } from '@/Components/Chip'
 
 const fields = [
     {
@@ -34,7 +34,7 @@ const fields = [
         pl: 'Mechanical, CAD'
     },
     {
-        label: "Enter Total openings",
+        label: "Total openings",
         name: "total_openings",
         pl: 'Number',
         type: 'select',
@@ -48,7 +48,7 @@ const fields = [
     {
         label: "Required Skills",
         name: "skills",
-        pl: "Eg: (,) seperated"
+        pl: "Eg: Enter required skills"
     },
     {
         label: "Select Job Type",
@@ -83,12 +83,13 @@ export default function Page() {
         job_type: 'Full Time',
         work_mode: 'Work from office',
         requirement: 'person',
+        skills: []
     })
     let [errors, setErrors] = useState({})
     const [active, setActive] = useState(false)
     const [loading, setLoading] = useState(false)
     const r = useRouter()
-    const { id } = r.query
+    const { id, repost } = r.query
 
     function onChange(e) {
         let { name, value } = e.target
@@ -102,7 +103,6 @@ export default function Page() {
                 const d = res.data
                 d.requirement = d.lost_date ? 'last_date' : 'person'
                 d.last_date = d.lost_date
-                d.skills = d.skills.join(',')
                 const ed = d.education.split(',')
                 d.education = ed[0]
                 d.stream = ed[1]
@@ -114,9 +114,7 @@ export default function Page() {
     }, [id])
 
     function submit() {
-
-        let newData = { ...data, id, lost_date: data.last_date }
-        newData.skills = newData.skills?.split(',') || undefined
+        let newData = { ...data, id, lost_date: data.last_date, status: repost ? 1 : undefined }
         newData.education = newData.education + ',' + newData.stream
         setLoading(true)
         PUT('/api/job', newData)
@@ -150,10 +148,31 @@ export default function Page() {
             />
             <div className='df jcc my'>
                 <div style={{ padding: '4% 4% 3rem 4%', maxWidth: 600 }} className='bg df  w-full fdc gap rounded-sm shadow'>
-                    <h2 className='bold'>Job Details</h2>
+                    <h2 className={`bold ${repost ? 'ce' : 'ci'}`}>Job Details {repost && '(Reposting)'}</h2>
                     {fields.map((dat, i) => {
                         const { label, name, pl, options, type, error } = dat
                         const err = errors[name]
+
+                        if (name === 'skills') {
+                            return (
+                                <Select
+                                    key={i}
+                                    name={name}
+                                    label={label}
+                                    onChange={(val) => {
+                                        const skills = [...data.skills, val]
+                                        setData({ ...data, skills })
+                                    }}
+                                    placeholder={pl}
+                                    options={['React', 'Nextjs']}
+                                    multiple={<MultiChips
+                                        data={data.skills}
+                                        onDelete={(val) => {
+                                            setData({ ...data, skills: val })
+                                        }} />}
+                                />
+                            )
+                        }
                         return (
                             <FormElement
                                 key={i}
@@ -180,7 +199,7 @@ export default function Page() {
                         />
                     }
                     <div className='mb'>
-                        <h4 className='bold'>Job Description</h4>
+                        <h4 className='bold mb'>Job Description</h4>
                         <Editor
                             value={data.jd}
                             onChange={(val) => {

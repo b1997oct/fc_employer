@@ -1,6 +1,8 @@
 import Drawer from '@/Components/Drawer'
 import { Menu } from '@/Components/Icons'
+import { POST } from '@upgradableweb/client'
 import Link from 'next/link'
+import Router from 'next/router'
 import { useState } from 'react'
 
 const menus = [
@@ -20,13 +22,21 @@ const menus = [
         title: 'Employers',
         href: '/employer/new'
     },
-    {
-        title: 'Login',
-        href: '/login'
-    },
+  
 ]
 export default function Sidebar() {
     const [open, setOpen] = useState(false)
+
+    function logout(){
+        if(!confirm('confirm logout')) return
+        POST('/api/logout')
+        .then(res=>{
+            Router.replace('/login')
+        })
+        .catch(err=>{
+            alert(err.message)
+        })
+    }
     return (
         <div>
             <button onClick={() => setOpen(!open)} style={{ borderRadius: 4 }} className='icon-btn'><Menu/></button>
@@ -38,10 +48,14 @@ export default function Sidebar() {
                     <hr className='my' />
                         {menus.map((dat, i) => (
                             <Link href={dat.href} key={i}>
-                                <h3 className={`menu p rounded-sm bold`}>
+                                <div className={`menu p rounded-sm bold`}>
                                    {dat.title}
-                                </h3>
+                                </div>
                             </Link>))}
+                            <button 
+                            className='menu border py-2 mt bold rounded-sm'
+                            onClick={logout}
+                            >Logout</button>
                 </div>
             </Drawer>
         </div>

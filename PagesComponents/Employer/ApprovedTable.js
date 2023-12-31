@@ -1,6 +1,5 @@
 import EditButton from "@/Components/EditButton"
 import useTableFetch from "@/Components/Hooks/useTableFetch"
-import Modal from "@/Components/Modal"
 import Table from "@/Components/Table"
 import SlNo from "@/Components/Table/SlNo"
 import THead from "@/Components/Table/THead"

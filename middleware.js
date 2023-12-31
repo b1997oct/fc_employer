@@ -2,11 +2,13 @@ import { NextResponse } from "next/server"
 import { createToken, refreshToken, verifyToken } from "./lib/token";
 
 const authed = {
-    '/api/job/all': true,
+    '/api/job/processing': true,
     '/api/job/closed': true,
     '/api/job/count': true,
+    '/api/job/live': true,
     '/api/org': true,
     '/api/job': true,
+    '/api/image': true,
     // path
     '/': true,
     '/profile': true,

@@ -3,8 +3,6 @@ import Header from "./Header";
 import { useTheme } from "./Theme";
 
 export default function Layout({ children, title = 'First Career' }) {
-
-    const { width } = useTheme()
     return (
         <div>
             <Head>

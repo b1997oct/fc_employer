@@ -29,6 +29,8 @@
 .menu {
   width: 100%;
   cursor: pointer;
+  font-size: 18px;
+  background: var(--bg);
 }
 
 .menu-selected {

@@ -51,16 +51,13 @@ export default function Page() {
                             value={data.password || ''}
                             label="Password"
                             placeholder='Enter password'
-                            // InputProps={{
-                            //     endAdornment: <IconButton onClick={handleShow} sx={{ color: blue[400] }}>
-                            //         {show ? <VisibilityOff /> : <Visibility />}
-                            //     </IconButton>
-                            // }}
+
                             onChange={onChange}
                         />
                     </div>
                     <div className='my tae'>
                         <button
+                            disabled={loading}
                             onClick={() => r.push('/account/reset')}
                             className='text-btn'>
                             Forgot Password

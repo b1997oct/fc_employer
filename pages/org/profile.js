@@ -77,20 +77,37 @@ export default function Page() {
     }
 
 
-    function submit() {
-        // if (logo) {
-        // }
-        let newData = { ...data, id: py.id }
+    async function submit() {
+
+        let res, newData = { ...data, id: py.id }
         setLoading(true)
-        PUT('/api/org', newData)
-            .then(res => {
-                setPy(res.data)
-                setData({})
-            })
-            .catch(err => {
-                alert(err.message)
-            })
-            .finally(() => setLoading(false))
+        try {
+            if (py.id === 'new' || Object.entries(data).length) {
+                res = await PUT('/api/org', newData)
+            }
+            let newFileds = {}
+            if (logo) {
+                const formData = new FormData()
+                formData.append('image', logo)
+                if (py.company_logo?.secure_url) {
+                    formData.append('id', py.company_logo.public_id)
+                }
+                res = await PUT('/api/image', formData)
+                newFileds = { company_logo: res.data }
+            }
+            if (Object.entries(newFileds).length) {
+                res = await PUT('/api/org', newFileds)
+            }
+            setPy(res.data)
+            setData({})
+            if (logo) {
+                setLogo(null)
+            }
+        } catch (error) {
+            alert(error.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const ValueGetter = (name) => typeof data[name] === 'string' ? data[name] : py[name] || ''
@@ -125,10 +142,10 @@ export default function Page() {
 
                 <div className='bg p rounded-sm shadow-sm w-full' style={{ maxWidth: 478 }}>
 
-                    <Gallery
+                    {/* <Gallery
                         images={banner}
                         setImages={setBanner}
-                    />
+                    /> */}
                     <div>
                         <h3 className='bold my'>About Company</h3>
                         <Editor

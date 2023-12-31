@@ -55,6 +55,11 @@ const schema = new Schema({
     },
     publish: {
         type: Boolean,
+        default: false
+    },
+    status: {
+        type: Number,
+        max: 4
     },
     posted_by: {
         type: String,

@@ -10,7 +10,7 @@ export default async function route(req, res) {
   try {
     await dbConnect()
     const { uid } = req.headers
-    let data = await Job.find({ company: uid })
+    let data = await Job.find({ company: uid, status: { $gt: 0 } })
     return res.status(200).json({ data })
   } catch (error) {
     res.status(500).json({ message: error.message })
