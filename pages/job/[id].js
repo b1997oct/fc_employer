@@ -1,16 +1,15 @@
 import Input from '@/Components/Input'
 import Editor from '@/Components/Editor'
 import Layout from '@/Layout'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Select from '@/Components/Select'
 import Radio from '@/Components/Radio'
 import FormElement from '@/Components/FormElement'
 import Validator from '@/Components/Utils/Validator'
-import useTableFetch from '@/Components/Hooks/useTableFetch'
-import CompanyModal from '@/PagesComponents/Job/CompanyModal'
-import { POST, PUT } from '@upgradableweb/client'
+import { PUT } from '@upgradableweb/client'
 import { useRouter } from 'next/router'
 import { MultiChips } from '@/Components/Chip'
+import useDataFetch from '@/Components/Hooks/useDataFetch'
 
 const fields = [
     {
@@ -78,6 +77,7 @@ const radio = [
 
 export default function Page() {
 
+    const [py, setPy] = useState({})
     const [data, setData] = useState({
         total_openings: '01',
         job_type: 'Full Time',
@@ -96,22 +96,24 @@ export default function Page() {
         setData({ ...data, [name]: value })
     }
 
-    useEffect(() => {
-        if (!id || id === 'new') return
-        POST('/api/job', { id })
-            .then(res => {
-                const d = res.data
-                d.requirement = d.lost_date ? 'last_date' : 'person'
-                d.last_date = d.lost_date
-                const ed = d.education.split(',')
-                d.education = ed[0]
-                d.stream = ed[1]
-                setData(d)
-            })
-            .catch(err => {
-                alert(err.message)
-            })
-    }, [id])
+
+    function handleData(d) {
+        d.requirement = d.lost_date ? 'last_date' : 'person'
+        d.last_date = d.lost_date
+        const ed = d.education.split(',')
+        d.education = ed[0]
+        d.stream = ed[1]
+        setData(d)
+    }
+    const url = id && id !== 'new' && '/api/job'
+    useDataFetch(url, { id }, { setData: handleData, setLoading })
+
+    function onCompany(res) {
+        const { address, company_name } = res
+        setData({ ...data, location: address, company_name })
+    }
+
+    useDataFetch(id === 'new' && '/api/org', '', { setData: onCompany, setLoading })
 
     function submit() {
         let newData = { ...data, id, lost_date: data.last_date, status: repost ? 1 : undefined }
@@ -127,9 +129,10 @@ export default function Page() {
             .finally(() => setLoading(false))
 
     }
+    const getValue = (name) => typeof data[name] === 'string' ? data[name] : py[name] || ''
 
     const ValueGetter = ({ name, min, max, type }) => {
-        const value = data[name] || ''
+        const value = getValue(name)
         const err = Validator({ value, min, max, type })
         const present = errors[name]
         if (err && err !== present) {
@@ -143,16 +146,12 @@ export default function Page() {
 
     return (
         <Layout>
-            <CompanyModal
-                setData={setData}
-            />
             <div className='df jcc my'>
                 <div style={{ padding: '4% 4% 3rem 4%', maxWidth: 600 }} className='bg df  w-full fdc gap rounded-sm shadow'>
                     <h2 className={`bold ${repost ? 'ce' : 'ci'}`}>Job Details {repost && '(Reposting)'}</h2>
                     {fields.map((dat, i) => {
                         const { label, name, pl, options, type, error } = dat
                         const err = errors[name]
-
                         if (name === 'skills') {
                             return (
                                 <Select
@@ -201,7 +200,7 @@ export default function Page() {
                     <div className='mb'>
                         <h4 className='bold mb'>Job Description</h4>
                         <Editor
-                            value={data.jd}
+                            value={getValue('jd')}
                             onChange={(val) => {
                                 setData({ ...data, ['jd']: val })
                             }}
@@ -232,7 +231,7 @@ export default function Page() {
                         onClick={submit}
                         disabled={loading || !Object.keys(data).length}
                         className='btn p-btn w-full p mt'>
-                        Submit
+                        {repost ? 'Repost Job' : 'Post Job'}
                     </button>
                 </div>
             </div>

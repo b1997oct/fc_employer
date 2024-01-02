@@ -52,6 +52,10 @@
     color: var(--pc);
 }
 
+.cs {
+    color: var(--success);
+}
+
 .bold {
     font-weight: 600;
 }

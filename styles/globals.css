@@ -23,7 +23,11 @@
     padding: 0;
   }
 
-  .p-bg {
+  .z {
+    z-index: auto;
+  }
+
+  .primary-bg {
     background-color: var(--pc);
     color: var(--bg);
   }
@@ -75,7 +79,7 @@
     border-color: #9993;
   }
 
-  button,
+  button:not(:disabled),
   label {
     cursor: pointer;
   }
@@ -85,8 +89,6 @@
   }
 
   .header {
-    position: sticky;
-    top: 0;
     padding: 1rem;
     background: var(--bg);
     max-width: 100vw;
@@ -94,6 +96,4 @@
     z-index: 100;
   }
 
-  .skt {
-    background: #9992;
-  }
+  

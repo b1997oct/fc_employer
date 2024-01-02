@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/db"
-import Employer from "@/schema/Company/Employer"
+import Job from "@/schema/Job"
 import { isValidObjectId } from "mongoose"
 
 /**
@@ -9,13 +9,20 @@ import { isValidObjectId } from "mongoose"
 
 export default async function route(req, res) {
     try {
+        const { method } = req
         await dbConnect()
         let data
-        const { _id, id, createdAt, updatedAt, ...body } = req.body
-        if (id === 'new') {
-            data = await new Employer(body).save()
-        } else if (isValidObjectId(id)) {
-            data = await Employer.findByIdAndUpdate(id, body, { new: true })
+        const { _id, id, ...body } = req.body
+        if (body.publish) {
+            throw Error('Something went wrong!')
+        }
+        
+        if (method === "PUT") {
+            data = await Job.findByIdAndUpdate(id, body, { new: true })
+        }
+
+        if (!data) {
+            throw Error('document not found')
         }
         return res.status(200).json({ data })
     } catch (error) {

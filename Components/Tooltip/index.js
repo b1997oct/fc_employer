@@ -1,32 +1,22 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 
-export default function Tooltip({ content, children }) {
-
+export default function Tooltip({ content, children, style }) {
   const [open, setOpen] = useState(false);
-
-  const toggle = () => {
-    setOpen(!open);
-  };
-
-
-
 
   return (
     <div
-      onMouseEnter={toggle}
-      onMouseLeave={toggle}
+      onMouseEnter={() => !open && setOpen(true)}
+      onMouseLeave={() => open && setOpen(false)}
       className='relative df jcc'
     >
+      <div
+        className={`tooltip ${open ? 'fadeIn' : 'toastOut'}`}
+        style={style}
+      >
+        {content}
+        {/* <div className='tooltip-arrow' /> */}
+      </div>
       {children}
-      {open && (
-        <div
-         
-          style={{ top:-36, zIndex: 99 }}
-          className='absolute p-2 text-bg rounded-sm shadow-sm'
-        >
-          {content}
-        </div>
-      )}
     </div>
   )
 }

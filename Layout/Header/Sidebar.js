@@ -12,50 +12,50 @@ const menus = [
     },
     {
         title: 'Jobs',
-        href: '/job/s'
+        href: '/job/live'
     },
     {
-        title: 'Organization',
-        href: '/org/profile'
+        title: 'Company Profile',
+        href: '/company/profile'
     },
-       {
+    {
         title: 'Employers',
         href: '/employer/new'
     },
-  
 ]
+
 export default function Sidebar() {
     const [open, setOpen] = useState(false)
 
-    function logout(){
-        if(!confirm('confirm logout')) return
+    function logout() {
+        if (!confirm('confirm logout')) return
         POST('/api/logout')
-        .then(res=>{
-            Router.replace('/login')
-        })
-        .catch(err=>{
-            alert(err.message)
-        })
+            .then(res => {
+                Router.replace('/login')
+            })
+            .catch(err => {
+                alert(err.message)
+            })
     }
     return (
         <div>
-            <button onClick={() => setOpen(!open)} style={{ borderRadius: 4 }} className='icon-btn'><Menu/></button>
+            <button onClick={() => setOpen(!open)} style={{ borderRadius: 4 }} className='icon-btn'><Menu /></button>
             <Drawer open={open} onClose={() => setOpen(!open)}>
                 <div className='m'>
                     <div>
                         <h2 style={{ minWidth: 260 }}>Firstcareer</h2>
                     </div>
                     <hr className='my' />
-                        {menus.map((dat, i) => (
-                            <Link href={dat.href} key={i}>
-                                <div className={`menu p rounded-sm bold`}>
-                                   {dat.title}
-                                </div>
-                            </Link>))}
-                            <button 
-                            className='menu border py-2 mt bold rounded-sm'
-                            onClick={logout}
-                            >Logout</button>
+                    {menus.map((dat, i) => (
+                        <Link href={dat.href} key={i}>
+                            <div className={`menu p rounded-sm bold`}>
+                                {dat.title}
+                            </div>
+                        </Link>))}
+                    <button
+                        className='menu border py-2 mt bold rounded-sm'
+                        onClick={logout}
+                    >Logout</button>
                 </div>
             </Drawer>
         </div>

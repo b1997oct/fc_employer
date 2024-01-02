@@ -9,6 +9,7 @@ import ProfileHeader from '@/PagesComponents/Profile/ProfileHeader'
 import Gallery from '@/PagesComponents/Profile/Gallery'
 import { POST, PUT } from '@upgradableweb/client'
 import useTableFetch from '@/Components/Hooks/useTableFetch'
+import useDataFetch from '@/Components/Hooks/useDataFetch'
 
 const fields = [
     {
@@ -29,7 +30,7 @@ const fields = [
         pl: "Select Functional Area"
     },
     {
-        label: "Main office address",
+        label: "Company address",
         name: "address",
         pl: "Eg: Banglore , peenya 560001"
     },
@@ -55,7 +56,7 @@ export default function Page() {
 
     const [data, setData] = useState({})
     const [py, setPy] = useState({})
-    const [banner, setBanner] = useState([])
+    const [banner, setBanner] = useState(null)
     const [logo, setLogo] = useState(null)
     const [loading, setLoading] = useState(false)
 
@@ -69,7 +70,7 @@ export default function Page() {
         }
     }
 
-    useTableFetch({ url: '/api/org', onResponse })
+    useDataFetch('/api/org','',{ onResponse })
 
     function onChange(e) {
         let { name, value } = e.target
@@ -112,7 +113,7 @@ export default function Page() {
 
     const ValueGetter = (name) => typeof data[name] === 'string' ? data[name] : py[name] || ''
 
-    const disabled = loading || !Object.keys(data).length && !logo && !banner.length
+    const disabled = loading || !Object.keys(data).length && !logo && !banner
 
     return (
         <Layout>
@@ -141,11 +142,10 @@ export default function Page() {
                 </div>
 
                 <div className='bg p rounded-sm shadow-sm w-full' style={{ maxWidth: 478 }}>
-
-                    {/* <Gallery
+                    <Gallery
                         images={banner}
                         setImages={setBanner}
-                    /> */}
+                    />
                     <div>
                         <h3 className='bold my'>About Company</h3>
                         <Editor

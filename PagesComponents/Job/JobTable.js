@@ -1,14 +1,15 @@
 import EditButton from "@/Components/EditButton"
 import useTableFetch from "@/Components/Hooks/useTableFetch"
+import Pagination from "@/Components/Pagination"
+import usePagination from "@/Components/Pagination/usePagination"
 import Table from "@/Components/Table"
-import SlNo from "@/Components/Table/SlNo"
 import THead from "@/Components/Table/THead"
 import TRow from "@/Components/Table/TRow"
-import TableFooter from "@/Components/TableFooter"
 import moment from "moment"
 import Link from "next/link"
-import Router, { useRouter } from "next/router"
+import { useRouter } from "next/router"
 import { useState } from "react"
+import JobStatus from "./JobStatus"
 
 
 
@@ -17,23 +18,31 @@ const h = [
     { label: 'Job', minWidth: 100 },
     { label: 'Posted on', minWidth: 100 },
     { label: 'Posted By', minWidth: 100 },
-    { label: 'Status', minWidth: 140 },
-    { label: 'Applicants', minWidth: 100 },
+    { label: 'Status', maxWidth: 100, textAlign: 'center' },
+    { label: 'Applicants', maxWidth: 50 },
+    { maxWidth: 100 },
 ]
-const statusText = ['', 'Reviewing', 'Rejected']
 
 export default function JobTable({ url }) {
 
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
-    const [paination, setPagination] = useState({
-        page: 1,
-        limit: 24,
-        sort_field: 'createdAt',
-        sort: 1
-    })
+    const [total, setTotal] = useState(0)
+    const [paination, setPagination] = usePagination()
 
-    useTableFetch({ url, setData, setLoading }, [paination])
+    const path = useRouter().pathname.split('/')[2]
+
+    useTableFetch(url, paination, { setData, setLoading, setTotal }, [paination])
+
+    function onChange(val) {
+        const f = data.map(d => {
+            if (d._id === val._id) {
+                d = { ...d, ...val }
+            }
+            return d
+        })
+        setData(f)
+    }
 
     return (
         <div>
@@ -51,61 +60,61 @@ export default function JobTable({ url }) {
                                 {...dat}
                                 index={i}
                                 id={dat._id}
+                                path={path}
+                                onChange={onChange}
                             />)
                     })}
                 </tbody>
 
             </Table>
-            <TableFooter />
+            <Pagination
+                pagination={{ ...paination, total }}
+                setPagination={setPagination}
+            />
 
         </div>
     )
 }
 
 
-function TableRow({ index, job_role, updatedAt, posted_by, status, publish, applicants, id }) {
-
-    const r = useRouter()
-    const closed = r.pathname.split('/')[2] === 'closed'
-
-    if (status) {
-        status = statusText[status]
-    } else if (publish) {
-        status = 'Live'
-    } else {
-        status = 'Closed'
-    }
+function TableRow({ id, index, job_role, updatedAt, admin_posted, status, publish, applicants, path, onChange }) {
 
     return (
         <TRow>
             <td>
-                <SlNo>{index + 1}</SlNo>
+                <p className="p tac">{index + 1}</p>
             </td>
             <td>
-                {job_role}
+                <strong style={{ maxWidth: 250 }} className="nowrap">{job_role}</strong>
             </td>
             <td>
                 {moment(updatedAt).fromNow()}
             </td>
             <td>
-                {posted_by}
+                {admin_posted ? 'Admin' : 'Company'}
             </td>
             <td>
-                <div className="df aic gap">
-                    <p className={`${publish === false ? 'ce' : 'cs'}`}>{status}</p>
-                    {closed && <Link href={`/job/${id}?repost=yes`}><button>Repost ?</button></Link>}
-                </div>
-
-            </td>
-            <td>
-                {applicants || 0}
-            </td>
-            <td>
-                <EditButton
-                    onClick={() => {
-                        r.push('/job/' + id)
-                    }}
+                <JobStatus
+                    id={id}
+                    onChange={onChange}
+                    status={status ? status : publish}
                 />
+            </td>
+            <td>
+                <p className="tac">{applicants || 0}</p>
+            </td>
+            <td>
+                <div className="tac">
+                    {path === 'closed' ?
+                        <Link href={`/job/${id}?repost=yes`}>
+                            <button>Repost ?</button>
+                        </Link>
+                        : <EditButton
+                            onClick={() => {
+                                r.push('/job/' + id)
+                            }}
+                        />}
+                </div>
             </td>
         </TRow>
     )

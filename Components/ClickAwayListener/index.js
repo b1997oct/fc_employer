@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function ClickAwayListener({ children, className, onClickAway }) {
+export default function ClickAwayListener({ children, className, onClickAway,style, ...props }) {
 
     const containerRef = useRef(null);
     useEffect(() => {
@@ -17,5 +17,5 @@ export default function ClickAwayListener({ children, className, onClickAway }) 
         };
     }, [onClickAway]);
 
-    return <div ref={containerRef} className={className}>{children}</div>;
+    return <div ref={containerRef} className={className} style={style} {...props}>{children}</div>;
 };

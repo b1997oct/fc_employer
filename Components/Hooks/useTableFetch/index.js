@@ -1,17 +1,22 @@
 import { POST } from "@upgradableweb/client"
 import { useEffect } from "react"
 
-export default function useTableFetch({ url, setLoading, setData, onResponse, setTotal }, deps = []) {
+export default function useTableFetch(url, body, { setLoading, setData, onResponse, setTotal }, deps = []) {
 
     useEffect(() => {
+        if (!url) return
         setLoading && setLoading(true)
-        POST(url, ...deps)
+        POST(url, body)
             .then(res => {
                 if (Array.isArray(res.data)) {
-                    setData && setData(res.data)
+                    if (body.skip) {
+                        setData && setData(prev => ([...prev, ...res.data]))
+                    } else {
+                        setData && setData(res.data)
+                    }
                 }
-                if (res.totol_count) {
-                    setTotal && setTotal(res.totol_count)
+                if (res.total_count) {
+                    setTotal && setTotal(res.total_count)
                 }
                 onResponse && onResponse(res)
             })

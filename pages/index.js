@@ -5,20 +5,20 @@ export default function Page() {
 
   return (
     <Layout>
-      <div>
+      <div className="h-screen">
         <h3>Wellcome to Your Dashboard</h3>
+
+        <div className="df fww aic">
+          <DashboardCard
+            title='Active Jobs'
+            url='/api/job/count?q=active'
+          />
+          <DashboardCard
+            title='Inactive Jobs'
+            url='/api/job/count?q=inactive'
+          />
+        </div>
       </div>
-      <div className="df fww jcc">
-      <DashboardCard
-        title='Active Jobs'
-        url='/api/job/count?q=active'
-      />
-       <DashboardCard
-        title='Inactive Jobs'
-        url='/api/job/count?q=inactive'
-      />
-      </div>
-     
     </Layout>
   )
 }

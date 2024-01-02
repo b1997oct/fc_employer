@@ -19,6 +19,10 @@
   border: none;
 }
 
+.tab:not(:disabled):hover {
+  opacity: .7;
+}
+
 .tab-start {
   border-top-left-radius: var(--radius);
   border-bottom-left-radius: var(--radius);

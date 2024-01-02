@@ -4,7 +4,7 @@ import TableSkeleton from "./TableSkeleton";
 export default function Table({ col, loading, nodata, children }) {
     return (
         <>
-            <div className='table'>
+            <div style={{ paddingBottom: !nodata && '12%' }} className='table'>
                 <table>
                     {children}
                     {loading &&
