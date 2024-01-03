@@ -1,14 +1,11 @@
 import Input from '@/Components/Input'
-import Editor, { htmlToJSON } from '@/Components/Editor'
+import Editor from '@/Components/Editor'
 import Layout from '@/Layout'
 import { useTheme } from '@/Layout/Theme'
-import { useMemo, useState } from 'react'
-import { Logo, UploadButton } from '@/PagesComponents/Profile/ProfileFiles'
-import { ReactSortable } from 'react-sortablejs'
-import ProfileHeader from '@/PagesComponents/Profile/ProfileHeader'
+import { useState } from 'react'
+import { Logo } from '@/PagesComponents/Profile/ProfileFiles'
 import Gallery from '@/PagesComponents/Profile/Gallery'
-import { POST, PUT } from '@upgradableweb/client'
-import useTableFetch from '@/Components/Hooks/useTableFetch'
+import { PUT } from '@upgradableweb/client'
 import useDataFetch from '@/Components/Hooks/useDataFetch'
 
 const fields = [
@@ -70,7 +67,7 @@ export default function Page() {
         }
     }
 
-    useDataFetch('/api/org','',{ onResponse })
+    useDataFetch('/api/org', '', { onResponse })
 
     function onChange(e) {
         let { name, value } = e.target
@@ -149,6 +146,7 @@ export default function Page() {
                     <div>
                         <h3 className='bold my'>About Company</h3>
                         <Editor
+                            name='about_us'
                             value={ValueGetter('about_us')}
                             onChange={(val) => {
                                 setData({ ...data, ['about_us']: val })

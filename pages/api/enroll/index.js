@@ -14,7 +14,7 @@ export default async function route(req, res) {
         let data
         if (method === 'POST') {
             const { email, mobile } = req.body
-            data = await Enroll.findOne({ $or: [{ email }, { mobile }] })
+            data = await Enroll.countDocuments({ $or: [{ email }, { mobile }] })
             if (!data) {
                 data = await Enroll(req.body).save()
             }

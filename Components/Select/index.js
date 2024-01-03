@@ -14,8 +14,8 @@ export default function Select({ options = [], value = '', name, onChange, label
         !multiple && onChange(e)
     }
 
-    const focus = () =>document.getElementById(id).focus()
-    
+    const focus = () => document.getElementById(id).focus()
+
     function reset() {
         setData(null)
         onChange({ target: { name, value: '' } })
@@ -90,7 +90,7 @@ export function StaticSelect({ label, name, value, onChange, children, active, e
     const id = useId()
     const err = b && Boolean(error) || active && Boolean(error)
     return (
-        <div>
+        <div className={`${err ? 'error' : ''}`}>
             <label className='bold' htmlFor={id}>{label}</label>
             <select
                 name={name}
@@ -102,6 +102,6 @@ export function StaticSelect({ label, name, value, onChange, children, active, e
             >
                 {children}
             </select>
-            {err && <div className="mt-1 mx-2 error-text">{errorText}</div>}
+            {err && <div className="mt-1 mx-2 ce">{errorText}</div>}
         </div>)
 }

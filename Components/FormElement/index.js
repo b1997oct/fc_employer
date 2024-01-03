@@ -14,7 +14,10 @@ export default function FormElement({ value, onChange, label, type, name, option
                 error={error}
                 errorText={errorText}
             >
-                {options.map((d, ind) => <option key={ind} value={d}>{d}</option>)}
+                <option>Select one</option>
+                {options.map((d, ind) => <option key={ind} value={d}>
+                    {d}
+                </option>)}
             </StaticSelect>
         )
     }

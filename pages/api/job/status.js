@@ -16,13 +16,12 @@ export default async function route(req, res) {
         if (body.publish) {
             throw Error('Something went wrong!')
         }
-        
+
         if (method === "PUT") {
             data = await Job.findByIdAndUpdate(id, body, { new: true })
         }
-
         if (!data) {
-            throw Error('document not found')
+            return res.status(404).json({ message: 'document not found' })
         }
         return res.status(200).json({ data })
     } catch (error) {

@@ -17,7 +17,7 @@ export default function Input({ label, value, name, active, error, className = '
                 onBlur={() => setB(true)}
                 {...props}
             />
-            {err && <div className="mt-1 mx-2 error-text">{errorText}</div>}
+            {err && <div className="mt-1 mx-2 ce">{errorText}</div>}
         </div>
     )
 }

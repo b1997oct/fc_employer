@@ -42,8 +42,8 @@ export default function Page() {
                         <Input
                             name="uid"
                             value={data.uid || ''}
-                            placeholder='Enter Your Employer Id'
-                            label="Employer Id"
+                            placeholder='Enter Employer ID'
+                            label="Employer ID"
                             onChange={onChange}
                         />
                         <Input
@@ -63,7 +63,7 @@ export default function Page() {
                             Forgot Password
                         </button>
                     </div>
-                    <button onClick={submit} className='btn w-full pbg'>
+                    <button onClick={submit} className='btn w-full primary-bg'>
                         Login
                     </button>
                     <Link href='/account' target='_blank'>

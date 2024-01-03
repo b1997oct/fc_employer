@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false, loading: () => <div>Editor Loading...</div> })
 import 'react-quill/dist/quill.snow.css';
 
@@ -12,17 +13,24 @@ const quillModules = {
 }
 
 
-export default function Editor({ value, onChange, placeholder }) {
+export default function Editor({ value, name, onChange, placeholder, error, active, errorText }) {
+  const [b, setB] = useState(false)
+  const err = b && Boolean(error) || active && Boolean(error)
 
   return (
-    <ReactQuill
-      modules={quillModules}
-      className='editor'
-      onChange={onChange}
-      value={value}
-      placeholder={placeholder}
-      formats={['bold', 'list']}
-    />
+    <div>
+      <ReactQuill
+        modules={quillModules}
+        className='editor'
+        onChange={(val) => {
+          onChange && onChange({ target: { name, value: val } })
+        }}
+        value={value}
+        placeholder={placeholder}
+        formats={['bold', 'list']}
+      />
+      {err && <div className="mt-1 mx-2 ce">{errorText}</div>}
+    </div>
   )
 }
 

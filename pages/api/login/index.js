@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/db"
 import { createToken } from "@/lib/token"
+import Company from "@/schema/Company"
 import Employer from "@/schema/Company/Employer"
 
 /**
@@ -12,7 +13,7 @@ export default async function route(req, res) {
     await dbConnect()
     let data
     const { uid, password } = req.body
-    data = await Employer.findOne({ uid, password })
+    data = await Company.findOne({ uid, password })
     if (!data) {
       return res.status(404).json({ message: 'user not found with this uid and password' })
     } else if (data.status) {

@@ -3,66 +3,100 @@ import Validator from '@/Components/Utils/Validator';
 import { useRouter } from 'next/router';
 import { useState } from 'react'
 import { POST } from '@upgradableweb/client'
+import Editor from '@/Components/Editor';
+import useDataFetch from '@/Components/Hooks/useDataFetch';
 
 const fields = [
     {
-        label: "Your Name",
-        name: "name",
-        pl: "Enter your name",
-        error: { min: 3, max: 50 }
-    },
-    {
-        label: "Company Name",
+        label: "Company Name*",
         name: "company_name",
         pl: "Enter company name",
-        error: { min: 3, max: 50, }
+        error: { min: 1, max: 100 }
     },
     {
-        type: "autocomplete",
-        label: "Company Industry Type",
+        type: "select",
+        label: "Industry*",
         name: "industry",
-        pl: "Industry Type",
-        error: { min: 1 }
+        pl: "industry type",
+        error: { min: 3, max: 100 },
+
     },
     {
-        label: "Contact Mobile",
-        name: "mobile",
-        pl: "Enter Contact Mobile",
-        error: { min: 10, max: 10, type: 'mobile' }
+        type: "select",
+        label: "Comapny Functinal Area*",
+        name: "department",
+        pl: "Functional Area",
+        error: { min: 3, max: 100 },
     },
     {
-        label: "Contact Email",
-        name: "email",
-        pl: "Enter Contact Email",
-        error: { min: 3, max: 50, type: 'email' }
-    },
-    {
-        label: "Company Location",
+        label: "Company address*",
         name: "address",
-        pl: "Enter Company Location",
+        pl: "Eg: Banglore , peenya 560001",
+        error: { min: 3, max: 100 }
+    },
+    {
+        label: "Company location map link",
+        name: "map_link",
+        pl: "Paste the map link"
+    },
+    {
+        label: "Company Website link",
+        name: "website",
+        pl: "https://firstcareer.co"
+    },
+    {
+        label: "Contact email",
+        name: "email",
+        pl: "company@mail.com",
         error: { min: 3, max: 50 }
     },
-    // {
-    //     label: "Quering for",
-    //     name: "reason",
-    //     pl: "Select any one",
-    //     options: ['Job Posting', 'None'],
-    //     type: 'select',
-    //     error: { min: 1 }
-    // },
+    {
+        label: "Contact Mobile Number",
+        name: "mobile",
+        pl: "9876543210",
+        error: { min: 10, max: 10 }
+    },
+    {
+        name: "about_us",
+        error: { min: 30, max: 3000 }
+    },
 ]
 
+const flds = fields.length - 1
+
+let errors = {}
+
+function onError({ name, value }) {
+    const f = fields.find(d => d.name === name)
+    if (!f) return
+    const err = Validator({ value, ...f.error })
+    const present = errors[name]
+    if (err && err !== present) {
+        errors = { ...errors, [name]: err }
+    } else if (!err && present) {
+        delete errors[name]
+    }
+}
 
 export default function AccountForm() {
 
     const [data, setData] = useState({})
-    let [errors, setErrors] = useState({})
     const [loading, setLoading] = useState(false);
     const [active, setActive] = useState(false);
+    const [utils, setUtils] = useState({
+        industry_list: [],
+        department_list: []
+    });
     const r = useRouter()
 
+    useDataFetch('/api/utils', '', { setData: setUtils })
+
     const submit = () => {
-        const notValid = Object.keys(errors).pop()
+        for (const f of fields) {
+            const { name } = f
+            onError({ name, value: data[name] })
+        }
+        const notValid = Object.keys(errors)[0]
         if (notValid) {
             !active && setActive(true)
             document.getElementsByName(notValid)[0]?.focus()
@@ -79,28 +113,24 @@ export default function AccountForm() {
             .finally(() => setLoading(false))
     }
     function onChange(e) {
-        const { name, value } = e.target
+        let { name, value } = e.target
+        onError({ name, value })
         setData({ ...data, [name]: value })
     }
 
-    const ValueGetter = ({ name, min, max, type }) => {
+    const ValueGetter = (name) => {
         const value = data[name] || ''
-        const err = Validator({ value, min, max, type })
-        const present = errors[name]
-        if (err && err !== present) {
-            setErrors({ ...errors, [name]: err })
-        } else if (!err && present) {
-            delete errors[name]
-            setErrors({ ...errors })
-        }
         return value
     }
 
     return (
         <div className='df fdc gap-2'>
-            {fields.map((dat, i) => {
-                const { label, name, pl, options, type, error } = dat
+            {fields.slice(0, flds).map((dat, i) => {
+                const { label, name, pl, type } = dat
                 const err = errors[name]
+                const options = name === 'industry' ? utils.industry_list
+                    : name === 'department' ? utils.department_list : undefined
+
                 return (
                     <FormElement
                         key={i}
@@ -108,7 +138,7 @@ export default function AccountForm() {
                         name={name}
                         placeholder={pl}
                         onChange={onChange}
-                        value={ValueGetter({ name, ...error })}
+                        value={ValueGetter(name)}
                         options={options}
                         type={type}
                         active={active}
@@ -116,6 +146,18 @@ export default function AccountForm() {
                         errorText={err}
                     />)
             })}
+            <div>
+                <h3 className='bold my'>About Your Company</h3>
+                <Editor
+                    value={ValueGetter('about_us')}
+                    onChange={onChange}
+                    placeholder='About company'
+                    name='about_us'
+                    error={errors.about_us}
+                    errorText={errors.about_us}
+                    active={active}
+                />
+            </div>
             <button
                 disabled={loading}
                 className='btn w-full my'

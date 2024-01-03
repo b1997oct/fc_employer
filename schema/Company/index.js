@@ -6,19 +6,25 @@ const image = {
 }
 
 const schema = new Schema({
-    _id: {
-        type: Schema.Types.ObjectId,
-        required: [true, '/user is required/'],
-    },
     company_name: {
         type: String,
         required: true,
         unique: true,
         trim: true
     },
+    uid: {
+        type: String,
+        unique: [true, '/uid must be unique'],
+        required: [true, '/uid is reuired/'],
+        trim: true
+    },
+    password: {
+        type: String,
+        required: [true, '/password is reuired/'],
+    },
     address: {
         type: String,
-        required: true,
+        required: [true, '/address is reuired/'],
         trim: true
     },
     size: {
@@ -42,16 +48,22 @@ const schema = new Schema({
         required: true,
         trim: true
     },
+    email: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    mobile: {
+        type: String,
+        required: true,
+        trim: true
+    },
     about_us: {
         type: String,
         required: [true, '/about required'],
         minlength: [30, '/about min 30 chars required']
     },
     banner: image,
-    banner_2: image,
-    banner_3: image,
-    banner_4: image,
-    banner_5: image,
     company_logo: image,
 }, { timestamps: true, versionKey: false })
 
