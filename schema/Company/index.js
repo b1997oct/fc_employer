@@ -12,12 +12,6 @@ const schema = new Schema({
         unique: true,
         trim: true
     },
-    uid: {
-        type: String,
-        unique: [true, '/uid must be unique'],
-        required: [true, '/uid is reuired/'],
-        trim: true
-    },
     password: {
         type: String,
         required: [true, '/password is reuired/'],

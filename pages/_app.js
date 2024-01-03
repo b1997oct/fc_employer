@@ -12,6 +12,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Theme>
       <Component {...pageProps} />
+      <div id='toast' className='toastOut' />
     </Theme>
   )
 }

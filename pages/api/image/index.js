@@ -34,7 +34,6 @@ export default async function route(req, res) {
                 return res.status(400).json({ message: "please upload only image files" })
             }
             data = await Cloud.upload(img.filepath, { folder: FOLDER })
-            console.log('data: ', data);
             id && await Cloud.destroy(id)
         }
         return res.status(200).json({ data })

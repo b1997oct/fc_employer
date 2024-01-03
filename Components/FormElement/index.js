@@ -1,11 +1,11 @@
 import Input from '../Input'
-import { StaticSelect } from '../Select'
+import Select, { StaticSelect } from '../Select'
 
 export default function FormElement({ value, onChange, label, type, name, options, placeholder, active, error, errorText }) {
 
     if (type === 'select') {
         return (
-            <StaticSelect
+            <Select
                 name={name}
                 value={value}
                 onChange={onChange}
@@ -13,12 +13,10 @@ export default function FormElement({ value, onChange, label, type, name, option
                 active={active}
                 error={error}
                 errorText={errorText}
-            >
-                <option>Select one</option>
-                {options.map((d, ind) => <option key={ind} value={d}>
-                    {d}
-                </option>)}
-            </StaticSelect>
+                options={options}
+                placeholder={placeholder}
+           />
+           
         )
     }
 

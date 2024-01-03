@@ -5,14 +5,17 @@ export default function Page() {
             <div className='df jcc aic h-screen'>
                 <div style={{ maxWidth: 450, marginTop: -120 }} className='card shadow m'>
                     <h2 className='bold tac'>First Career</h2>
-                    <p className='tac fs1'>Thank you for submiting We will be back to you soon</p>
-                    <div style={{marginTop:24}} className="df">
+                    <p className='tac fs1'>
+                        Thank you for your interest in First Career. Your application has been received, and our Backend team will review it. We will be in touch with you shortly
+                    </p>
+                    {/* <p className='tac fs1'>Thank you for submiting We will be back to you soon</p> */}
+                    <div style={{ marginTop: 24 }} className="df">
                         <div className="f-1">
                             <a href="https://firstcareer.co" >
                                 firstcareer.co
                             </a>
                         </div>
-                       
+
                         <a href='mailto:info@firstcareer.co'
                             target='_blank' className='a mr'>Email</a>
                         <a

@@ -12,8 +12,8 @@ export default async function route(req, res) {
   try {
     await dbConnect()
     let data
-    const { uid, password } = req.body
-    data = await Company.findOne({ uid, password })
+    const { email, password } = req.body
+    data = await Company.findOne({ email: { $regex: new RegExp(email.trim(), 'i') } })
     if (!data) {
       return res.status(404).json({ message: 'user not found with this uid and password' })
     } else if (data.status) {

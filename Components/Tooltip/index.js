@@ -10,7 +10,7 @@ export default function Tooltip({ content, children, style }) {
       className='relative df jcc'
     >
       <div
-        className={`tooltip ${open ? 'fadeIn' : 'toastOut'}`}
+        className={`tooltip ${open ? 'fadeIn' : 'tooltipOut'}`}
         style={style}
       >
         {content}

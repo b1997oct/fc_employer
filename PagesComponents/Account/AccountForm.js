@@ -23,7 +23,7 @@ const fields = [
     },
     {
         type: "select",
-        label: "Comapny Functinal Area*",
+        label: "Comapny functinal area*",
         name: "department",
         pl: "Functional Area",
         error: { min: 3, max: 100 },
@@ -40,7 +40,7 @@ const fields = [
         pl: "Paste the map link"
     },
     {
-        label: "Company Website link",
+        label: "Company website link",
         name: "website",
         pl: "https://firstcareer.co"
     },
@@ -51,7 +51,7 @@ const fields = [
         error: { min: 3, max: 50 }
     },
     {
-        label: "Contact Mobile Number",
+        label: "Contact mobile number",
         name: "mobile",
         pl: "9876543210",
         error: { min: 10, max: 10 }
@@ -146,18 +146,16 @@ export default function AccountForm() {
                         errorText={err}
                     />)
             })}
-            <div>
-                <h3 className='bold my'>About Your Company</h3>
-                <Editor
-                    value={ValueGetter('about_us')}
-                    onChange={onChange}
-                    placeholder='About company'
-                    name='about_us'
-                    error={errors.about_us}
-                    errorText={errors.about_us}
-                    active={active}
-                />
-            </div>
+            <h3 className='bold my'>About your company</h3>
+            <Editor
+                value={ValueGetter('about_us')}
+                onChange={onChange}
+                placeholder='About company'
+                name='about_us'
+                error={errors.about_us}
+                errorText={errors.about_us}
+                active={active}
+            />
             <button
                 disabled={loading}
                 className='btn w-full my'

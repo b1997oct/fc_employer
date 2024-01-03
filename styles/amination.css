@@ -52,17 +52,51 @@
 
 /* component ani */
 
-.toastOut {
-  animation: toastout 300ms forwards;
+.tooltipOut {
+  animation: tooltipOut 300ms forwards;
 }
 
-@keyframes toastout {
+@keyframes tooltipOut {
   0% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
-    display: none;
+    visibility: hidden;
+  }
+}
+
+.toastIn {
+  animation: toastIn 300ms forwards;
+}
+
+
+.toastOut {
+  animation: toastOut 300ms forwards;
+}
+
+@keyframes toastIn {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    bottom: 0px;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 30px;
+  }
+}
+
+@keyframes toastOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    bottom: 0;
+    visibility: hidden;
   }
 }

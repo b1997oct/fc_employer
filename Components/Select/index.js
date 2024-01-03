@@ -55,7 +55,7 @@ export default function Select({ options = [], value = '', name, onChange, label
                     </button>}
                 {open &&
                     <div
-                        className='bg py-1 scroll mt-1 fadeIn absolute w-full rounded-sm shadow-sm'
+                        className='bg py-1 scroll mt-1 absolute w-full rounded-sm shadow-sm'
                         style={{ maxHeight: 200, zIndex: 9, }}>
                         {search.length ?
                             search.map((dat, i) => {
@@ -72,6 +72,7 @@ export default function Select({ options = [], value = '', name, onChange, label
                                                 focus()
                                             } else {
                                                 onChange && onChange({ target: { name, value: dat } })
+                                                setOpen(false)
                                             }
                                         }}>
                                         {dat}

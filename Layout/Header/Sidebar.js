@@ -18,10 +18,6 @@ const menus = [
         title: 'Company Profile',
         href: '/company/profile'
     },
-    {
-        title: 'Employers',
-        href: '/employer/new'
-    },
 ]
 
 export default function Sidebar() {

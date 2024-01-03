@@ -8,7 +8,7 @@ import { useState } from 'react'
 export default function Page() {
 
     const [data, setData] = useState({
-        uid: "",
+        email: "",
         password: ""
     })
     const [loading, setLoading] = useState(false);
@@ -40,10 +40,10 @@ export default function Page() {
                     <p className='tac fs1 '>Employer Login</p>
                     <div className='df fdc gap-2'>
                         <Input
-                            name="uid"
-                            value={data.uid || ''}
-                            placeholder='Enter Employer ID'
-                            label="Employer ID"
+                            name="email"
+                            value={data.email || ''}
+                            placeholder='Enter employer email'
+                            label="Employer email"
                             onChange={onChange}
                         />
                         <Input
