@@ -19,7 +19,7 @@ export default async function route(req, res) {
     if (!data || !match) {
       return res.status(404).json({ message: 'user not found with this email and password' })
     }
-    const { cookie } = await createToken({ name: '_tok', payload: { uid: data._id.toString() }, expireInDays: 30 })
+    const { cookie } = await createToken({ name: '_tok', payload: { uid: data._id }, expireInDays: 30 })
     res.setHeader('Set-Cookie', cookie)
     return res.status(200).json({ message: 'verified successfully' })
   } catch (error) {

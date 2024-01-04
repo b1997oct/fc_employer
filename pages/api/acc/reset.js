@@ -14,7 +14,7 @@ export default async function route(req, res) {
   try {
     await dbConnect()
     let data
-    let { email, password } = req.body
+    let { email, password, subject, html } = req.body
     if (method === "POST") {
       data = await Company.findOne({ email: { $regex: new RegExp(email.trim(), 'i') } }).select('email')
       if (!data) {
@@ -22,7 +22,8 @@ export default async function route(req, res) {
       }
       const { token } = await refreshToken({ payload: { uid: data._id }, expireInMin: 15 })
       const url = req.headers.origin + '/account/reset?token=' + token
-      await ResetMail({ email: email, url })
+      await ResetMail({ email, url, html, subject })
+
     } else if (method === 'PUT') {
       const { uid } = await verifyToken(req.body.token)
       if (!password) {

@@ -113,22 +113,21 @@ export default function Page() {
             }
             let newFileds = {}
             if (logo) {
-                const formData = new FormData()
-                formData.append('image', logo)
-                if (py.company_logo?.secure_url) {
-                    formData.append('id', py.company_logo.public_id)
-                }
-                res = await PUT('/api/image', formData)
-                newFileds = { company_logo: res.data }
+                res = await UploadImg(logo, py.company_logo?.public_id)
+                newFileds = { ...newFileds, company_logo: res }
             }
+            if (banner) {
+                res = await UploadImg(banner, py.banner?.public_id)
+                newFileds = { ...newFileds, banner: res }
+            }
+
             if (Object.entries(newFileds).length) {
                 res = await PUT('/api/org', newFileds)
             }
             setPy(res.data)
             setData({})
-            if (logo) {
-                setLogo(null)
-            }
+            logo && setLogo(null)
+            banner && setBanner(null)
             Toast('details saved successfully')
         } catch (error) {
             alert(error.message)
@@ -148,7 +147,7 @@ export default function Page() {
 
             <div style={{ margin: '4% 0' }} className={`df jcsa gap ${width ? '' : 'fdc'}`}>
 
-                <div style={{ padding: '5%' ,maxWidth:500}} className='bg df fdc gap rounded-sm shadow-sm'>
+                <div style={{ padding: '5%', maxWidth: 500 }} className='bg df fdc gap rounded-sm shadow-sm'>
                     {!disabled && data.id === 'new' && <p className='ce'>Please save the details</p>}
                     <Logo
                         open={true}
@@ -182,8 +181,9 @@ export default function Page() {
 
                 <div className='bg p rounded-sm shadow-sm w-full' style={{ maxWidth: 478 }}>
                     <Gallery
-                        images={banner}
-                        setImages={setBanner}
+                        image={banner}
+                        setImage={setBanner}
+                        url={py.banner?.secure_url}
                     />
                     <h3 className='bold my'>About your company</h3>
                     <Editor
@@ -207,4 +207,17 @@ export default function Page() {
 
         </Layout>
     )
+}
+
+
+async function UploadImg(img, id) {
+    const formData = new FormData()
+    formData.append('image', img)
+    if (id) {
+        formData.append('id', id)
+    }
+
+    const { data } = await PUT('/api/image', formData)
+    const { secure_url, public_id } = data
+    return { public_id, secure_url }
 }

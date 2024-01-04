@@ -1,20 +1,22 @@
 import { useId, useState } from 'react'
-import { Close, Cancel } from '../Icons'
+import { Cancel } from '../Icons'
 import ClickAwayListener from '../ClickAwayListener'
+import style from './styles.module.css'
 
 
-export default function Select({ options = [], value = '', name, onChange, label, placeholder, multiple, readOnly }) {
+export default function Select({ options = [], value = '', name, onChange, label, placeholder, multiple, readOnly, active, error, errorText }) {
 
     const [open, setOpen] = useState(false)
     const [data, setData] = useState(null)
     const id = useId()
+    const err = Boolean(error) || active && Boolean(error)
 
     function handleChange(e) {
         setData(e.target.value)
         !multiple && onChange(e)
     }
 
-    const focus = () => document.getElementById(id).focus()
+    const focus = () => document.getElementById(id)?.focus()
 
     function reset() {
         setData(null)
@@ -22,22 +24,32 @@ export default function Select({ options = [], value = '', name, onChange, label
         focus()
     }
 
-    const search = options.filter(d => d.trim().toLowerCase().includes((data || '').trim().toLowerCase()))
-    if (data && !search.length) {
-        search.push(`Add new "${data}"`)
+    const onClickAway = () => {
+        typeof data === 'string' && setData(null)
+        setOpen(false)
     }
+
+    const handleOutput = (dat) => {
+
+        data && setData(null)
+        if (multiple) {
+            onChange(dat)
+        } else {
+            onChange && onChange({ target: { name, value: dat } })
+        }
+        setOpen(false)
+    }
+
+    const search = options.filter(d => d.trim().toLowerCase().includes((data || '').trim().toLowerCase()))
 
     return (
         <div className='relative w-full'>
             <label htmlFor={id} className='bold'>{label}</label>
             {multiple}
-            <ClickAwayListener
-                onClickAway={() => setOpen(false)}
-                className='relative'>
+            <ClickAwayListener onClickAway={onClickAway} className='relative'>
                 <input
                     id={id}
                     onFocus={() => setOpen(true)}
-                    onBlur={() => typeof data === 'string' && setTimeout(() => setData(null), 200)}
                     className='input mt-2'
                     onChange={handleChange}
                     value={typeof data === 'string' ? data : value}
@@ -47,39 +59,29 @@ export default function Select({ options = [], value = '', name, onChange, label
                     autoComplete='off'
                 />
                 {value &&
-                    <button
-                        onClick={reset}
-                        style={{ right: 8, top: '20%', borderRadius: 4, color:'gray' }}
-                        className='absolute icon-btn'>
+                    <button onClick={reset} className={style.close}>
                         <Cancel />
                     </button>}
                 {open &&
-                    <div
-                        className='bg py-1 scroll mt-1 absolute w-full rounded-sm shadow-sm'
+                    <div className='bg py-1 scroll mt-1 absolute w-full rounded-sm shadow-sm'
                         style={{ maxHeight: 240, zIndex: 9, }}>
-                        {search.length ?
-                            search.map((dat, i) => {
-                                const selected = value === dat ? 'menu-selected' : ''
-                                return (
-                                    <div
-                                        key={i}
-                                        role='button'
-                                        className={`menu p-2 ${selected}`}
-                                        onClick={() => {
-                                            setData(null)
-                                            if (multiple) {
-                                                onChange(dat)
-                                            } else {
-                                                onChange && onChange({ target: { name, value: dat } })
-                                            }
-                                            setOpen(false)
-                                        }}>
-                                        {dat}
-                                    </div>)
-                            }) : <p className='px'>No Result found</p>}
+                        {search.map((dat, i) => {
+                            const selected = value === dat ? 'menu-selected' : ''
+                            return (
+                                <div
+                                    key={i}
+                                    role='button'
+                                    className={`menu p-2 ${selected}`}
+                                    onClick={() => handleOutput(dat)}
+                                >
+                                    {dat}
+                                </div>)
+                        })}
+                        {!search.length && <div onClick={() => handleOutput(data)} className='menu p-2'>{`Add new "${data}"`}</div>}
                     </div>
                 }
             </ClickAwayListener>
+            {err && <div className="mt-1 mx-2 ce">{errorText}</div>}
         </div>
     )
 }

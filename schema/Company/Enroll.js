@@ -53,8 +53,7 @@ const schema = new Schema({
         required: [true, '/about required'],
         minlength: [30, '/about min 30 chars required']
     },
-    banner: image,
-    company_logo: image,
+  
 }, { timestamps: true, versionKey: false })
 
 export default models.Enroll || model('Enroll', schema);

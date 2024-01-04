@@ -43,7 +43,8 @@ const fields = [
     {
         label: "Company website link",
         name: "website",
-        pl: "https://firstcareer.co"
+        pl: "https://firstcareer.co",
+        error: { min: 3, max: 200 }
     },
     {
         label: "Contact email",
@@ -116,7 +117,7 @@ export default function AccountForm() {
 
     function onChange(e) {
         let { name, value } = e.target
-        setData({...data, [name]: value })
+        setData({ ...data, [name]: value })
     }
 
     const ValueGetter = (name) => {

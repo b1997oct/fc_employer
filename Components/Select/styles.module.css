@@ -1,0 +1,15 @@
+.close {
+    position: absolute;
+    right: 8px;
+    top: 20%;
+    border-radius:300px;
+    color: gray;
+    background: none;
+    padding: 8px 8px 6px 8px;
+    border: none;
+}
+
+.close:hover {
+    opacity: .8;
+    background: #eee;
+}

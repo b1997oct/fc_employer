@@ -75,6 +75,15 @@
     font-size: larger;
   }
 
+  input:read-only {
+    outline: none;
+    border: 1px solid #10101044;
+  }
+
+  input:read-only:hover {
+    border: 1px solid #10101091;
+  }
+
   hr {
     border-color: #9993;
   }

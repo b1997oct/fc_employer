@@ -10,6 +10,7 @@ import { PUT } from '@upgradableweb/client'
 import { useRouter } from 'next/router'
 import { MultiChips } from '@/Components/Chip'
 import useDataFetch from '@/Components/Hooks/useDataFetch'
+import Skills from '@/PagesComponents/Job/Skills'
 
 const fields = [
     {
@@ -157,21 +158,11 @@ export default function Page() {
                         const err = errors[name]
                         if (name === 'skills') {
                             return (
-                                <Select
+                                <Skills
                                     key={i}
-                                    name={name}
-                                    label={label}
-                                    onChange={(val) => {
-                                        const skills = [...data.skills, val]
-                                        setData({ ...data, skills })
-                                    }}
-                                    placeholder={pl}
-                                    options={['React', 'Nextjs']}
-                                    multiple={<MultiChips
-                                        data={data.skills}
-                                        onDelete={(val) => {
-                                            setData({ ...data, skills: val })
-                                        }} />}
+                                    {...dat}
+                                    setData={setData}
+                                    skills={data.skills}
                                 />
                             )
                         }
