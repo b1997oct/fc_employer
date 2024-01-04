@@ -51,7 +51,6 @@
 
 .btn:disabled {
   background: #9994;
-  cursor: auto;
   color: #9998;
   box-shadow: none;
 }
@@ -96,7 +95,6 @@
 .filled-btn:disabled {
   background: var(--disabled-bg);
   color: var(--text);
-  cursor: auto;
 }
 
 .upload-btn {

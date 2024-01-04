@@ -1,4 +1,5 @@
 import AccountForm from '@/PagesComponents/Account/AccountForm';
+import Link from 'next/link';
 
 export default function Page() {
     return (
@@ -8,6 +9,13 @@ export default function Page() {
                     <h2 className='bold tac'>First Career</h2>
                     <p className='tac fs1 '>Employer Account</p>
                     <AccountForm />
+                    <div className='df jce aic gap'>
+                        <p>Already have account ?</p>
+                        <Link href='/login' className='a'>
+                            Login
+                        </Link>
+                    </div>
+
                 </div>
             </div>
         </div >

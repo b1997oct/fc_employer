@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
     "@upgradableweb/client": "^1.0.3",
+    "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.1",
     "formidable": "^3.5.1",
     "jose": "^5.2.0",

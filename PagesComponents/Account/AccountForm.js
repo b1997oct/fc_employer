@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { POST } from '@upgradableweb/client'
 import Editor from '@/Components/Editor';
 import useDataFetch from '@/Components/Hooks/useDataFetch';
+import Input from '@/Components/Input';
 
 const fields = [
     {
@@ -17,7 +18,7 @@ const fields = [
         type: "select",
         label: "Industry*",
         name: "industry",
-        pl: "industry type",
+        pl: "Industry type",
         error: { min: 3, max: 100 },
 
     },
@@ -25,7 +26,7 @@ const fields = [
         type: "select",
         label: "Comapny functinal area*",
         name: "department",
-        pl: "Functional Area",
+        pl: "Functional area",
         error: { min: 3, max: 100 },
     },
     {
@@ -112,10 +113,10 @@ export default function AccountForm() {
             })
             .finally(() => setLoading(false))
     }
+
     function onChange(e) {
         let { name, value } = e.target
-        onError({ name, value })
-        setData({ ...data, [name]: value })
+        setData({...data, [name]: value })
     }
 
     const ValueGetter = (name) => {
@@ -132,7 +133,7 @@ export default function AccountForm() {
                     : name === 'department' ? utils.department_list : undefined
 
                 return (
-                    <FormElement
+                    <Input
                         key={i}
                         label={label}
                         name={name}

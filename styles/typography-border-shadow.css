@@ -2,6 +2,10 @@
     border: 1px solid var(--sb);
 }
 
+.border-2 {
+    border: 2px solid var(--sb);
+}
+
 .rounded {
     border-radius: 50%;
 }
@@ -15,14 +19,16 @@
 }
 
 .shadow {
-    box-shadow: 0 0 20px #0001;
+    box-shadow: 0 0 20px #0002;
 }
 
 .shadow-sm {
     box-shadow: 0 0 10px #0003;
 }
 
-
+.select-none {
+    user-select: none;
+}
 
 .undeline {
     text-decoration: underline;

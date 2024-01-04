@@ -1,5 +1,7 @@
 import Checkbox from '@/Components/Checkbox';
 import Input from '@/Components/Input';
+import Modal from '@/Components/Modal';
+import Toast from '@/Components/Toast';
 import { POST } from '@upgradableweb/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,14 +14,20 @@ export default function Page() {
         password: ""
     })
     const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const r = useRouter()
 
     const submit = () => {
         setLoading(true)
-        POST('/api/login', data)
+        const url = open ? '/api/acc/reset' : '/api/acc/login'
+        POST(url, data)
             .then(res => {
-                r.replace('/')
+                if (open) {
+                    Toast(`reset link sent to ${res.data?.email}`)
+                } else {
+                    r.replace('/')
+                }
             })
             .catch(err => {
                 alert(err.message)
@@ -42,8 +50,8 @@ export default function Page() {
                         <Input
                             name="email"
                             value={data.email || ''}
-                            placeholder='Enter employer email'
-                            label="Employer email"
+                            placeholder='Enter registered email'
+                            label="Registered email"
                             onChange={onChange}
                         />
                         <Input
@@ -51,14 +59,13 @@ export default function Page() {
                             value={data.password || ''}
                             label="Password"
                             placeholder='Enter password'
-
                             onChange={onChange}
                         />
                     </div>
                     <div className='my tae'>
                         <button
                             disabled={loading}
-                            onClick={() => r.push('/account/reset')}
+                            onClick={() => setOpen(true)}
                             className='text-btn'>
                             Forgot Password
                         </button>
@@ -77,9 +84,26 @@ export default function Page() {
                             target='_blank' className='a undeline'>Contact Support</a>
                     </div>
                 </div>
-
             </div>
-        </div >
+            <Modal
+                open={open}
+                onClose={() => !loading && setOpen(false)}
+            >
+                <p>Password reset link will be sent to your registered email</p>
+                <Input
+                    name="email"
+                    value={data.email || ''}
+                    placeholder='Enter registered email'
+                    label="Registered email"
+                    onChange={onChange}
+                />
+                <button
+                    disabled={loading}
+                    onClick={submit} className='btn w-full primary-bg mt'>
+                    Send
+                </button>
+            </Modal>
+        </div>
     )
 }
 

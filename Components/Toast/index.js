@@ -4,5 +4,5 @@ export default function Toast(message) {
     const toast = document.getElementById('toast')
     toast.innerHTML = message
     toast.classList.replace('toastOut','toastIn')
-    t = setTimeout(() => toast.classList.replace('toastIn', 'toastOut'), 2500)
+    t = setTimeout(() => toast.classList.replace('toastIn', 'toastOut'), 3000)
 }

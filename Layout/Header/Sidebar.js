@@ -25,7 +25,7 @@ export default function Sidebar() {
 
     function logout() {
         if (!confirm('confirm logout')) return
-        POST('/api/logout')
+        POST('/api/acc/logout')
             .then(res => {
                 Router.replace('/login')
             })

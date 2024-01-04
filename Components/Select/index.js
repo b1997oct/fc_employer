@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { Close } from '../Icons'
+import { Close, Cancel } from '../Icons'
 import ClickAwayListener from '../ClickAwayListener'
 
 
@@ -49,14 +49,14 @@ export default function Select({ options = [], value = '', name, onChange, label
                 {value &&
                     <button
                         onClick={reset}
-                        style={{ right: 8, top: '20%', borderRadius: 4 }}
+                        style={{ right: 8, top: '20%', borderRadius: 4, color:'gray' }}
                         className='absolute icon-btn'>
-                        <Close />
+                        <Cancel />
                     </button>}
                 {open &&
                     <div
                         className='bg py-1 scroll mt-1 absolute w-full rounded-sm shadow-sm'
-                        style={{ maxHeight: 200, zIndex: 9, }}>
+                        style={{ maxHeight: 240, zIndex: 9, }}>
                         {search.length ?
                             search.map((dat, i) => {
                                 const selected = value === dat ? 'menu-selected' : ''
@@ -69,11 +69,10 @@ export default function Select({ options = [], value = '', name, onChange, label
                                             setData(null)
                                             if (multiple) {
                                                 onChange(dat)
-                                                focus()
                                             } else {
                                                 onChange && onChange({ target: { name, value: dat } })
-                                                setOpen(false)
                                             }
+                                            setOpen(false)
                                         }}>
                                         {dat}
                                     </div>)

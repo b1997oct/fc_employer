@@ -1,7 +1,7 @@
 import Input from '../Input'
 import Select, { StaticSelect } from '../Select'
 
-export default function FormElement({ value, onChange, label, type, name, options, placeholder, active, error, errorText }) {
+export default function FormElement({ value, onChange, label, type, name, options, placeholder, active, error, errorText, readOnly }) {
 
     if (type === 'select') {
         return (
@@ -15,6 +15,7 @@ export default function FormElement({ value, onChange, label, type, name, option
                 errorText={errorText}
                 options={options}
                 placeholder={placeholder}
+                readOnly={readOnly}
            />
            
         )

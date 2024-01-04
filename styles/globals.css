@@ -79,7 +79,13 @@
     border-color: #9993;
   }
 
+  :disabled {
+    cursor: not-allowed;
+  }
+
   button:not(:disabled),
+  input[type="radio"]:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
   label {
     cursor: pointer;
   }
