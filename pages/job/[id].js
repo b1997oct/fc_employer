@@ -196,9 +196,8 @@ export default function Page() {
                         <h4 className='bold mb'>Job Description</h4>
                         <Editor
                             value={getValue('jd')}
-                            onChange={(val) => {
-                                setData({ ...data, ['jd']: val })
-                            }}
+                            name='jd'
+                            onChange={onChange}
                             placeholder='Job Description'
                         />
                         <p className='caption'>{`Note : "Please don't leave any extra gaps or spaces"`}</p>

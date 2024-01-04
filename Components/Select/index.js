@@ -58,7 +58,7 @@ export default function Select({ options = [], value = '', name, onChange, label
                     readOnly={readOnly}
                     autoComplete='off'
                 />
-                {value &&
+                {!readOnly && value &&
                     <button onClick={reset} className={style.close}>
                         <Cancel />
                     </button>}
