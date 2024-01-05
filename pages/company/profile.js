@@ -174,6 +174,7 @@ export default function Page() {
                                 active={active}
                                 error={err}
                                 errorText={err}
+                                readOnly={Boolean(options)}
                             />)
                     })}
 

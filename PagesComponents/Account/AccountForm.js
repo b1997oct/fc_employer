@@ -134,7 +134,7 @@ export default function AccountForm() {
                     : name === 'department' ? utils.department_list : undefined
 
                 return (
-                    <Input
+                    <FormElement
                         key={i}
                         label={label}
                         name={name}
@@ -146,6 +146,7 @@ export default function AccountForm() {
                         active={active}
                         error={err}
                         errorText={err}
+                        readOnly={Boolean(options)}
                     />)
             })}
             <h3 className='bold my'>About your company</h3>
