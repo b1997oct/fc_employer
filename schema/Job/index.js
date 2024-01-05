@@ -33,6 +33,10 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    work_mode: {
+        type: String,
+        required: true
+    },
     total_openings: {
         type: String,
     },

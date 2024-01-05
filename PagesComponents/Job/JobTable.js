@@ -77,7 +77,9 @@ export default function JobTable({ url }) {
 }
 
 
-function TableRow({ id, index, job_role, updatedAt, admin_posted, status, publish, applicants, path, onChange }) {
+function TableRow({ id, index, job_role, updatedAt, admin_posted, status, publish, path, applicants, onChange }) {
+
+    const closed = path === 'closed'
 
     return (
         <TRow>
@@ -105,15 +107,9 @@ function TableRow({ id, index, job_role, updatedAt, admin_posted, status, publis
             </td>
             <td>
                 <div className="tac">
-                    {path === 'closed' ?
-                        <Link href={`/job/${id}?repost=yes`}>
-                            <button>Repost ?</button>
-                        </Link>
-                        : <EditButton
-                            onClick={() => {
-                                r.push('/job/' + id)
-                            }}
-                        />}
+                    <Link href={`/job/${id}${closed ? '?repost=yes' : ''}`}>
+                        {closed ? <button className="nowrap">Repost ?</button> : <EditButton />}
+                    </Link>
                 </div>
             </td>
         </TRow>

@@ -1,7 +1,6 @@
 import { useId, useState } from 'react'
 import { Cancel } from '../Icons'
 import ClickAwayListener from '../ClickAwayListener'
-import style from './styles.module.css'
 
 
 export default function Select({ options = [], value = '', name, onChange, label, placeholder, multiple, readOnly, active, error, errorText }) {
@@ -59,31 +58,39 @@ export default function Select({ options = [], value = '', name, onChange, label
                     autoComplete='off'
                 />
                 {!readOnly && value &&
-                    <button onClick={reset} className={style.close}>
+                    <button onClick={reset} className='auto-complete-close'>
                         <Cancel />
                     </button>}
                 {open &&
-                    <div className='bg py-1 scroll mt-1 absolute w-full rounded-sm shadow-sm'
-                        style={{ maxHeight: 240, zIndex: 9, }}>
+                    <div className='auto-complete-container'>
                         {search.map((dat, i) => {
                             const selected = value === dat ? 'menu-selected' : ''
                             return (
-                                <div
+                                <Option
                                     key={i}
-                                    role='button'
-                                    className={`menu p-2 ${selected}`}
+                                    className={selected}
                                     onClick={() => handleOutput(dat)}
                                 >
                                     {dat}
-                                </div>)
+                                </Option>)
                         })}
-                        {!search.length && <div onClick={() => handleOutput(data)} className='menu p-2'>{`Add new "${data}"`}</div>}
+                        {!search.length && <Option onClick={() => handleOutput(data)}>{`Add new "${data}"`}</Option>}
                     </div>
                 }
             </ClickAwayListener>
             {err && <div className="mt-1 mx-2 ce">{errorText}</div>}
         </div>
     )
+}
+
+function Option({ className, onClick, ...props }) {
+    return (
+        <div
+            {...props}
+            role='button'
+            className={`menu p-2 ${className}`}
+            onClick={onClick}
+        />)
 }
 
 

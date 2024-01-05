@@ -1,9 +1,9 @@
 .border {
-    border: 1px solid var(--sb);
+    border: 1px solid var(--shadow);
 }
 
 .border-2 {
-    border: 2px solid var(--sb);
+    border: 2px solid var(--shadow);
 }
 
 .rounded {

@@ -6,6 +6,7 @@ import '@/styles/mar-pad-pos.css'
 import '@/styles/components.css'
 import '@/styles/button.css'
 import '@/styles/amination.css'
+import '@/styles/select.css'
 import Theme from '@/Layout/Theme'
 
 export default function App({ Component, pageProps }) {

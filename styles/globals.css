@@ -8,6 +8,7 @@
     --success: #06ba15;
     --text: #000;
     --disabled: #9e9696cf;
+    --shadow: #8988;
     --radius: 8px;
   }
 
@@ -110,5 +111,3 @@
     box-shadow: 0 0 8px #0004;
     z-index: 100;
   }
-
-  

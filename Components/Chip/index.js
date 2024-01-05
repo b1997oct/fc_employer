@@ -11,7 +11,7 @@ export default function Chip({ className, children, onDelete, value }) {
 export function MultiChips({ data, onDelete }) {
     return (
         <div className='df aic gap-2 fww mt-2'>
-            {data.map((d, i) => (
+            {Array.isArray(data) && data.map((d, i) => (
                 <Chip
                     key={i}
                     onDelete={() => {

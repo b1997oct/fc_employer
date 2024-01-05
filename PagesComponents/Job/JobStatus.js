@@ -65,7 +65,7 @@ export default function JobStatus({ status, id, onChange }) {
             <button
                 onClick={toggle}
                 style={{ width: 100 }}
-                className={`${status === 'Live' ? 'cs' : 'ce'} bold  py-1 relative`}>
+                className={`${status === 'Live' ? 'cs' : 'ce'} bold border py-1 relative`}>
                 {status}
             </button>
         </div>

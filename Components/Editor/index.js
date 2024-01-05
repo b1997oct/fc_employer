@@ -16,7 +16,7 @@ const quillModules = {
 export default function Editor({ value, name, onChange, placeholder, error, active, errorText }) {
   const [b, setB] = useState(false)
   const err = b && Boolean(error) || active && Boolean(error)
-
+  
   return (
     <div>
       <ReactQuill
@@ -26,6 +26,7 @@ export default function Editor({ value, name, onChange, placeholder, error, acti
           onChange && onChange({ target: { name, value: val } })
         }}
         value={value}
+        scrollingContainer={'editor'}
         placeholder={placeholder}
         formats={['bold', 'list']}
       />
