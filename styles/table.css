@@ -1,0 +1,40 @@
+.table {
+    width: 100%;
+    background: var(--bg);
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+td,
+th {
+    border: 1px solid #eee;
+    padding: 4px;
+    border-collapse: collapse;
+}
+
+.thead {
+    font-weight: 600;
+    padding-bottom: 1rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+}
+
+
+
+.thead td {
+    padding-left: 8px;
+}
+
+.tr:hover {
+    background: #eee5;
+}
+
+.seperator {
+    background: #eee;
+}

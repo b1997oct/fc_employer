@@ -1,0 +1,156 @@
+
+.icon-btn {
+  display: flex;
+  border: none;
+  padding: 4px;
+  border-radius: 50%;
+  background: #eee9;
+}
+
+.nav-icon {
+  padding: 8px;
+  border-radius: 50%;
+  background: #eee9;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:not(:disabled):hover, .nav-icon:hover {
+  background: #0001;
+}
+
+.icon-btn:not(:disabled):active, .nav-icon:active {
+  background: #eee6;
+}
+
+
+
+.tab {
+  padding: 8px 1rem;
+  border: initial;
+}
+
+.tab:not(:disabled):hover {
+  opacity: .7;
+}
+
+.tab-start {
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+}
+
+.tob-end {
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.btn {
+  padding: 12px 1.5rem;
+  background: none;
+  border: 1px solid #0005;
+  border-radius: var(--radius);
+}
+
+.btn:not(:disabled):hover {
+  background: #eee;
+}
+
+.btn:disabled {
+  background: #9994;
+  color: #9998;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.btn:not(:disabled):active {
+  background: #eee6;
+}
+
+.primary-btn {
+  padding: 12px 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: 1px solid #eee;
+  background: var(--pc);
+  color: var(--bg);
+}
+
+.primary-btn:hover {
+  opacity: .9;
+}
+
+.primary-btn:active {
+  opacity: .7;
+  border-color: var(--bg);
+}
+
+.text-btn {
+  border: none;
+  background: transparent;
+}
+
+.text-btn:not(:disabled):hover {
+  color: var(--pc);
+}
+
+.text-btn:not(:disabled):active {
+  color: inherit;
+}
+
+.filled-btn {
+  padding: .5rem 1.5rem;
+  font-size: medium;
+  font-weight: 600;
+  border-radius: 100px;
+  border: none;
+}
+
+.filled-btn:not(:disabled):hover {
+  opacity: .7;
+}
+.filled-btn:not(:disabled):active {
+  opacity: 1;
+}
+
+.filled-btn:disabled {
+  background: #9994;
+  color: #9998;
+  box-shadow: none;
+}
+
+.upload-btn {
+  background: #0009;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 2px solid #7776;
+}
+
+.upload-btn:hover {
+  background: #0007;
+}
+
+.upload-btn:active {
+  background: #0008;
+}
+
+.pagination-btn {
+  padding: 8px 8vw;
+  background: none;
+  border: 1px solid #0005;
+  border-radius: 20px;
+}
+
+.pagination-btn:not(:disabled):hover {
+  background: #eee;
+}
+
+.pagination-btn:not(:disabled):active {
+  background: #eee6;
+}

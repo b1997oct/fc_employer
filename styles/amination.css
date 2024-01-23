@@ -1,0 +1,91 @@
+.zoomIn {
+  z-index: 500;
+  animation: zoom 300ms forwards;
+  transform: scale(.8);
+}
+
+.zoomOut {
+  animation: zoom 300ms reverse;
+}
+
+@keyframes zoom {
+  100% {
+    transform: scale(1);
+  }
+}
+
+.click:not(:disabled):active {
+  animation: click 300ms forwards;
+}
+
+@keyframes click {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.97);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fadeIn {
+  animation: fade 300ms forwards;
+}
+
+.fadeOut {
+  animation: fade 300ms reverse;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* component ani */
+
+.toastOut {
+  animation: toastout 300ms forwards;
+}
+
+@keyframes toastout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+/* shaking */
+
+@keyframes shakeIt {
+  0% { transform: translateX(-5px); }
+  25% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0px); }
+  
+}
+
+.shake {
+  animation: shakeIt 400ms 2;
+}
+
+.hover:hover {
+  opacity: .8;
+}
+
+.active:active {
+  opacity: .6;
+}

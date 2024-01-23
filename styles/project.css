@@ -1,0 +1,143 @@
+.product-image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.img-prev-container {
+  border: 2px solid #9994;
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-prev {
+  position: absolute;
+  z-index: -1;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.preview-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.dashboard-card {
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.var-tab {
+  outline: 1.5px dashed transparent;
+  padding: 8px 1rem;
+  border: 1px solid #0002;
+}
+
+.var-tab:not(:disabled):hover {
+  opacity: .7;
+}
+
+.var-tab-active {
+  outline-color: var(--text);
+}
+
+.var-tab-inactive {
+  outline-color: transparent;
+}
+
+.edit-drawer {
+  max-height: 84vh;
+  overflow: auto;
+  padding: 1.5rem 20%
+}
+
+.chip {
+  border: 1px solid initial;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: initial;
+  text-transform: capitalize;
+}
+
+.chip-hover:hover {
+  background: #0001;
+}
+
+.filled-chip-p {
+  border: 1px solid #096BDE50;
+  color: var(--pc);
+  background: #096BDE22;
+}
+
+.outlined-chip-p {
+  border: 1px solid #096BDE50;
+  color: var(--pc);
+  background: transparent;
+}
+
+.filled-chip-s {
+  color: var(--success);
+  border: 1px solid #06ba1530;
+  background: #06ba1520;
+}
+
+.filled-chip-e {
+  color: #a12;
+  background: #a10e2520;
+  border: 1px solid #a10e2540;
+}
+
+.scroll-bar::-webkit-scrollbar {
+  width: 4px;
+  background-color: #1111;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  background-color: #03162327;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 14px;
+  gap: .5rem;
+  margin: 1rem 4px;
+  padding: 8px 0px;
+  opacity: .6;
+}
+
+.menu-selected,
+.nav-menu:hover {
+  background: #eee;
+  opacity: 1;
+}
+
+@media (max-width:768px) {
+  .nav-menu {
+    margin: 1rem 8px;
+    padding: 12px 4px;
+    flex-direction: row;
+    min-width: 200px;
+  }
+
+  .dashboard-card {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .edit-drawer {
+    padding: 1.5rem 4%;
+  }
+}
