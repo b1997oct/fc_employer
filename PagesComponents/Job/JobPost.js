@@ -40,7 +40,7 @@ const fields = [
         name: "total_openings",
         pl: 'Number',
         type: 'select',
-        options: [...Array.from({ length: 9 }).map((_, i) => `0${i + 1}`), '10', '10+'],
+        options: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '10+'],
         readOnly: true,
         error: { min: 1 }
     },
@@ -173,6 +173,7 @@ export default function JobPost({ py }) {
                     if (url) {
                         return (
                             <AutoCompleteMultiple
+                                key={i}
                                 {...dat}
                                 placeholder={pl}
                                 type={type}
@@ -241,7 +242,7 @@ export default function JobPost({ py }) {
                 <button
                     onClick={submit}
                     disabled={loading || !Object.keys(data).length}
-                    className='w-full px-4 py-2 df aic jcc rounded-sm bold hover active border primary-bg mt'>
+                    className='w-full primary-btn'>
                     {repost ? 'Repost Job' : 'Post Job'}
                 </button>
             </div>

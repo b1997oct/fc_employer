@@ -48,7 +48,7 @@ export default function AppTable({ pagination, setPagination }) {
     const { limit } = pagination
 
     return (
-        <div className="mt">
+        <div className="mt border">
             <TableResults
                 loading={loading}
                 total={total}

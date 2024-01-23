@@ -5,7 +5,9 @@ import { PUT } from "@upgradableweb/client";
 import { MultiChips } from "../Chip";
 
 
-export default function AutoCompleteMultiple({ name, onChange, value = [], type, updateUrl, url, label, errorText, active, placeholder }) {
+export default function AutoCompleteMultiple({ name, onChange, value, type, updateUrl, url, label, errorText, active, placeholder }) {
+
+    value = Array.isArray(value) ? value : []
 
     const [text, setText] = useState('')
     const [open, setOpen] = useState(false)
@@ -39,19 +41,6 @@ export default function AutoCompleteMultiple({ name, onChange, value = [], type,
 
     usePredictionFetch(url, { keyword: text, type }, { setData: onRes }, [text])
 
-    const options = useMemo(() => {
-        if (!data.length) {
-            return <Option onClick={saveFn} value={text}>{`Add new "${text}"`}</Option>
-        } else {
-            return data.map((d, i) => {
-                let cn = value.some(dat => dat.startsWith(d)) ? 'menu-selected' : '';
-                return <Option className={cn} key={i} value={d} onClick={onAdd}>{d}</Option>
-            })
-        }
-    }, [data, value])
-
-
-
     const multiple = useMemo(() => <MultiChips data={value} onDelete={onDelete} />, [value])
 
 
@@ -59,7 +48,6 @@ export default function AutoCompleteMultiple({ name, onChange, value = [], type,
         <Select
             setOpen={setOpen}
             open={open}
-            options={options}
             value={text}
             onChange={(e) => setText(e.target.value)}
             name={name}
@@ -69,5 +57,24 @@ export default function AutoCompleteMultiple({ name, onChange, value = [], type,
             placeholder={placeholder}
             multiple={multiple}
             onKeyDown={(e) => e.code === 'Enter' && onAdd(text)}
-        />)
+        >
+            {data.length ?
+                data.map((d, i) => {
+                    let cn = value.some(dat => dat.startsWith(d)) ? 'menu-selected' : '';
+                    return (
+                        <Option
+                            className={cn}
+                            key={i}
+                            value={d}
+                            onClick={onAdd}>
+                            {d}
+                        </Option>)
+                })
+                :
+                <Option onClick={saveFn} value={text}>
+                    {`Add new "${text}"`}
+                </Option>
+            }
+        </Select>
+    )
 }

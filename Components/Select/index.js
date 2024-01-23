@@ -3,7 +3,7 @@ import { Cancel } from '../Icons'
 import ClickAwayListener from '../ClickAwayListener'
 
 
-export default function Select({ options, value = '', name, onChange, label, placeholder, multiple, readOnly, active, open, setOpen, errorText, ...props }) {
+export default function Select({ value = '', name, onChange, label, placeholder, multiple, readOnly, active, open, setOpen, errorText, children, ...props }) {
 
     const [b, setB] = useState(false)
     const id = useId()
@@ -13,6 +13,10 @@ export default function Select({ options, value = '', name, onChange, label, pla
         onChange({ target: { name, value: '' } })
         document.getElementById(id)?.focus()
     }
+
+    const onBlur = () => !multiple && !b && setB(true)
+    const onFocus = () => setOpen(true)
+
 
     return (
         <div className='relative w-full'>
@@ -24,25 +28,25 @@ export default function Select({ options, value = '', name, onChange, label, pla
                 className='relative'>
                 <input
                     id={id}
-                    onFocus={() => setOpen(true)}
                     className='input mt-2'
                     autoComplete='off'
-                    onBlur={() => !b && setB(true)}
                     name={name}
                     onChange={onChange}
                     value={value}
                     placeholder={placeholder}
                     readOnly={readOnly}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
                     {...props}
                 />
                 {!readOnly && value &&
                     <button onClick={reset} className='auto-complete-close'>
                         <Cancel />
                     </button>}
-                {open &&
+                {open && (
                     <div className='auto-complete-container'>
-                        {options}
-                    </div>}
+                        {children}
+                    </div>)}
             </ClickAwayListener>
             {err && <div className="mt-1 mx-2 ce">{errorText}</div>}
         </div>
@@ -63,22 +67,6 @@ export function SelectReadOnly({ label, name, value, onChange, options = [], mul
         setOpen(false)
     }
 
-    const ops = options.map((d, i) => {
-        let cn
-        if (typeof value === 'string' && value === d || multiValue && multiValue.includes(d)) {
-            cn = 'menu-selected'
-        }
-        return (
-            <Option
-                key={i}
-                value={d}
-                className={cn}
-                onClick={onClick}
-            >
-                {d}
-            </Option>)
-    })
-
     return (
         <Select
             setOpen={setOpen}
@@ -90,9 +78,19 @@ export function SelectReadOnly({ label, name, value, onChange, options = [], mul
             value={value}
             readOnly={true}
             placeholder={placeholder}
-            options={ops}
             disabled={disabled}
-        />
+        >
+            {options.map((d, i) => {
+                let cn
+                if (typeof value === 'string' && value === d || multiValue && multiValue.includes(d)) {
+                    cn = 'menu-selected'
+                }
+                return (
+                    <Option key={i} value={d} className={cn} onClick={onClick}>
+                        {d}
+                    </Option>)
+            })}
+        </Select>
     )
 }
 

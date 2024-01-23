@@ -161,7 +161,7 @@ export default function AccountForm() {
             />
             <button
                 disabled={loading}
-                className='btn w-full my'
+                className='primary-btn w-full my'
                 onClick={submit}>
                 SUBMIT
             </button>

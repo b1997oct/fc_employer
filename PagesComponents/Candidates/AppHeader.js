@@ -51,7 +51,7 @@ export default function AppHeader({ resetPagination }) {
    
 
     return (
-        <div className="bg p">
+        <div className="bg p border">
             <AllStatuses
                 status={py.status}
                 setChange={setPy}

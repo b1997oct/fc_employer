@@ -57,12 +57,6 @@
   background: #eee;
 }
 
-.btn:disabled {
-  background: #9994;
-  color: #9998;
-  box-shadow: none;
-  border-color: transparent;
-}
 
 .btn:not(:disabled):active {
   background: #eee6;
@@ -77,13 +71,21 @@
   color: var(--bg);
 }
 
-.primary-btn:hover {
+.primary-btn:not(:disabled):hover {
   opacity: .9;
 }
 
-.primary-btn:active {
+.primary-btn:not(:disabled):active {
   opacity: .7;
   border-color: var(--bg);
+}
+
+
+.btn:disabled, .primary-btn:disabled {
+  background: #9994;
+  color: #9998;
+  box-shadow: none;
+  border-color: transparent;
 }
 
 .text-btn {

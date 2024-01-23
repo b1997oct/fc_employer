@@ -88,7 +88,7 @@ export default function Job({ job_role, company_logo, company_name, salary, id }
                                 />
 
                                 <LabelValue
-                                    label='Lost Date'
+                                    label='Last Date'
                                     value={lost_date && moment(lost_date).from()}
                                 />
                             </div>

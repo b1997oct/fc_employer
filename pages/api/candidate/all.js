@@ -47,7 +47,6 @@ export default async function route(req, res) {
 
         data = await AppliedJob.aggregate([
             { $match: match },
-            ...pagination,
             {
                 $lookup: {
                     from: 'jobs',
@@ -64,37 +63,50 @@ export default async function route(req, res) {
                 }
             },
             {
-                $lookup: {
-                    from: 'users',
-                    localField: 'user',
-                    foreignField: '_id',
-                    as: 'user'
+                $facet: {
+                    metadata: [{ $count: "total_count" }],
+                    data: [...pagination,
+                    {
+                        $lookup: {
+                            from: 'users',
+                            localField: 'user',
+                            foreignField: '_id',
+                            as: 'user'
+                        }
+                    },
+                    { $unwind: '$user' },
+                    {
+                        $project: {
+                            _id: 1,
+                            status: 1,
+                            n: 1,
+                            user: {
+                                _id: 1,
+                                name: 1,
+                                email: 1,
+                                mobile: 1
+                            },
+                            job: {
+                                _id: 1,
+                                job_role: 1,
+                                salary: 1,
+                                company_logo: 1,
+                                company_name: 1
+                            }
+                        }
+                    }]
                 }
             },
-            { $unwind: '$user' },
             {
                 $project: {
-                    _id: 1,
-                    status: 1,
-                    user: {
-                        _id: 1,
-                        name: 1,
-                        email: 1,
-                        mobile: 1
-                    },
-                    job: {
-                        _id: 1,
-                        job_role: 1,
-                        salary: 1,
-                        company_logo: 1,
-                        company_name: 1
-                    }
+                    data: "$data",
+                    total_count: { $arrayElemAt: ["$metadata.total_count", 0] }
                 }
             }
         ])
-        total_count = await AppliedJob.countDocuments(match)
 
-        return res.status(200).json({ data, total_count })
+
+        return res.status(200).json(data[0])
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

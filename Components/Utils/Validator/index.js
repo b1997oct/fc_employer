@@ -1,7 +1,7 @@
 
-const minErr = (length, min) => `this field requires min ${min} got ${length}`
+const minErr = (length, min) => `this field requires min ${min}/${length}`
 
-const maxErr = (length, max) => `this field exceeds max ${length} got ${max}`
+const maxErr = (length, max) => `this field exceeds max ${max}/${length}`
 
 let required = 'this is required field'
 export default function Validator({ min, max, value = '', type }) {

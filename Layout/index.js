@@ -9,7 +9,7 @@ export default function Layout({ children, title = 'First Career' }) {
                 <title>First Career - Job Hub</title>
             </Head>
             <Header title={title} />
-            <div style={{ background: '#eee8' }} className={'p-2'}>
+            <div style={{ background: '#eef8' }} className={'p-2'}>
                 {children}
             </div>
         </div>
