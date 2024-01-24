@@ -17,7 +17,7 @@ export default async function route(req, res) {
         let data, total_count, uid = new mongoose.Types.ObjectId(req.headers.uid)
 
 
-        let { status = '', start_date, end_date } = req.body
+        let { status = '', start_date, end_date, job } = req.body
         let appStatus = []
         for (const dat of status.split('-')) {
             const sts = Status(dat)
@@ -34,7 +34,9 @@ export default async function route(req, res) {
         if (status) {
             match.status = { $in: appStatus }
         }
-
+        if (job) {
+            match.job = new mongoose.Types.ObjectId(job)
+        }
         if (start_date) {
             match.createdAt = { $gte: startDate }
         }

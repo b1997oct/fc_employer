@@ -94,8 +94,8 @@ export default function Job({ job_role, company_logo, company_name, salary, id }
                             </div>
                         </div>
                         <br/>
-                        <b>Skills</b>
-                        <div className='df fww gap-2 '>
+                        <h3>Skills</h3>
+                        <div className='df fww gap-2 mt'>
                             {Array.isArray(skills) && skills.length ?
                                 skills.map((d, i) => (
                                     <div key={i}>
@@ -104,6 +104,8 @@ export default function Job({ job_role, company_logo, company_name, salary, id }
                                 ))
                                 : <div>No Specific skills required</div>}
                         </div>
+                        <br/>
+                        <h3>Job Description</h3>
                         <div dangerouslySetInnerHTML={{ __html: jd }} />
                     </div>
                 }

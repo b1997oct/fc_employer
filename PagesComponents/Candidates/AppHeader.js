@@ -3,12 +3,14 @@ import { Params } from "@upgradableweb/client"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import AllStatuses from "./AllStatuses"
+import JobSelect from "../Job/JobSelect"
 
 
 const initial = {
-    status: ['applied'],
+    status: ['shortlisted'],
     start_date: '',
     end_date: '',
+    job: ''
 }
 
 
@@ -17,10 +19,11 @@ const today = new Date().toISOString().split('T')[0];
 export default function AppHeader({ resetPagination }) {
 
     const [py, setPy] = useState(initial)
+
     const r = useRouter()
 
     useEffect(() => {
-        let obj = { ...py, ...r.query }
+        let obj = { ...initial, ...r.query }
         if (!Array.isArray(obj.status)) {
             obj.status = obj.status.split('-')
         }
@@ -35,20 +38,20 @@ export default function AppHeader({ resetPagination }) {
     }
 
     function handleSearch() {
-        let { status, start_date, end_date } = py
+        let { status } = py
         if (!status.length) return
         status = status.join('-')
-        const url = '?' + Params({ status, start_date, end_date })
+        const url = '?' + Params({ ...py, status })
         r.push(url)
         resetPagination()
     }
 
     function reset() {
         resetPagination()
-        r.push('?status=applied')
+        r.push('?status=shortlisted')
     }
 
-   
+
 
     return (
         <div className="bg p border">
@@ -56,7 +59,7 @@ export default function AppHeader({ resetPagination }) {
                 status={py.status}
                 setChange={setPy}
             />
-            <div className="df sm-fdc gap my-4">
+            <div className="df md-aib sm-fdc gap my-4">
                 <div className="sm-fdc df gap f-1">
                     <div className="df aic">
                         <label>From Date</label>
@@ -82,10 +85,15 @@ export default function AppHeader({ resetPagination }) {
                     </div>
                 </div>
 
-                <div className="sm-fdc df aic gap mt">
-                    <button className="btn w-full"
-                        onClick={reset}>Clear</button>
-                    <button onClick={handleSearch} className="w-full px-4 py-2 df aic jcc rounded-sm bold hover active border primary-bg"><Search /> Search</button>
+                <div className="sm-fdc df aic gap mt f-1">
+                    <JobSelect
+                        placeholder='Filter by Job'
+                        onChange={onChange}
+                        name='job'
+                        value={py.job}
+                    />
+                    <button className="btn sm-w-full" onClick={reset}>Clear</button>
+                    <button onClick={handleSearch} className="sm-w-full primary-btn"><Search /> Search</button>
                 </div>
             </div>
         </div>

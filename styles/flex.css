@@ -74,6 +74,10 @@
     flex: 1;
 }
 
+.md-aib {
+    align-items: baseline;
+}
+
 @media (max-width:768px) {
     .sm-fdc {
         flex-direction: column;
@@ -82,7 +86,15 @@
     .sm-jcc {
         justify-content: center;
     }
+
     .sm-aic {
         align-items: center;
+    }
+
+    .sm-w-full {
+        width: 100%;
+    }
+    .md-aib {
+        align-items: normal;
     }
 }

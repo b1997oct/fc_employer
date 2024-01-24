@@ -47,10 +47,11 @@
 }
 
 .btn {
-  padding: 12px 1.5rem;
+  padding: 12px 1rem;
   background: none;
   border: 1px solid #0005;
   border-radius: var(--radius);
+  font-weight: 600;
 }
 
 .btn:not(:disabled):hover {
@@ -69,6 +70,10 @@
   border: 1px solid #eee;
   background: var(--pc);
   color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .primary-btn:not(:disabled):hover {
