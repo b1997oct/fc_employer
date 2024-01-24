@@ -3,7 +3,21 @@ import { Cancel } from '../Icons'
 import ClickAwayListener from '../ClickAwayListener'
 
 
-export default function Select({ value = '', name, onChange, label, placeholder, multiple, readOnly, active, open, setOpen, errorText, children, ...props }) {
+export default function Select({
+    value = '',
+    name,
+    onChange,
+    label,
+    placeholder,
+    multiple,
+    readOnly,
+    active,
+    open,
+    setOpen,
+    errorText,
+    children,
+    disabled,
+    ...props }) {
 
     const [b, setB] = useState(false)
     const id = useId()
@@ -37,9 +51,10 @@ export default function Select({ value = '', name, onChange, label, placeholder,
                     readOnly={readOnly}
                     onBlur={onBlur}
                     onFocus={onFocus}
+                    disabled={disabled}
                     {...props}
                 />
-                {!readOnly && value &&
+                {!readOnly && !disabled && value &&
                     <button onClick={reset} className='auto-complete-close'>
                         <Cancel />
                     </button>}

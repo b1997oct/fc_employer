@@ -10,13 +10,14 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import JobStatus from "./JobStatus"
+import Job from "."
 
 
 
 const h = [
     { label: 'No.', minWidth: 60, textAlign: 'center' },
     { label: 'Job', minWidth: 100 },
-    { label: 'Posted on', minWidth: 100 },
+    { label: 'Details', minWidth: 100 },
     { label: 'Posted By', minWidth: 100 },
     { label: 'Status', maxWidth: 100, textAlign: 'center' },
     { label: 'Applicants', maxWidth: 50 },
@@ -77,7 +78,7 @@ export default function JobTable({ url }) {
 }
 
 
-function TableRow({ id, index, job_role, updatedAt, admin_posted, status, publish, path, applicants, onChange }) {
+function TableRow({ id, index, job_role, updatedAt, location, experience, salary, admin_posted, status, publish, path, applicants, onChange }) {
 
     const closed = path === 'closed'
 
@@ -87,10 +88,18 @@ function TableRow({ id, index, job_role, updatedAt, admin_posted, status, publis
                 <p className="p tac">{index + 1}</p>
             </td>
             <td>
-                <strong style={{ maxWidth: 250 }} className="nowrap">{job_role}</strong>
+                <Job
+                    job_role={job_role}
+                    id={id}
+                    updatedAt={updatedAt}
+                />
             </td>
             <td>
-                {moment(updatedAt).fromNow()}
+                <div>
+                    <div>{salary}</div>
+                    <div>{experience}</div>
+                    <div>{location == '1' ? 'Remote' : location}</div>
+                </div>
             </td>
             <td>
                 {admin_posted ? 'Admin' : 'Company'}

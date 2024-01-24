@@ -81,7 +81,7 @@ export default async function route(req, res) {
                         $project: {
                             _id: 1,
                             status: 1,
-                            n: 1,
+                            updatedAt: 1,
                             user: {
                                 _id: 1,
                                 name: 1,
@@ -92,8 +92,7 @@ export default async function route(req, res) {
                                 _id: 1,
                                 job_role: 1,
                                 salary: 1,
-                                company_logo: 1,
-                                company_name: 1
+                                updatedAt: 1,
                             }
                         }
                     }]

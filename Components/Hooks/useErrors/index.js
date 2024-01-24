@@ -7,9 +7,17 @@ export default function useErrors(fields, py = {}) {
 
     let errors = {}, values = {}
     for (const dat of fields) {
-        const { name, error } = dat
+        const { name, error, validator } = dat
         values[name] = typeof data[name] !== 'undefined' ? data[name] : py[name] || ''
-        const f = Validator({ value: values[name], ...error })
+        let f
+        if (validator && validator(values)) {
+            f = Validator({ value: values[name], ...error })
+        } else if (validator) {
+            f = undefined
+        } else {
+            f = Validator({ value: values[name], ...error })
+        }
+
         if (f) {
             errors[name] = f
         }

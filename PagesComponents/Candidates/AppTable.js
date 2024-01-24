@@ -87,7 +87,7 @@ export default function AppTable({ pagination, setPagination }) {
 
 function TableRow({ page, user, job, status, updatedAt, index, onChange, id, hold, reason }) {
     const { name, image, mobile, email } = user
-    const { job_role, salary, company_logo, company_name } = job
+    const { job_role, salary,  } = job
 
     return (
         <>
@@ -112,11 +112,10 @@ function TableRow({ page, user, job, status, updatedAt, index, onChange, id, hol
                 </td>
                 <td>
                     <Job
-                        company_logo={company_logo}
-                        company_name={company_name}
                         job_role={job_role}
                         salary={salary}
                         id={job._id}
+                        updatedAt={job.updatedAt}
                     />
                 </td>
                 <td>

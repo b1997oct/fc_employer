@@ -4,8 +4,9 @@ import LabelValue from "@/Components/LabelValue"
 import moment from "moment"
 import { useState } from "react"
 
-export default function Job({ job_role, company_logo, company_name, salary, id }) {
+export default function Job({ job_role, updatedAt, id, salary }) {
 
+    
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState(null)
@@ -13,7 +14,6 @@ export default function Job({ job_role, company_logo, company_name, salary, id }
     useDataFetch(open && !data && '/api/job', { id }, { setLoading, setData })
 
     const {
-        updatedAt,
         experience,
         job_type,
         total_openings,
@@ -22,30 +22,25 @@ export default function Job({ job_role, company_logo, company_name, salary, id }
         skills,
         lost_date,
         publish,
-        jd
+        jd,
+        company_name,
     } = data || {}
 
+    updatedAt = moment(updatedAt).fromNow()
+    
     return (
         <div style={{ maxWidth: 300 }}>
             <b className="nowrap a pointer" onClick={() => setOpen(true)}>{job_role}</b>
-            <div className="cs df gap-2 caption">
-                {company_logo && <img
-                    src={company_logo}
-                    style={{ width: 30, height: 30 }}
-                />}
-                {company_name}
-            </div>
             <div>{salary}</div>
+            <div className="cs caption">
+                {updatedAt}
+            </div>
             <BottomDrawer open={open} onClose={setOpen}>
                 <b>{job_role}</b>
                 <div className="df gap-2">
-                    {company_logo && <img
-                        src={company_logo}
-                        style={{ width: 30, height: 30 }}
-                    />}
                     <div>
-                        <div className="caption cs">{company_name} </div>
-                        {moment(updatedAt).fromNow() + ' '}
+                        <div className="caption cs">{company_name}</div>
+                        {updatedAt + ' '}
                         {data &&
                             <b className={publish ? 'cs' : 'ce'}>{publish ? 'Active' : 'InActive'}</b>}
                     </div>
@@ -93,7 +88,7 @@ export default function Job({ job_role, company_logo, company_name, salary, id }
                                 />
                             </div>
                         </div>
-                        <br/>
+                        <br />
                         <h3>Skills</h3>
                         <div className='df fww gap-2 mt'>
                             {Array.isArray(skills) && skills.length ?
@@ -104,7 +99,7 @@ export default function Job({ job_role, company_logo, company_name, salary, id }
                                 ))
                                 : <div>No Specific skills required</div>}
                         </div>
-                        <br/>
+                        <br />
                         <h3>Job Description</h3>
                         <div dangerouslySetInnerHTML={{ __html: jd }} />
                     </div>

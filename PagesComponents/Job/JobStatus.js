@@ -65,8 +65,8 @@ export default function JobStatus({ status, id, onChange }) {
                 </ClickAwayListener>}
             <button
                 onClick={toggle}
-                style={{ width: 100 }}
-                className={`${status === 'Live' ? 'cs' : 'ce'} bold border py-1 relative`}>
+                style={{ width: 100,  }}
+                className={`${status === 'Live' ? 'cs' : 'ce'} bg bold border py-1 relative`}>
                 {status}
             </button>
         </div>

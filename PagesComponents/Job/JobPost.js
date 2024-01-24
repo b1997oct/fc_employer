@@ -81,10 +81,21 @@ const fields = [
         error: { min: 10, max: 3000 }
     },
     {
-        name: 'requirement'
+        name: 'location',
+        validator: (props) => {
+            return props.work_mode === 'Work from office'
+        },
+        error: { min: 1, max: 50 }
     },
     {
-        name: 'location'
+        name: 'requirement',
+    },
+    {
+        name: 'last_date',
+        validator: (props) => {
+            return props.requirement === 'last_date'
+        },
+        error: { min: 1, max: 50 }
     }
 ]
 
@@ -158,47 +169,27 @@ export default function JobPost({ py }) {
         setData({ ...data, [name]: value })
     }
 
-    const getValue = name => values[name]
 
     const location = values.location
+    const requirement = values.requirement
 
 
     return (
         <div className='df jcc my'>
             <div style={{ padding: '4% 4% 3rem 4%', maxWidth: 600 }} className='bg df  w-full fdc gap rounded-sm shadow'>
                 <h2 className={`bold ${repost ? 'ce' : 'ci'}`}>Job Details {repost && '(Reposting)'}</h2>
-                {fields.slice(0, - 3).map((dat, i) => {
-                    const { label, name, pl, options, type, readOnly, url } = dat
-                    const err = errors[name]
+                {fields.slice(0, - 4).map((dat, i) => {
+                    const { name, pl, url } = dat
+
+                    dat.errorText = errors[name]
+                    dat.onChange = onChange
+                    dat.value = values[name]
+                    dat.active = active
+                    dat.placeholder = pl
                     if (url) {
-                        return (
-                            <AutoCompleteMultiple
-                                key={i}
-                                {...dat}
-                                placeholder={pl}
-                                type={type}
-                                url={url}
-                                onChange={onChange}
-                                value={values[name]}
-                                errorText={err}
-                                active={active}
-                            />
-                        )
+                        return <AutoCompleteMultiple key={i} {...dat} />
                     }
-                    return (
-                        <FormElement
-                            key={i}
-                            label={label}
-                            name={name}
-                            placeholder={pl}
-                            onChange={onChange}
-                            value={values[name]}
-                            options={options}
-                            type={type}
-                            active={active}
-                            errorText={err}
-                            readOnly={readOnly}
-                        />)
+                    return <FormElement key={i} {...dat} />
                 })}
                 {data.work_mode !== 'Remote' &&
                     <Input
@@ -207,11 +198,12 @@ export default function JobPost({ py }) {
                         placeholder='Banglore, Peenya'
                         onChange={onChange}
                         value={location}
+                        errorText={errors.location}
                     />}
                 <div className='mb'>
                     <h4 className='bold mb'>Job Description</h4>
                     <Editor
-                        value={getValue('jd')}
+                        value={values.jd}
                         name='jd'
                         onChange={onChange}
                         active={active}
@@ -228,16 +220,18 @@ export default function JobPost({ py }) {
                             name='requirement'
                             onChange={onChange}
                             value={dat.value}
-                            checked={getValue('requirement')}
+                            checked={values.requirement}
                         />))}
                 </div>
-                {data.requirement === 'last_date' &&
+                {requirement === 'last_date' &&
                     <Input
                         label='Last Date To Apply'
                         type='date'
                         name='last_date'
                         onChange={onChange}
-                        value={getValue('last_date')}
+                        value={values.last_date}
+                        errorText={errors.last_date}
+                        active={active}
                     />}
                 <button
                     onClick={submit}
