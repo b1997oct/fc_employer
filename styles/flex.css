@@ -22,12 +22,20 @@
     gap: 8px;
 }
 
+.gap-4 {
+    gap: 2rem;
+}
+
 .aic {
     align-items: center;
 }
 
 .ais {
     align-items: start;
+}
+
+.aie {
+    align-items: end;
 }
 
 .jcs {
@@ -81,6 +89,10 @@
 @media (max-width:768px) {
     .sm-fdc {
         flex-direction: column;
+    }
+
+    .sm-fdrr {
+        flex-direction: row-reverse;
     }
 
     .sm-jcc {

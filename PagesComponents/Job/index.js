@@ -4,9 +4,8 @@ import LabelValue from "@/Components/LabelValue"
 import moment from "moment"
 import { useState } from "react"
 
-export default function Job({ job_role, updatedAt, id, salary }) {
+export default function Job({ job_role, caption, salary, id }) {
 
-    
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState(null)
@@ -14,7 +13,10 @@ export default function Job({ job_role, updatedAt, id, salary }) {
     useDataFetch(open && !data && '/api/job', { id }, { setLoading, setData })
 
     const {
+        updatedAt,
         experience,
+        company_logo,
+        company_name,
         job_type,
         total_openings,
         location,
@@ -22,27 +24,31 @@ export default function Job({ job_role, updatedAt, id, salary }) {
         skills,
         lost_date,
         publish,
-        jd,
-        company_name,
+        jd
     } = data || {}
 
-    updatedAt = moment(updatedAt).fromNow()
-    
     return (
         <div style={{ maxWidth: 300 }}>
-            <b className="nowrap a pointer" onClick={() => setOpen(true)}>{job_role}</b>
-            <div>{salary}</div>
-            <div className="cs caption">
-                {updatedAt}
+            <div className="nowrap a pointer bold" onClick={() => setOpen(true)}>{job_role}</div>
+            <div className="df gap-2 caption">
+                {caption}
             </div>
+            <div>{salary}</div>
             <BottomDrawer open={open} onClose={setOpen}>
-                <b>{job_role}</b>
+                <h3>{job_role}</h3>
                 <div className="df gap-2">
+                    {company_logo &&
+                        <img
+                            src={company_logo}
+                            style={{ width: 30, height: 30 }}
+                        />}
                     <div>
                         <div className="caption cs">{company_name}</div>
-                        {updatedAt + ' '}
+                        {moment(updatedAt).fromNow() + ' '}
                         {data &&
-                            <b className={publish ? 'cs' : 'ce'}>{publish ? 'Active' : 'InActive'}</b>}
+                            <b className={publish ? 'cs' : 'ce'}>
+                                {publish ? 'Active' : 'InActive'}
+                            </b>}
                     </div>
 
                 </div>
@@ -59,12 +65,12 @@ export default function Job({ job_role, updatedAt, id, salary }) {
                         <div className='df sm-fdc gap jcsb'>
                             <div className="">
                                 <LabelValue
-                                    label='Required Experience'
+                                    label='Experience'
                                     value={experience}
                                 />
                                 <LabelValue
                                     label='Salary'
-                                    value={salary}
+                                    value={salary || data.salary}
                                 />
                                 <LabelValue
                                     label='Job Type'
@@ -83,24 +89,20 @@ export default function Job({ job_role, updatedAt, id, salary }) {
                                 />
 
                                 <LabelValue
-                                    label='Last Date'
-                                    value={lost_date && moment(lost_date).from()}
+                                    label='Last Date To Apply'
+                                    value={lost_date}
                                 />
                             </div>
                         </div>
                         <br />
-                        <h3>Skills</h3>
+                        <b>Required Skills</b>
                         <div className='df fww gap-2 mt'>
-                            {Array.isArray(skills) && skills.length ?
-                                skills.map((d, i) => (
-                                    <div key={i}>
-                                        <button className='filled-chip-p chip'>{d}</button>
-                                    </div>
-                                ))
-                                : <div>No Specific skills required</div>}
+                            {skills.map((d, i) => (
+                                <div key={i}>
+                                    <button className='filled-chip-p chip'>{d}</button>
+                                </div>
+                            ))}
                         </div>
-                        <br />
-                        <h3>Job Description</h3>
                         <div dangerouslySetInnerHTML={{ __html: jd }} />
                     </div>
                 }

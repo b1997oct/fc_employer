@@ -18,30 +18,30 @@ const fields = [
         error: { min: 1, max: 200 }
     },
     {
-        label: "Minimum Experience",
+        label: "Experience Level",
         name: "experience",
         pl: 'Fresher, 1 to 3 years',
         error: { min: 1, max: 100 }
     },
     {
-        label: "Minimum Education Level",
+        label: "Qualification",
         name: "education",
         pl: 'Any UG, Diploma',
         error: { min: 3, max: 50 }
     },
     {
-        label: "Stream",
+        label: "Stream/Combination",
         name: "stream",
-        pl: 'Mechanical, CAD',
+        pl: 'Eg: Mechanical, Electrical, Finance',
         error: { min: 3, max: 50 }
     },
     {
         label: "Total openings",
         name: "total_openings",
-        pl: 'Number',
-        type: 'select',
-        options: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '10+'],
-        readOnly: true,
+        pl: 'Number Of Openings',
+        // type: 'select',
+        // options: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '10+'],
+        // readOnly: true,
         error: { min: 1 }
     },
     {

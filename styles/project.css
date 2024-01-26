@@ -57,7 +57,7 @@
 .edit-drawer {
   max-height: 84vh;
   overflow: auto;
-  padding: 1.5rem 20%
+  padding: 0rem 10%;
 }
 
 .chip {
@@ -138,6 +138,6 @@
   }
 
   .edit-drawer {
-    padding: 1.5rem 4%;
+    padding: 0 8px;
   }
 }

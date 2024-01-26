@@ -11,11 +11,13 @@ export default function Page() {
         <div className="df fww aic">
           <DashboardCard
             title='Active Jobs'
-            url='/api/job/count?q=active'
+            url='/api/job/count'
+            body={{ publish: true }}
           />
           <DashboardCard
             title='Inactive Jobs'
-            url='/api/job/count?q=inactive'
+            url='/api/job/count'
+            body={{ publish: { $ne: true } }}
           />
         </div>
       </div>

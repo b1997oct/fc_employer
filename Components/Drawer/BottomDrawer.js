@@ -11,7 +11,9 @@ export default function BottomDrawer({ open, onClose, children, cn, className = 
             onClose={onClose}>
             <CloseButton disabled={Boolean(!onClose)} onClick={onClose} />
             <div className={className}>
-                {children}
+                <div style={{ maxWidth: 700, margin: 'auto', marginBottom:24 }} className="border p rounded-sm">
+                    {children}
+                </div>
             </div>
         </Drawer>
     )

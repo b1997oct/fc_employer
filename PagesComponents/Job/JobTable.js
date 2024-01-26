@@ -78,7 +78,7 @@ export default function JobTable({ url }) {
 }
 
 
-function TableRow({ id, index, job_role, updatedAt, location, experience, salary, admin_posted, status, publish, path, applicants, onChange }) {
+function TableRow({ id, index, job_role, updatedAt, location, job_type, total_openings, experience, salary, admin_posted, status, publish, path, applicants, onChange }) {
 
     const closed = path === 'closed'
 
@@ -92,6 +92,7 @@ function TableRow({ id, index, job_role, updatedAt, location, experience, salary
                     job_role={job_role}
                     id={id}
                     updatedAt={updatedAt}
+                    caption={`Total openings ${total_openings} | ${job_type}`}
                 />
             </td>
             <td>
