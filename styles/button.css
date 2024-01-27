@@ -162,3 +162,24 @@
 .pagination-btn:not(:disabled):active {
   background: #eee6;
 }
+
+.tab-btn {
+  padding: 4px 1rem;
+  background: none;
+  border: none;
+}
+
+.tab-btn-active {
+  color: blue;
+  position: relative;
+}
+
+.tab-btn-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  border-bottom: 3px solid blue;
+  border-radius: 8px;
+}

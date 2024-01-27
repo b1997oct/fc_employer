@@ -45,7 +45,14 @@ export default function Page() {
             <div className='df jcc aic h-screen'>
                 <div style={{ maxWidth: 450 }} className='card shadow m'>
                     <h2 className='bold tac'>First Career</h2>
-                    <p className='tac fs1 '>Employer Login</p>
+                    <br/>   
+                    <div className='df jcsa'>
+                        <Link href='https://firstcareer.co/user/login'>
+                            <button className={`tab-btn `}>Job Seeker Login</button>
+                        </Link>
+                        <button className={`tab-btn tab-btn-active`}>Employer Login</button>
+                    </div>
+                    <br/>  
                     <div className='df fdc gap-2'>
                         <Input
                             name="email"
