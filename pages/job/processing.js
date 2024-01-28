@@ -7,7 +7,8 @@ export default function Page() {
         <Layout>
             <JobHeader />
             <JobTable
-                url='/api/job/processing'
+                url='/api/job/all'
+                body={{ status: { $gt: 0 } }}
             />
         </Layout>
     )

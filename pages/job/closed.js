@@ -8,6 +8,7 @@ export default function Page() {
             <JobHeader />
             <JobTable
                 url='/api/job/closed'
+                body={{ status: { $exists: false }, publish: { $ne: true } }}
             />
         </Layout>
     )

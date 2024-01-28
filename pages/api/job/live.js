@@ -1,4 +1,5 @@
-import dbConnect from "@/lib/db"
+import serverPagination from "@/Components/Pagination/serverPagination"
+import dbConnect, { dataTotal, toOject } from "@/lib/db"
 import Job from "@/schema/Job"
 
 /**
@@ -9,9 +10,15 @@ import Job from "@/schema/Job"
 export default async function route(req, res) {
   try {
     await dbConnect()
+    const pagination = serverPagination(req.body)
+
     const { uid } = req.headers
-    let data = await Job.find({ company: uid, publish: true })
-    return res.status(200).json({ data })
+    let data = await Job.aggregate([
+      { $match: { company: uid, publish: true } },
+      ...dataTotal([pagination])
+    ])
+
+    return res.status(200).json(toOject(data))
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

@@ -61,7 +61,7 @@ const schema = new Schema({
         type: Boolean,
         default: false
     },
-    status: {
+    status:  {
         type: Number,
         max: 4
     },

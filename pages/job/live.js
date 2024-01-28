@@ -7,7 +7,8 @@ export default function Page() {
         <Layout>
             <JobHeader />
             <JobTable
-                url='/api/job/live'
+                url='/api/job/all'
+                body={{ publish: true }}
             />
         </Layout>
     )

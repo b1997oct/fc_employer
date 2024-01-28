@@ -180,7 +180,6 @@ export default function JobPost({ py }) {
                 <h2 className={`bold ${repost ? 'ce' : 'ci'}`}>Job Details {repost && '(Reposting)'}</h2>
                 {fields.slice(0, - 4).map((dat, i) => {
                     const { name, pl, url } = dat
-
                     dat.errorText = errors[name]
                     dat.onChange = onChange
                     dat.value = values[name]

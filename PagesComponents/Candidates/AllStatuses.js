@@ -43,7 +43,7 @@ export default function AllStatuses({ status, name = 'status', setChange }) {
 
     return (
         <div className="df mt gap fww">
-            {links.slice(2, 8).map((d, i) => {
+            {links.slice(2, 9).map((d, i) => {
                 const { value, label } = d
                 const ac = statusValue.includes(value)
                 const cn = chipCn + (ac ? 'filled-chip-p' : 'chip-hover')

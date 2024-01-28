@@ -11,7 +11,7 @@ const authed = {
     '/job/closed': true,
 }
 
-const start = ['/api/job', '/api/candidate', '/candidate']
+const start = ['/api/job', '/api/candidate','/api/prediction', '/candidate','/job']
 
 const protectedPath = (path) => {
     let v = authed[path]
@@ -98,5 +98,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-    matcher: ['/', '/profile', '/job/:path*', '/api/:path*'],
+    matcher: ['/', '/profile','/candidate/:path*', '/job/:path*', '/api/:path*'],
 } 

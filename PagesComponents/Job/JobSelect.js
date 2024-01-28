@@ -19,7 +19,7 @@ export default function JobSelect({ value, onChange, name, ...props }) {
 
     useDataFetch(value && '/api/job', { id: value, select: '_id job_role' }, { setData: onRes }, [value])
 
-    usePredictionFetch('/api/job/all', { job_role: text, select: '_id job_role' }, { setData }, [text])
+    usePredictionFetch('/api/prediction/job', { job_role: text, select: '_id job_role' }, { setData }, [text])
 
     function onAdd(dat) {
         setVal(dat.job_role)

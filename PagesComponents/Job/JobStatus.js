@@ -1,6 +1,5 @@
 import ClickAwayListener from '@/Components/ClickAwayListener'
 import { PUT } from '@upgradableweb/client'
-import Link from 'next/link'
 import { useState } from 'react'
 
 const statusText = ['', 'Reviewing', 'Rejected']

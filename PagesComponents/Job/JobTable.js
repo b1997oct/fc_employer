@@ -24,16 +24,16 @@ const h = [
     { maxWidth: 100 },
 ]
 
-export default function JobTable({ url }) {
+export default function JobTable({ url, body }) {
 
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [total, setTotal] = useState(0)
-    const [paination, setPagination] = usePagination()
+    const [pagination, setPagination] = usePagination()
 
     const path = useRouter().pathname.split('/')[2]
 
-    useTableFetch(url, paination, { setData, setLoading, setTotal }, [paination])
+    useTableFetch(url, { ...pagination, ...body }, { setData, setLoading, setTotal }, [pagination])
 
     function onChange(val) {
         const f = data.map(d => {
@@ -69,7 +69,7 @@ export default function JobTable({ url }) {
 
             </Table>
             <Pagination
-                pagination={{ ...paination, total }}
+                pagination={{ ...pagination, total }}
                 setPagination={setPagination}
             />
 
@@ -113,7 +113,9 @@ function TableRow({ id, index, job_role, updatedAt, location, job_type, total_op
                 />
             </td>
             <td>
-                <p className="tac">{applicants || 0}</p>
+                <div className='tac'>
+                    <Link href={'/candidate/s?status=withdrawn-closed-inactive-rejected-selected-interview-shortlisted&job=' + id} className="a">{applicants || 0}</Link>
+                </div>
             </td>
             <td>
                 <div className="tac">
