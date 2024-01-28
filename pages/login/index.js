@@ -46,11 +46,11 @@ export default function Page() {
                 <div style={{ maxWidth: 450 }} className='card shadow m'>
                     <h2 className='bold tac'>First Career</h2>
                     <br/>   
-                    <div className='df jcsa'>
-                        <Link href='https://firstcareer.co/user/login'>
+                    <div className='df jcc'>
+                        {/* <Link href='https://firstcareer.co/user/login'>
                             <button className={`tab-btn `}>Job Seeker Login</button>
-                        </Link>
-                        <button className={`tab-btn tab-btn-active`}>Employer Login</button>
+                        </Link> */}
+                        <div>Employer Login</button>
                     </div>
                     <br/>  
                     <div className='df fdc gap-2'>
