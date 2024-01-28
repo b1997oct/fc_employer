@@ -50,7 +50,7 @@ export default function Page() {
                         {/* <Link href='https://firstcareer.co/user/login'>
                             <button className={`tab-btn `}>Job Seeker Login</button>
                         </Link> */}
-                        <div>Employer Login</button>
+                        <div>Employer Login</div>
                     </div>
                     <br/>  
                     <div className='df fdc gap-2'>
