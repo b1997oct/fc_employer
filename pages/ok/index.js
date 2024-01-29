@@ -22,9 +22,9 @@ export default function Page() {
                             href={"https://wa.me/+918904472228?text=" + encodeURIComponent(`Hi`)}
                             target='_blank' className='a'>WhatsApp</a>
                     </div>
-                    <div className="df jcc aic mt-4">
+                    {/* <div className="df jcc aic mt-4">
                         <img src='whatsappqr.jpeg' style={{ width: 300, height: 300, borderRadius: 16 }} alt='whatsappqr.jpeg' />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div >
