@@ -15,7 +15,7 @@ const fields = [
         error: { min: 1, max: 100 }
     },
     {
-        type: "select",
+        // type: "select",
         label: "Industry*",
         name: "industry",
         pl: "Industry type",
@@ -23,7 +23,7 @@ const fields = [
 
     },
     {
-        type: "select",
+        // type: "select",
         label: "Comapny functinal area*",
         name: "department",
         pl: "Functional area",
@@ -130,8 +130,8 @@ export default function AccountForm() {
             {fields.slice(0, flds).map((dat, i) => {
                 const { label, name, pl, type } = dat
                 const err = errors[name]
-                const options = name === 'industry' ? utils.industry_list
-                    : name === 'department' ? utils.department_list : undefined
+                // const options = name === 'industry' ? utils.industry_list
+                //     : name === 'department' ? utils.department_list : undefined
 
                 return (
                     <FormElement
@@ -141,12 +141,12 @@ export default function AccountForm() {
                         placeholder={pl}
                         onChange={onChange}
                         value={ValueGetter(name)}
-                        options={options}
+                        // options={options}
                         type={type}
                         active={active}
                         error={err}
                         errorText={err}
-                        readOnly={Boolean(options)}
+                        // readOnly={Boolean(options)}
                     />)
             })}
             <h3 className='bold my'>About your company</h3>

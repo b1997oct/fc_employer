@@ -18,13 +18,13 @@ const fields = [
         pl: "Enter company name"
     },
     {
-        type: "select",
+        // type: "select",
         label: "Select industry",
         name: "industry",
         pl: "Select industry type"
     },
     {
-        type: "select",
+        // type: "select",
         label: "Comapny functinal area",
         name: "department",
         pl: "Select functional area"
@@ -158,8 +158,8 @@ export default function Page() {
                     {fields.map((dat, i) => {
                         const { label, name, pl, type } = dat
                         const err = errors[name]
-                        const options = name === 'industry' ? utils.industry_list
-                            : name === 'department' ? utils.department_list : undefined
+                        // const options = name === 'industry' ? utils.industry_list
+                        //     : name === 'department' ? utils.department_list : undefined
 
                         return (
                             <FormElement
@@ -169,12 +169,12 @@ export default function Page() {
                                 placeholder={pl}
                                 onChange={onChange}
                                 value={getValue(name)}
-                                options={options}
+                                // options={options}
                                 type={type}
                                 active={active}
                                 error={err}
                                 errorText={err}
-                                readOnly={Boolean(options)}
+                                // readOnly={Boolean(options)}
                             />)
                     })}
 
