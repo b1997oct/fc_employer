@@ -25,14 +25,14 @@ const fields = [
     },
     {
         // type: "select",
-        label: "Comapny functinal area",
+        label: "Company functional area*",
         name: "department",
         pl: "Select functional area"
     },
     {
         label: "Company address",
         name: "address",
-        pl: "Eg: Banglore , peenya 560001"
+        pl: "Eg: Bangalore , peenya 560001"
     },
     {
         label: "Company location map link",

@@ -24,7 +24,7 @@ const fields = [
     },
     {
         // type: "select",
-        label: "Comapny functinal area*",
+        label: "Company functional area*",
         name: "department",
         pl: "Functional area",
         error: { min: 3, max: 100 },
@@ -32,7 +32,7 @@ const fields = [
     {
         label: "Company address*",
         name: "address",
-        pl: "Eg: Banglore , peenya 560001",
+        pl: "Eg: Bangalore , peenya 560001",
         error: { min: 3, max: 100 }
     },
     {
