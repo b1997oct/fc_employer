@@ -6,7 +6,7 @@ export default function BottomDrawer({ open, onClose, children, cn, className = 
         <Drawer
             value={false}
             open={open}
-            direction='bottom'
+            direction='right'
             className={`bottom-drawer ${cn}`}
             onClose={onClose}>
             <CloseButton disabled={Boolean(!onClose)} onClick={onClose} />

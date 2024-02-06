@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/db"
-import Professional from "@/schema/User/Professional"
+import User from "@/schema/User"
 
 /**
  * @param {import("next").NextApiRequest} req 
@@ -10,9 +10,14 @@ export default async function route(req, res) {
     try {
 
         await dbConnect()
-        let data, id = req.body.id
-        data = await Professional.findById(id)
-        return res.status(200).json({ data: data, })
+        let data, { id } = req.body
+        data = await User.findById(id)
+        if(data){
+            return res.status(200).json({ data })
+        } else {
+            throw Error('Something went wrong')
+        }
+        
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

@@ -18,7 +18,7 @@ const fields = [
         // type: "select",
         label: "Industry*",
         name: "industry",
-        pl: "Industry type",
+        pl: "Eg: Manufacturing, Software",
         error: { min: 3, max: 100 },
 
     },
@@ -26,7 +26,7 @@ const fields = [
         // type: "select",
         label: "Company functional area*",
         name: "department",
-        pl: "Functional area",
+        pl: "Eg: TMC, Sheet Metal, Electrical Panels",
         error: { min: 3, max: 100 },
     },
     {
@@ -49,7 +49,7 @@ const fields = [
     {
         label: "Contact email",
         name: "email",
-        pl: "company@mail.com",
+        pl: "company@email.com",
         error: { min: 3, max: 50 }
     },
     {
@@ -82,13 +82,14 @@ function onError({ name, value }) {
 
 export default function AccountForm() {
 
-    const [data, setData] = useState({})
+   
     const [loading, setLoading] = useState(false);
     const [active, setActive] = useState(false);
     const [utils, setUtils] = useState({
         industry_list: [],
         department_list: []
     });
+    const [data, setData] = useState({})
     const r = useRouter()
 
     useDataFetch('/api/utils', '', { setData: setUtils })
