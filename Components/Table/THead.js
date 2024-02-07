@@ -1,16 +1,9 @@
 
-export default function THead({ fields }) {
+export default function THead({ children }) {
     return (
         <thead className="thead">
             <tr>
-                {fields.map((dat, i) => {
-
-                    if (typeof dat === 'string') {
-                        return <th key={i} className='py'>{dat}</th>
-                    }
-                    const { label, ...props } = dat
-                    return <th key={i} style={props} className='py'>{label}</th>
-                })}
+                {children}
             </tr>
         </thead>
     )

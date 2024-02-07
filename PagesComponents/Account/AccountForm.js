@@ -26,7 +26,7 @@ const fields = [
         // type: "select",
         label: "Company functional area*",
         name: "department",
-        pl: "Eg: TMC, Sheet Metal, Electrical Panels",
+        pl: "Eg: CNC, Sheet Metal, Electrical Panels",
         error: { min: 3, max: 100 },
     },
     {

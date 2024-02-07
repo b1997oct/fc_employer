@@ -21,7 +21,8 @@
     "react-dom": "^18",
     "react-quill": "^2.0.0",
     "react-sortablejs": "^6.1.4",
-    "sortablejs": "^1.15.1"
+    "sortablejs": "^1.15.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "eslint": "^8",
