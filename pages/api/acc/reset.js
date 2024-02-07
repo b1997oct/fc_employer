@@ -16,9 +16,9 @@ export default async function route(req, res) {
     let data
     let { email, password, subject, html } = req.body
     if (method === "POST") {
-      data = await Company.findOne({ email: { $regex: new RegExp(email.trim(), 'i') } }).select('email')
+      // data = await Company.findOne({ email: { $regex: new RegExp(email.trim(), 'i') } }).select('email')
       if (!data) {
-        return res.status(404).json({ message: 'user not found with this email and password' })
+        return res.status(200).json({ message: 'user not found with this email and password' })
       }
       const { token } = await refreshToken({ payload: { uid: data._id }, expireInMin: 15 })
       const url = req.headers.origin + '/account/reset?token=' + token

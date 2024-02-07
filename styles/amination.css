@@ -52,17 +52,29 @@
 
 /* component ani */
 
-.toastOut {
-  animation: toastout 300ms forwards;
+.toastIn {
+  animation: toastIn 300ms forwards;
 }
 
-@keyframes toastout {
+@keyframes toastIn {
   0% {
-    opacity: 1;
+    display: flex;
+    bottom: 0;
   }
 
   100% {
-    opacity: 0;
+    bottom: 4vh;
+  }
+}
+
+.toastOut {
+  animation: toastout 500ms forwards;
+}
+
+@keyframes toastout {
+ 
+  100% {
+    bottom: -10vh;
     display: none;
   }
 }
@@ -70,12 +82,26 @@
 /* shaking */
 
 @keyframes shakeIt {
-  0% { transform: translateX(-5px); }
-  25% { transform: translateX(5px); }
-  50% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-  100% { transform: translateX(0px); }
-  
+  0% {
+    transform: translateX(-5px);
+  }
+
+  25% {
+    transform: translateX(5px);
+  }
+
+  50% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+
 }
 
 .shake {

@@ -1,9 +1,7 @@
 import Checkbox from '@/Components/Checkbox';
-import useDataFetch from '@/Components/Hooks/useDataFetch';
 import Input from '@/Components/Input';
 import Toast from '@/Components/Toast';
-import { PATCH, PUT } from '@upgradableweb/client';
-import Head from 'next/head';
+import { PUT } from '@upgradableweb/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -87,7 +85,7 @@ export default function Page() {
                     <button
                         onClick={submit}
                         disabled={disabled}
-                        className='btn w-full my-4 primary-bg'>
+                        className='w-full my-4 primary-btn'>
                         Submit
                     </button>
                     <div className='df jce aic gap'>

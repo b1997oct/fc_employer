@@ -93,7 +93,7 @@ input[type="checkbox"] {
   padding: 0;
 }
 
- ul li::before {
+ul li::before {
   font-size: 1.5rem;
   line-height: 1;
   vertical-align: sub;
@@ -121,6 +121,17 @@ input[type="checkbox"] {
   right: 0;
 }
 
+#toast {
+  position: fixed;
+  right: 4%;
+  bottom: 4%;
+  z-index: 4000;
+  background: #000;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: inherit;
+}
 
 .tooltip {
   position: absolute;
@@ -150,4 +161,3 @@ input[type="checkbox"] {
   border-radius: 1rem;
 
 }
-

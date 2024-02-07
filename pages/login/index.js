@@ -1,4 +1,3 @@
-import Checkbox from '@/Components/Checkbox';
 import Input from '@/Components/Input';
 import Modal from '@/Components/Modal';
 import Toast from '@/Components/Toast';
@@ -106,7 +105,7 @@ export default function Page() {
                 />
                 <button
                     disabled={loading}
-                    onClick={submit} className='btn w-full primary-bg mt'>
+                    onClick={submit} className='w-full primary-btn mt'>
                     Send
                 </button>
             </Modal>

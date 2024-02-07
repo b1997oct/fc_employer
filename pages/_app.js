@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }) {
       <div className={font.className}>
         <Component {...pageProps} />
       </div>
+      <div id='toast' className='toastOut' />
     </Theme>
   )
 }
