@@ -71,8 +71,8 @@ export default function Profile({ image, name, mobile, email, id }) {
                             <div className='df sm-fdc gap-4 jcsb'>
                                 <div>
                                     <LabelValue
-                                        label='Experianced Designation'
-                                        value={designation[0] || ''}
+                                        label='Designation'
+                                        value={designation}
                                     />
                                     {industry && <div className='cp'>{industry} | {functional_area}</div>}
                                     <LabelValue
@@ -188,8 +188,8 @@ function MainDetail({ image, name, email, mobile, onClick, dob, isFresher }) {
             <div>
                 <div className='bold pointer a nowrap' onClick={handleClick}>{name}</div>
                 <div className='df fww'>
-                    <div className="nowrap">{email} | </div>
-                    <div>+91 {mobile}</div>
+                    <div>+91 {mobile} |</div>
+                    <div className="nowrap">{email}</div>
                 </div>
                 <div>{dob && `Age : ${moment(dob).fromNow(true)}`} {isFresher && <span>| <span className='cs'>Fresher</span></span>}</div>
             </div>

@@ -1,6 +1,6 @@
 export default function LabelValue({ label, value }) {
-
-    if (value) {
+    const f = Array.isArray(value) ? value.length : value
+    if (f) {
         return (
             <div className="mt-2">
                 <b>{label}</b>
