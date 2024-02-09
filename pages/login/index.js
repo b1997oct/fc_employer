@@ -15,8 +15,7 @@ export default function Page() {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
-    const r = useRouter()
-
+    
     const submit = () => {
         setLoading(true)
         const url = open ? '/api/acc/reset' : '/api/acc/login'
@@ -25,7 +24,7 @@ export default function Page() {
                 if (open) {
                     Toast(`reset link sent to ${res.data?.email}`)
                 } else {
-                    r.replace('/')
+                    location.replace('/')
                 }
             })
             .catch(err => {
@@ -44,14 +43,14 @@ export default function Page() {
             <div className='df jcc aic h-screen'>
                 <div style={{ maxWidth: 450 }} className='card shadow m'>
                     <h2 className='bold tac'>First Career</h2>
-                    <br/>   
+                    <br />
                     <div className='df jcc'>
                         {/* <Link href='https://firstcareer.co/user/login'>
                             <button className={`tab-btn `}>Job Seeker Login</button>
                         </Link> */}
                         <div>Employer Login</div>
                     </div>
-                    <br/>  
+                    <br />
                     <div className='df fdc gap-2'>
                         <Input
                             name="email"
