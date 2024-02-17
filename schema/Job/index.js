@@ -54,6 +54,10 @@ const schema = new Schema({
         type: [String],
         required: true
     },
+    perks: {
+        type: [String],
+        required: true
+    },
     verified: {
         type: Boolean,
     },
@@ -61,7 +65,7 @@ const schema = new Schema({
         type: Boolean,
         default: false
     },
-    status:  {
+    status: {
         type: Number,
         max: 4
     },

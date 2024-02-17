@@ -53,11 +53,12 @@ const fields = [
     {
         label: "Required Skills",
         name: "skills",
-        pl: "Enter required skills",
-        type: 'skill',
+        pl: "GST, Tally",
+        body: { type: 'skill' },
         url: '/api/prediction',
         error: { min: 2, max: 20, type: 'array' }
     },
+
     {
         label: "Select Job Type",
         name: "job_type",
@@ -75,6 +76,14 @@ const fields = [
         readOnly: true,
         error: { min: 1 },
         pl: 'Eg: Remote, Work from office, Hybrid'
+    },
+    {
+        label: "Employment Benefits",
+        name: "perks",
+        pl: "PF,Health insurance, Remote Work",
+        body: { type: 'perks' },
+        url: '/api/prediction',
+        error: { min: 2, max: 20, type: 'array' }
     },
     {
         name: 'jd',

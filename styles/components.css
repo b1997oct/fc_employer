@@ -22,9 +22,8 @@
 }
 
 .input:focus {
-  outline-width: 3px;
+  outline-width: 2px;
   outline-color: #0008;
-
 }
 
 .input:disabled {
