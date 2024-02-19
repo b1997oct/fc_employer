@@ -146,7 +146,8 @@ export default function JobPost({ py }) {
 
     useDataFetch(id === 'new' && '/api/org', '', { setData: onCompany, setLoading })
 
-
+    const location = values.location
+    const requirement = values.requirement
 
     function submit() {
         !active && setActive(true)
@@ -158,7 +159,12 @@ export default function JobPost({ py }) {
             focusName('skills')
             return
         }
-        let newData = { ...data, id, lost_date: data.last_date, status: 1 }
+        let newData = {
+            ...data,
+            ...(requirement !== 'last_date' ? { $unset: { lost_date: 1 } } : { lost_date: data.last_date }),
+            status: 1,
+            id
+        }
         if (data.education || data.stream) {
             newData.education = newData.education + '-' + newData.stream
         }
@@ -177,10 +183,6 @@ export default function JobPost({ py }) {
         let { name, value } = e.target
         setData({ ...data, [name]: value })
     }
-
-
-    const location = values.location
-    const requirement = values.requirement
 
 
     return (
