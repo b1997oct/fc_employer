@@ -79,7 +79,7 @@ export default function Page() {
                             name='remember'
                             checked={remember}
                             onChange={onChange}
-                            label='I remeber new password'
+                            label='I remember new password'
                         />
                     </div>
                     <button
