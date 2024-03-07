@@ -18,13 +18,11 @@ const fields = [
         pl: "Enter company name"
     },
     {
-        // type: "select",
         label: "Select industry",
         name: "industry",
         pl: "Select industry type"
     },
     {
-        // type: "select",
         label: "Company functional area*",
         name: "department",
         pl: "Select functional area"
@@ -114,11 +112,11 @@ export default function Page() {
             let newFileds = {}
             if (logo) {
                 res = await UploadImg(logo, py.company_logo?.public_id)
-                newFileds = { ...newFileds, company_logo: res }
+                newFileds.company_logo = res
             }
             if (banner) {
                 res = await UploadImg(banner, py.banner?.public_id)
-                newFileds = { ...newFileds, banner: res }
+                newFileds.banner = res
             }
 
             if (Object.entries(newFileds).length) {
@@ -174,7 +172,7 @@ export default function Page() {
                                 active={active}
                                 error={err}
                                 errorText={err}
-                                // readOnly={Boolean(options)}
+                            // readOnly={Boolean(options)}
                             />)
                     })}
 

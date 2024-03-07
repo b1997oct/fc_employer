@@ -178,6 +178,7 @@ function MainDetail({ image, name, email, mobile, onClick, dob, isFresher }) {
     function handleClick() {
         onClick && onClick(true)
     }
+
     return (
         <div className="df aic gap-2">
             <div onClick={handleClick} className="preview-img round hidden pointer">
@@ -188,8 +189,8 @@ function MainDetail({ image, name, email, mobile, onClick, dob, isFresher }) {
             <div>
                 <div className='bold pointer a nowrap' onClick={handleClick}>{name}</div>
                 <div className='df fww'>
-                    <div>+91 {mobile} |</div>
-                    <div className="nowrap">{email}</div>
+                    <Link href={`https://api.whatsapp.com/send?phone=91${mobile}`} target='_blank'>+91 {mobile} |</Link>
+                    <Link href={`mailto:${email}`} target='_blank' className="nowrap">{email}</Link>
                 </div>
                 <div>{dob && `Age : ${moment(dob).fromNow(true)}`} {isFresher && <span>| <span className='cs'>Fresher</span></span>}</div>
             </div>
