@@ -155,8 +155,3 @@ ul li::before {
   background: inherit;
   transform: rotate(45deg);
 }
-
-.bottom-drawer {
-  border-radius: 1rem;
-
-}

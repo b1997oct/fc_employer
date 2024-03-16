@@ -1,11 +1,13 @@
 import BottomDrawer from '@/Components/Drawer/BottomDrawer'
 import useDataFetch from '@/Components/Hooks/useDataFetch'
-import { Avatar } from '@/Components/Icons'
+import { Avatar, Call, Email, Whatsapp } from '@/Components/Icons'
 import LabelValue from '@/Components/LabelValue'
 import { useState } from 'react'
 import { convertExperience } from './SelectExperience'
 import moment from 'moment'
 import useTableFetch from '@/Components/Hooks/useTableFetch'
+import Link from 'next/link'
+import Resume from './Resume'
 
 const emp = [
     {
@@ -66,7 +68,11 @@ export default function Profile({ image, name, mobile, email, id }) {
 
                     {data &&
                         <div className='p'>
-
+                            <div className='df fww my-2 gap'>
+                                <Link href={`tel:${mobile}`} target='_blank' className='phone'><Call size='1.2em' /> Call</Link>
+                                <Link href={`mailto:${email}`} target='_blank' className="email" ><Email /> Email</Link>
+                                <Link href={`https://api.whatsapp.com/send?phone=91${mobile}`} target='_blank' className="whatsapp" ><Whatsapp /> Send Message</Link>
+                            </div>
                             <br />
                             <div className='df sm-fdc gap-4 jcsb'>
                                 <div>
@@ -133,11 +139,7 @@ export default function Profile({ image, name, mobile, email, id }) {
                                 value={area ? `${area} | City - ${city} | State - ${state} | ${pin}` : ''}
                             />
                             <br />
-                            {resume &&
-                                <iframe
-                                    style={{ height: '80vh' }}
-                                    className='w-full'
-                                    src={resume} />}
+                            {resume && <Resume resume={resume} />}
                             <br />
                             <br />
                             <LabelValue

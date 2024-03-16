@@ -105,6 +105,41 @@
   background-color: #03162327;
 }
 
+.whatsapp {
+  padding: 6px 1rem;
+  border: 2px solid #0ab40a;
+  border-radius: 200px;
+  color: #0ab40a;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.email {
+  padding: 6px 1rem;
+  border: 2px solid #4e0c00;
+  border-radius: 200px;
+  /* background: #000; */
+  color: #4e0c00;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.phone {
+  padding: 6px 1rem;
+  border: 2px solid #000;
+  border-radius: 200px;
+  background: #000;
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .nav-menu {
   display: flex;
   flex-direction: column;
