@@ -14,7 +14,7 @@ let links = [
     'Selected',
     'Rejected',
     'Inactive',
-    'Closed',
+    'Hold',
     'Withdraw'
 ]
 

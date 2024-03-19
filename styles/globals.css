@@ -26,6 +26,7 @@ body {
 iframe {
   border: none;
 }
+
 .z {
   z-index: auto;
 }
@@ -113,7 +114,6 @@ button {
 
 .table-hight {
   max-height: 80vh;
-
 }
 
 

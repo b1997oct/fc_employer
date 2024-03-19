@@ -204,7 +204,7 @@ function TableRow({
                 </td>
                 <td>
                     <div className='tac'>
-                        <Link href={'/candidate/s?status=withdrawn-closed-inactive-rejected-selected-interview-shortlisted&job=' + id} className="a">{applicants || 0}</Link>
+                        <Link href={'/candidate/s?status=withdrawn-hold-inactive-rejected-selected-interview-shortlisted&job=' + id} className="a">{applicants || 0}</Link>
                     </div>
                 </td>
                 <td>
