@@ -12,7 +12,7 @@ const fields = [
         label: "Company Name*",
         name: "company_name",
         pl: "Enter company name",
-        error: { min: 1, max: 100 }
+        error: { min: 1, max: 200 }
     },
     {
         // type: "select",
@@ -33,12 +33,13 @@ const fields = [
         label: "Company address*",
         name: "address",
         pl: "Eg: Bangalore , peenya 560001",
-        error: { min: 3, max: 100 }
+        error: { min: 3, max: 200 }
     },
     {
         label: "Company location map link",
         name: "map_link",
-        pl: "Paste the map link"
+        pl: "Paste the map link",
+        error: { max: 1000 }
     },
     {
         label: "Company website link",
@@ -56,7 +57,7 @@ const fields = [
         label: "Contact mobile number",
         name: "mobile",
         pl: "9876543210",
-        error: { min: 10, max: 10 }
+        error: { min: 10, max: 13 }
     },
     {
         name: "about_us",
@@ -82,7 +83,7 @@ function onError({ name, value }) {
 
 export default function AccountForm() {
 
-   
+
     const [loading, setLoading] = useState(false);
     const [active, setActive] = useState(false);
     const [utils, setUtils] = useState({
@@ -118,6 +119,7 @@ export default function AccountForm() {
 
     function onChange(e) {
         let { name, value } = e.target
+        onError(e.target)
         setData({ ...data, [name]: value })
     }
 
@@ -147,7 +149,7 @@ export default function AccountForm() {
                         active={active}
                         error={err}
                         errorText={err}
-                        // readOnly={Boolean(options)}
+                    // readOnly={Boolean(options)}
                     />)
             })}
             <h3 className='bold my'>About your company</h3>

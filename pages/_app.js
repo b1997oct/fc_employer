@@ -9,9 +9,9 @@ import '@/styles/select.css'
 import '@/styles/project.css'
 import '@/styles/globals.css'
 import Theme from '@/Layout/Theme'
-import { IBM_Plex_Sans, Public_Sans } from 'next/font/google'
+import { Public_Sans } from 'next/font/google'
 
-const font = IBM_Plex_Sans({ subsets: ['latin'], weight: ["100","200", "300", "400", "500", "600", "700"] })
+const font = Public_Sans({ subsets: ['latin'] })
 
 export default function App({ Component, pageProps }) {
   return (
