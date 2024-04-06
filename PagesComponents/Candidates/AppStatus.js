@@ -78,12 +78,12 @@ export default function AppStatus(py) {
                     setChange={setData}
                 />
                 <br />
-                <Checkbox
+                {/* <Checkbox
                     onChange={handleChange}
                     label='Any Problem with the candidate? (Hold Application)'
                     name='hold'
                     checked={ValueGetter('hold')}
-                />
+                /> */}
                 <Input
                     label='Status Updating Reason'
                     placeholder='Notes'
@@ -96,7 +96,6 @@ export default function AppStatus(py) {
                     <button onClick={cancel} className="text-btn">Cancel</button>
                     <button className="btn" disabled={loading} onClick={submit}>Submit</button>
                 </div>
-
             </BottomDrawer>
         </div>
     )
