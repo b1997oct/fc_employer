@@ -1,0 +1,106 @@
+@tailwind components;
+
+@layer components {
+
+  /* typography */
+
+  .cp {
+    color: rgb(var(--pc));
+  }
+
+  .ce {
+    color: rgb(var(--error));
+  }
+
+  .a {
+    color: rgb(var(--pc));
+    @apply hover:underline
+  }
+
+  /* button */
+
+  .hover {
+    @apply duration-200 active:opacity-50 hover:bg-stone-100
+  }
+
+  .btn {
+    @apply active:opacity-60 disabled:opacity-60 bg-stone-50 border-2 disabled:text-stone-400
+  }
+
+  .text-btn {
+    @apply bg-transparent border-none text-sm
+  }
+
+  .icon-btn {
+    @apply duration-200 active:opacity-50 hover:bg-stone-200/70 rounded-none p-1
+  }
+
+  .chip {
+    @apply rounded-none active:opacity-50 border-2 text-sm
+  }
+
+  .checkbox {
+    @apply before:outline flex items-center gap-2 before:outline-blue-600 before:rounded-[.5px] before:outline-offset-[2.5px] before:outline-2 before:p-1.5
+  }
+
+  /* toast */
+
+  #toast {
+    position: fixed;
+    top: 10%;
+    right: 50%;
+    z-index: 5000;
+    background: #0009;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    transform: translateX(50%);
+  }
+
+  .toastOut {
+    display: none;
+  }
+
+  .toastIn {
+    display: block;
+  }
+
+  /* menu */
+
+  .active {
+    @apply bg-[rgb(var(--active))]
+  }
+
+  .border-pc {
+    @apply border-[rgb(var(--pc))]
+  }
+
+  .alert-green {
+    @apply bg-green-100 border-l-4 border-green-500 text-green-700 p-4
+  }
+
+  .alert-orange {
+    @apply bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4
+  }
+
+  /* modal */
+
+  .backdrop {
+    @apply bottom-0 top-0 right-0 left-0
+  }
+
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: auto 0;
+  cursor: var(--cursor);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  .btn {
+    @apply bg-stone-800
+  }
+} */

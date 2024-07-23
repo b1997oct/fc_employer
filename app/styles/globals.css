@@ -1,0 +1,70 @@
+:root {
+  --bg: 255, 255, 255;
+  --bg-base: 255, 255, 255;
+  --text: 0, 0, 0;  
+  --cursor: pointer;
+  --button-radius: 6px; 
+  --radius: 4px;
+  --pc: 3, 123, 252;
+  --pc-dark: 252, 132, 3;
+  --error: 255, 51, 51;
+  --active: 230, 230, 230
+}
+
+
+
+body {
+  color: rgb(var(--text));
+  background: rgb(var(--bg-base))
+}
+
+img {
+  vertical-align: middle;
+}
+
+.bg {
+  background: rgb(var(--bg))
+}
+
+.bg-pc {
+  background: rgb(var(--pc))
+}
+
+.border-pc {
+  border-color: rgb(var(--pc))
+}
+
+.pointer {
+  cursor: var(--cursor);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.autocomplete-input {
+  @apply rounded-full px-4
+}
+
+.autocomplete-popper {
+  @apply bg rounded-b-lg shadow-md overflow-x-hidden overflow-y-auto max-h-60 w-full
+}
+
+.option {
+  @apply px-4 py-1 hover:bg-stone-100 pointer
+}
+
+@media (max-width:768px) {
+  :root {
+    --cursor: auto;
+  }
+}
+
+
+:disabled {
+  cursor: not-allowed !important;
+}
+
+button:disabled {
+  @apply hover:bg-gray-300/60 bg-gray-300/60 hover:text-gray-500/60 text-gray-500/60 border-gray-300
+}

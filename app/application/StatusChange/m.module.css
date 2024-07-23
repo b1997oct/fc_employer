@@ -1,0 +1,14 @@
+.in {
+    transition: transform 0.3s ease;
+    display: flex;
+}
+
+.out {
+    animation: out forwards 300ms;
+}
+
+@keyframes out {
+    100% {
+        display: none;
+    }
+}

@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind utilities;
+
+
+* {
+  box-sizing: border-box;
+}
+
+@screen md {
+  button {
+    @apply cursor-pointer
+  }
+}
+
+@layer base {
+
+  h1 {
+    @apply text-3xl bold
+  }
+
+  h2 {
+    @apply text-2xl bold
+  }
+
+  h3 {
+    @apply text-xl bold
+  }
+
+  h4 {
+    @apply text-lg bold
+  }
+
+  h5 {
+    @apply text-[16px] bold
+  }
+
+  h6 {
+    @apply text-sm bold
+  }
+
+  p {
+    @apply py-4
+  }
+
+  ol {
+    @apply ml list-decimal
+  }
+
+  ul {
+    @apply ml list-disc
+  }
+
+  input, select, textarea {
+    @apply px-2 py-1.5 border w-full rounded-[--radius] focus:outline-none focus:border-[rgb(var(--pc))] bg-stone-50
+  }
+  
+  button {
+    @apply px-4 py-1 inline-flex justify-center rounded-[--button-radius]
+  }
+
+  .outlined {
+    @apply border duration-200 active:opacity-50 hover:bg-stone-100
+  }
+
+  select {
+    background: transparent;
+  }
+
+}
+
+@layer utilities {
+
+  /* margin padding */
+
+  .m {
+    @apply m-4
+  }
+
+  .mt {
+    @apply mt-4
+  }
+
+  .mb {
+    @apply mb-4
+  }
+
+  .my {
+    @apply my-4
+  }
+
+  .mr {
+    @apply mr-4
+  }
+
+  .ml {
+    @apply ml-4
+  }
+
+  .mx {
+    @apply mx-4
+  }
+
+
+  .p {
+    @apply p-4
+  }
+
+  .pt {
+    @apply pt-4
+  }
+
+  .pb {
+    @apply pb-4
+  }
+
+  .py {
+    @apply py-4
+  }
+
+
+  .pr {
+    @apply pr-4
+  }
+
+  .pl {
+    @apply pl-4
+  }
+
+  .px {
+    @apply px-4
+  }
+
+  .t-p {
+    @apply p md:px-10
+  }
+
+
+  /* flex */
+
+  .df {
+    @apply flex
+  }
+
+  .dn {
+    @apply hidden
+  }
+
+  .fww {
+    @apply flex-wrap
+  }
+
+  .f-1 {
+    @apply flex-1
+  }
+
+  .gap {
+    @apply gap-4
+  }
+
+  .fdc {
+    @apply flex-col
+  }
+
+  .fdr {
+    @apply flex-row
+  }
+
+  .fdrr {
+    @apply flex-row-reverse
+  }
+
+  .aic {
+    @apply items-center
+  }
+
+  .ais {
+    @apply items-start
+  }
+
+  .aie {
+    @apply items-end
+  }
+
+  .jcc {
+    @apply justify-center
+  }
+
+  .jce {
+    @apply justify-end
+  }
+
+  .jcsb {
+    @apply justify-between
+  }
+
+  .jcsa {
+    @apply justify-around
+  }
+
+  .jcse {
+    @apply justify-evenly
+  }
+
+  /* typoraphy */
+
+
+  .undeline {
+    text-decoration: underline;
+  }
+
+  .tas {
+    text-align: start;
+  }
+
+  .tac {
+    @apply text-center
+  }
+
+  .tae {
+    @apply text-end
+  }
+
+  .bold {
+    @apply font-semibold
+  }
+
+  .nowrap {
+    @apply whitespace-nowrap overflow-hidden
+  }
+
+  /* position */
+
+  .top {
+    @apply top-0
+  }
+
+  .bottom {
+    @apply bottom-0
+  }
+
+  .right {
+    @apply right-0
+  }
+
+
+}

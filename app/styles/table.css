@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+tr {
+    @apply hover:bg-stone-50
+}
+
+td,
+th {
+    border-bottom: 1px solid #9994;
+    padding: 16px;
+    border-collapse: collapse;
+}
+
+.thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.th {
+    color: rgb(var(--bg));
+    background: rgb(var(--pc));
+    cursor: var(--cursor);
+    white-space: nowrap;
+    border-right: 1px solid rgb(var(--bg));
+}
+
+.th:hover {
+    background: rgb(var(--pc), .8) !important;
+}
+
+
+.seperator {
+    background: #eee;
+}

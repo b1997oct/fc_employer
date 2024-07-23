@@ -1,0 +1,43 @@
+.whatsapp {
+    padding: 6px 1rem;
+    border: 2px solid #0ab40a;
+    border-radius: 200px;
+    color: #0ab40a;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .whatsapp:disabled {
+  opacity: .3;
+  }
+  
+  .email {
+    padding: 6px 1rem;
+    border: 2px solid #191970;
+    border-radius: 200px;
+    /* background: #000; */
+    color: #191970;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  
+  .phone {
+    padding: 6px 1rem;
+    border: 2px solid #000;
+    border-radius: 200px;
+    background: #000;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .skill {
+    @apply rounded-full border px-2 py-1 cursor-default border-stone-600 hover:bg-stone-200
+  }
