@@ -9,7 +9,7 @@ export default function useSubmit(fields, { url, body, onResponse }, py) {
         [loading, setLoading] = useState(),
         [error, setError] = useState(),
         active = typeof loading == 'boolean',
-        inputs = arr => arr.map(d => <FormField active={active} {...inputParse(d)} />)
+        inputs = arr => arr.map(d => <FormField key={d.name} active={active} {...inputParse(d)} />)
 
     function submit() {
 

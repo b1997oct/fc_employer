@@ -134,7 +134,7 @@ function Skills({ data }) {
     if (data) {
         return <div className='df gap-2 fww'>
             {Boolean(data.length) ?
-                data.map(d => <div className='skill'>{d.skill}</div>)
+                data.map(d => <div key={d.skill} className='skill'>{d.skill}</div>)
                 : <div>No data found </div>}
         </div>
     }

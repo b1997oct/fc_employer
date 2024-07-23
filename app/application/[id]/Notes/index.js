@@ -16,7 +16,7 @@ export default function Notes({ app }) {
                 <div>Team</div>
                 <div>
                     {tabs.map(d => {
-                        return <button onClick={Tggr(setTab, d)} className={`${d == tab ? 'bg-pc text-white' : 'border'} px-2 ml-2 py-0 rounded-full`}>{d}</button>
+                        return <button key={d} onClick={Tggr(setTab, d)} className={`${d == tab ? 'bg-pc text-white' : 'border'} px-2 ml-2 py-0 rounded-full`}>{d}</button>
                     })}
                 </div>
             </div>

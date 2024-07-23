@@ -55,7 +55,7 @@ export default function ViewJob({ jobId }) {
                 <Tabs value={tab} tabs={tabs} onChange={setTab} />
                 {tab == 'Skills' ?
                     <div className='df fww gap-2'>
-                        {skills?.map(d => <div className='skill'>{d}</div>)}
+                        {skills?.map(d => <div key={d} className='skill'>{d}</div>)}
                     </div> :
                     tab == 'Job Description' ?
                         <div dangerouslySetInnerHTML={{ __html: jd }} /> :

@@ -39,7 +39,7 @@ export default function Page() {
                 {loading && 'Loading...'}
                 {data.map(d => {
                     let { name, uid } = d
-                    return <div onClick={() => setOpen({})} className='bg mt-2 grid grid-cols-3 p gap border rounded-lg hover:shadow'>
+                    return <div key={name} onClick={() => setOpen({})} className='bg mt-2 grid grid-cols-3 p gap border rounded-lg hover:shadow'>
                         <div >{name}</div>
                         <div>{uid}</div>
                         <div className='tac'>0</div>
