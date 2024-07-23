@@ -20,7 +20,7 @@ export default function Experience({ inputparse }) {
             <div className='df gap'>
                 {fields.map(d => <Select key={d.name} {...inputparse(d)} >
                     <option>Select option</option>
-                    {Array.from({ length: 15 }).map((d, i) => <option value={i}>{i ? i + ` Year${i == 1 ? '' : 's'}` : 'Fresher'}</option>)}
+                    {Array.from({ length: 15 }).map((d, i) => <option key={i} value={i}>{i ? i + ` Year${i == 1 ? '' : 's'}` : 'Fresher'}</option>)}
                 </Select>)}
         </div>
     )

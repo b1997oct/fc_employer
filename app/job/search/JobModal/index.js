@@ -157,7 +157,7 @@ const fields = [
             name: 'Hourly',
             value: 'hour'
         },
-    ].map(d => <option value={d.value}>{d.name}</option>),
+    ].map(d => <option key={d.name} value={d.value}>{d.name}</option>),
     Options = ({ handle, data, value }) => {
         return data.length ?
             data.map(d => {
@@ -191,7 +191,7 @@ export default function JobModal({ open, onClose, id }) {
                 props = { touched, ...inputParse(d) }
 
             if (radio) {
-                return <RadioGroup {...props} />
+                return <RadioGroup key={name} {...props} />
             } else if (options) {
                 return (
                     <Select key={name} {...props} >
