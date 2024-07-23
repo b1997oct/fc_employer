@@ -10,7 +10,6 @@ import onUpdate from "@/UW/JS/Array/onUpdate"
 import NoDataFound from "@/UW/NoDataFound"
 import ServerFunction from "@/server"
 import Adaptor from "@/UW/Adaptor"
-import { configs } from "@/app/config"
 import SearchWithOptions from "@/PagesComponents/SearchWithOptions"
 
 
@@ -39,7 +38,6 @@ export default function Recruiter() {
         pagination, Pagination, resetPagination } = useResponse(),
         [loading, setLoading] = useState(true),
         [open, setOpen] = useState(),
-        write = configs().write('recruiter'),
         [error, setError] = useState(),
         id = open?._id || 'new',
         { name = 'name', value, sort } = pagination,
