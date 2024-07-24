@@ -16,6 +16,7 @@ import TextArea from '@/UW/Input/TextArea'
 import Experience from './Experience'
 import Button from '@/UW/Button'
 import ServerFunction from '@/server'
+import Editor from '@/UW/Input/Editor'
 
 let span = <span className='absolute left-2 top-2'>₹</span>
 
@@ -206,7 +207,7 @@ export default function JobModal({ open, onClose, id }) {
             } else if (hintFn) {
                 return <Autocomplete Popper={Popper} key={name} {...props} />
             } else if (name == 'jd') {
-                return <TextArea key={name} {...props} />
+                return <Editor key={name} {...props} />
             }
 
             return <Input key={name} {...props} />

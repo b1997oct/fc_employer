@@ -6,7 +6,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export default function TableCheckBox({ className, th, children, ...props }: Props) {
 
-    const cn = className || 'accent-green-400',
+    const cn = className || 'accent-orange-400',
         id = useId()
     return (
         <td className={`${th ? 'th' : ''}`}>

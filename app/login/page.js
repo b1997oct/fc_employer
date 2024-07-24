@@ -27,7 +27,7 @@ export default function Page() {
     [loading, setLoading] = useState(),
     [error, setError] = useState(false),
     handler = ServerFunction('login', { setLoading, setError, onResponse }),
-    active = typeof loading == 'boolean'
+    touched = typeof loading == 'boolean'
 
   function onResponse() {
     location.replace('/')
@@ -50,7 +50,7 @@ export default function Page() {
         <div className='df fdc gap-2'>
           {fields.map(d => {
             const { name } = d
-            return <Input key={name} active={active} {...inputParse(d)} />
+            return <Input key={name} touched={touched} {...inputParse(d)} />
           })}
         </div>
         {/* <div className='my tae'>
